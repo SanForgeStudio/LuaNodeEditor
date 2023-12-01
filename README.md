@@ -5,7 +5,7 @@
 #
 
 <br/>
-<b>Lua Node Editor</b> is a powerful visual scripting tool that uses nodes to program visually by using it with the lua programming language. This tool is build originally to be used for the KZX Engine, however as it is also a powerfull tool to be used for other projects we decided to share the tool to github as an individual application.
+<b>Lua Node Editor</b> is a powerful visual scripting IDE tool that uses nodes to program visually by using it with the lua programming language. Our tool is unique and powerful in its own way as it can be used for major projects in the industry.
 <br/>
 
 
@@ -14,14 +14,18 @@ For those new to coding Lua is a very lightweight programming language, because 
 
 <img width="400" alt="nodeeditor" src="https://github.com/SanForgeStudio/LuaNodeEditor/assets/97965051/bd82fdb3-890e-4bff-80c5-f7a8f9b66be4">
 
-# Simplicity Meets Power
-Embrace coding without the intimidation of knowledge. The Lua Node Editor simplifies Lua programming through a visual language, making it an ideal starting point for beginners, professionals and experts that wish to understand lua better.
+# Why Visual Programming?
+Simplicity Meets Power, embrace coding without the intimidation of having knowledge. The Lua Node Editor simplifies Lua programming through a visual language, making it an ideal starting point for no experienced beginners, professionals and experts that wish to understand Lua better.
 The overall idea of this tool is to ensure everyone can profit and integrate it to your own system both games, mods and software and to customize it how you like.
 
 The overall application idea in a flowchart:
 
 <img alt="flowchart" src="https://github.com/SanForgeStudio/LuaNodeEditor/assets/97965051/12b3d742-63d8-478a-94a2-58c566f9b19e" width="300" />
 
+# Why Choose us?
+Our tool is not designed to work with only one application like many game engine have, but instead it is designed to be used with any Lua powered application.
+You can see our tool a combination of Visual Studio + Lua + Google Scratch into one.
+
 # License?
-The Lua Node Editor is a 'Proprietary Licenced' application that is not open source. 
+The Lua Node Editor is a **Proprietary Licenced** application that is not open source. 
 
