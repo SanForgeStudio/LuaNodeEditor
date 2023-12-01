@@ -23,5 +23,5 @@ The overall application idea in a flowchart:
 <img alt="flowchart" src="https://github.com/SanForgeStudio/LuaNodeEditor/assets/97965051/12b3d742-63d8-478a-94a2-58c566f9b19e" width="300" />
 
 # License?
-The Lua Node Editor is a **Proprietary Licenced** application that is not open source. 
+The Lua Node Editor is a **Proprietary Licenced** application that is not open source but it is free to use at the moment. 
 
