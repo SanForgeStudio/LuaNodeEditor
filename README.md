@@ -5,7 +5,7 @@
 #
 
 <br/>
-<b>Lua Node Editor</b> is a powerful visual scripting IDE tool that uses nodes to program visually by using it with the lua programming language. Our tool is unique and powerful in its own way as it can be used for major projects in the industry.
+<b>Lua Node Editor</b> is a powerful visual scripting IDE that uses nodes to program visually by using it with the Lua programming language. Our tool is unique and powerful in its own way as it can be used for major projects in the industry.
 <br/>
 
 
@@ -21,10 +21,6 @@ The overall idea of this tool is to ensure everyone can profit and integrate it 
 The overall application idea in a flowchart:
 
 <img alt="flowchart" src="https://github.com/SanForgeStudio/LuaNodeEditor/assets/97965051/12b3d742-63d8-478a-94a2-58c566f9b19e" width="300" />
-
-# Why Choose us?
-Our tool is not designed to work with only one application like many game engine have, but instead it is designed to be used with any Lua powered application.
-You can see our tool a combination of Visual Studio + Lua + Google Scratch into one.
 
 # License?
 The Lua Node Editor is a **Proprietary Licenced** application that is not open source. 
