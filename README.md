@@ -20,7 +20,14 @@ For those new to coding Lua is a very lightweight programming language, because 
 Simplicity Meets Power, embrace coding without the intimidation of having knowledge. The Lua Node Editor simplifies Lua programming through a visual language, making it an ideal starting point for no experienced beginners, professionals and experts that wish to understand Lua better.
 The overall idea of this tool is to ensure everyone can profit and integrate it to your own system both games, mods and software and to customize it how you like.
 
-The overall application idea in a flowchart:
+**The Advantage of a Visual Programming tool:**
+- It can make Lua programming easier, faster, and more fun, especially for beginners or people who are not comfortable with writing code.
+- It can provide a visual overview of the structure and functionality of the program, which can help with debugging, testing, and understanding the code.
+- It can enable rapid prototyping and experimentation, because you can quickly create and modify nodes and see fast results.
+- It can easily integrate with other software and frameworks that use Lua like any other IDE.
+
+
+*The overall application idea in a flowchart:*
 
 <img alt="flowchart" src="https://github.com/SanForgeStudio/LuaNodeEditor/assets/97965051/12b3d742-63d8-478a-94a2-58c566f9b19e" width="300" />
 
