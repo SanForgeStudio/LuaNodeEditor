@@ -34,6 +34,12 @@ The overall idea of this tool is to ensure everyone can profit and integrate it 
 
 <img alt="flowchart" src="https://github.com/SanForgeStudio/LuaNodeEditor/assets/97965051/12b3d742-63d8-478a-94a2-58c566f9b19e" width="300" />
 
+
+
+# Early Access?
+The Lua Node Editor currently is still in a early development fase, however you can still find all the releases [here](https://github.com/SanForgeStudio/LuaNodeEditor/releases).
+
+
 # License?
 The Lua Node Editor is a **Proprietary Licenced** application that is not open source but it is free to use at the moment. 
 
