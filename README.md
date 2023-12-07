@@ -7,13 +7,11 @@
 #
 
 <br/>
-<b>Lua Node Editor</b> is a powerful visual scripting IDE that uses nodes to program visually by using it with the Lua programming language. Our tool is unique and powerful in its own way as it can be used for major projects in the industry.
+<b>Lua Node Editor</b> is a powerful visual scripting IDE that uses nodes to program visually by using it with the Lua programming language. Our tool is unique and powerful in its own way as it can be used for major projects in multiple industries.
 <br/>
 
-
 # Why Lua?
-For those new to coding Lua is a very lightweight programming language, because it is a quick and powerfull language and a very wanted language in alot of industries it is used in massive projects for example Roblox, BeamNG, Xplane but also used in mods for other major games. learning is key! With the Lua Node Editor, you see the logic unfold visually, in getting a deeper understanding of the programming concepts used by Lua.
-
+For those new to coding Lua is a very lightweight programming language, because it is a quick and powerful language and a very wanted language in alot of industries it is used in massive projects for example Roblox, BeamNG, Xplane. learning is key! With the Lua Node Editor, you see the logic unfold visually, in getting a deeper understanding of the programming concepts used by Lua.
 
 
 <img width="700" alt="showcase" src="https://github.com/SanForgeStudio/LuaNodeEditor/assets/97965051/a6eb2045-af92-4e06-8bda-2c21e1d98ee3">
@@ -35,11 +33,14 @@ The overall idea of this tool is to ensure everyone can profit and integrate it 
 <img alt="flowchart" src="https://github.com/SanForgeStudio/LuaNodeEditor/assets/97965051/12b3d742-63d8-478a-94a2-58c566f9b19e" width="600" />
 
 
+# The power of nodes
+Because the Lua Node Editor is based on learning and exploring and making code more fun like many tools that use visual programming for example Google Scratch or Unreal Engine, We hope to accomplish alot of breakthroughs with this tool.
+
 
 # Early Access?
-The Lua Node Editor currently is still in a early development fase, however you can still find all the releases [here](https://github.com/SanForgeStudio/LuaNodeEditor/releases).
+The Lua Node Editor has just released, currently the editor is still in a early fase, however you can still find all the releases [here](https://github.com/SanForgeStudio/LuaNodeEditor/releases).
 
 
 # License?
-The Lua Node Editor is a **Proprietary Licenced** application that is not open source but it is free to use at the moment. 
+The Lua Node Editor is currently a **Proprietary Licenced** application that is not open source but it is free to use at the moment. 
 
