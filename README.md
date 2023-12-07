@@ -14,7 +14,9 @@
 For those new to coding Lua is a very lightweight programming language, because it is a quick and powerful language and a very wanted language in alot of industries it is used in massive projects for example Roblox, BeamNG, Xplane. learning is key! With the Lua Node Editor, you see the logic unfold visually, in getting a deeper understanding of the programming concepts used by Lua.
 
 
-<img width="700" alt="showcase" src="https://github.com/SanForgeStudio/LuaNodeEditor/assets/97965051/a6eb2045-af92-4e06-8bda-2c21e1d98ee3">
+<img width="500" alt="showcase1" src="https://github.com/SanForgeStudio/LuaNodeEditor/assets/97965051/a6eb2045-af92-4e06-8bda-2c21e1d98ee3">
+
+<img width="400" alt="showcase2" src="https://github.com/SanForgeStudio/LuaNodeEditor/assets/97965051/08f0c276-c05e-4d12-82c2-ef6dd1b03f24">
 
 
 # Why Visual Programming?
@@ -35,10 +37,13 @@ The overall idea of this tool is to ensure everyone can profit and integrate it 
 
 # The power of nodes
 Because the Lua Node Editor is based on learning and exploring and making code more fun like many tools that use visual programming for example Google Scratch or Unreal Engine, We hope to accomplish alot of breakthroughs with this tool.
+The Lua Node Editor has a total of 32 integrated nodes, in which each is specifically designed like the lua programming workflow.
+
+<img alt="flowchart" src="https://github.com/SanForgeStudio/LuaNodeEditor/assets/97965051/045dd7f4-0a77-45c8-ba7e-ed059574658b" width="600" />
 
 
-# Early Access?
-The Lua Node Editor has just released, currently the editor is still in a early fase, however you can still find all the releases [here](https://github.com/SanForgeStudio/LuaNodeEditor/releases).
+# Early Release?
+The Lua Node Editor has just released in a early fase to receive community feedback and to overall showcase our innovation to the world. You can find all the releases [here](https://github.com/SanForgeStudio/LuaNodeEditor/releases).
 
 
 # License?
