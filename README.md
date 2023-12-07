@@ -14,14 +14,14 @@
 For those new to coding Lua is a very lightweight programming language, because it is a quick and powerful language and a very wanted language in alot of industries it is used in massive projects for example Roblox, BeamNG, Xplane. learning is key! With the Lua Node Editor, you see the logic unfold visually, in getting a deeper understanding of the programming concepts used by Lua.
 
 
-<img width="500" alt="showcase1" src="https://github.com/SanForgeStudio/LuaNodeEditor/assets/97965051/a6eb2045-af92-4e06-8bda-2c21e1d98ee3">
-
-<img width="415" alt="showcase2" src="https://github.com/SanForgeStudio/LuaNodeEditor/assets/97965051/08f0c276-c05e-4d12-82c2-ef6dd1b03f24">
-
-
 # Why Visual Programming?
 Simplicity Meets Power, embrace coding without the intimidation of having knowledge. The Lua Node Editor simplifies Lua programming through a visual language, making it an ideal starting point for no experienced beginners, professionals and experts that wish to understand Lua better.
 The overall idea of this tool is to ensure everyone can profit and integrate it to your own system both games, mods and software and to customize it how you like.
+
+<img width="415" alt="showcase2" src="https://github.com/SanForgeStudio/LuaNodeEditor/assets/97965051/08f0c276-c05e-4d12-82c2-ef6dd1b03f24">
+
+<img width="450" alt="showcase1" src="https://github.com/SanForgeStudio/LuaNodeEditor/assets/97965051/a6eb2045-af92-4e06-8bda-2c21e1d98ee3">
+
 
 **The Advantage of a Visual Programming tool:**
 - It can make Lua programming easier, faster, and more fun, especially for beginners or people who are not comfortable with writing code.
