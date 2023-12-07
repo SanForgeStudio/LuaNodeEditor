@@ -16,7 +16,7 @@ For those new to coding Lua is a very lightweight programming language, because 
 
 <img width="500" alt="showcase1" src="https://github.com/SanForgeStudio/LuaNodeEditor/assets/97965051/a6eb2045-af92-4e06-8bda-2c21e1d98ee3">
 
-<img width="400" alt="showcase2" src="https://github.com/SanForgeStudio/LuaNodeEditor/assets/97965051/08f0c276-c05e-4d12-82c2-ef6dd1b03f24">
+<img width="415" alt="showcase2" src="https://github.com/SanForgeStudio/LuaNodeEditor/assets/97965051/08f0c276-c05e-4d12-82c2-ef6dd1b03f24">
 
 
 # Why Visual Programming?
