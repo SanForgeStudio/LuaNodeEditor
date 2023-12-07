@@ -43,7 +43,7 @@ The Lua Node Editor has a total of 32 integrated nodes, in which each is specifi
 
 
 # Early Release?
-The Lua Node Editor has just released in a early fase to receive community feedback and to overall showcase our innovation to the world. You can find all the releases [here](https://github.com/SanForgeStudio/LuaNodeEditor/releases).
+The Lua Node Editor has released in a early fase to receive community feedback and to overall showcase our innovation to the world. You can find all the releases [here](https://github.com/SanForgeStudio/LuaNodeEditor/releases).
 
 
 # License?
