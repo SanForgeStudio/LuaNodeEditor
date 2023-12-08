@@ -39,10 +39,9 @@ The Lua Node Editor has currently a total of 32 integrated nodes in which more w
 <img alt="flowchart" src="https://github.com/SanForgeStudio/LuaNodeEditor/assets/97965051/045dd7f4-0a77-45c8-ba7e-ed059574658b" width="600" />
 
 
-# Early Release?
-The Lua Node Editor has released but in a early phase to receive community feedback and to showcase our innovation to the world. You can find all the releases [here](https://github.com/SanForgeStudio/LuaNodeEditor/releases).
+# Early development release?
+The Lua Node Editor has released but in a early development phase. Purely to receive community feedback and to showcase our innovation to the world. You can find all the releases [here](https://github.com/SanForgeStudio/LuaNodeEditor/releases).
 
 
 # License?
-The Lua Node Editor is currently a **Proprietary Licenced** application that is not open source but it is free to use at the moment. 
 
