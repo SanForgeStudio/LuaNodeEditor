@@ -18,10 +18,7 @@ For those new to coding Lua is a very lightweight programming language, because 
 Simplicity Meets Power, embrace coding without the intimidation of having knowledge. The Lua Node Editor simplifies Lua programming through a visual language, making it an ideal starting point for no experienced beginners, professionals and experts that wish to understand Lua better.
 The overall idea of this tool is to ensure everyone can profit and integrate it to your own system both games, mods and software and to customize it how you like.
 
-<img width="415" alt="showcase2" src="https://github.com/SanForgeStudio/LuaNodeEditor/assets/97965051/08f0c276-c05e-4d12-82c2-ef6dd1b03f24">
-
-<img width="450" alt="showcase1" src="https://github.com/SanForgeStudio/LuaNodeEditor/assets/97965051/a6eb2045-af92-4e06-8bda-2c21e1d98ee3">
-
+<img width="440" alt="showcase2" src="https://github.com/SanForgeStudio/LuaNodeEditor/assets/97965051/08f0c276-c05e-4d12-82c2-ef6dd1b03f24">
 
 **The Advantage of a Visual Programming tool:**
 - It can make Lua programming easier, faster, and more fun, especially for beginners or people who are not comfortable with writing code.
@@ -37,13 +34,13 @@ The overall idea of this tool is to ensure everyone can profit and integrate it 
 
 # The power of nodes
 Because the Lua Node Editor is based on learning and exploring and making code more fun like many tools that use visual programming for example Google Scratch or Unreal Engine, We hope to accomplish alot of breakthroughs with this tool.
-The Lua Node Editor has a total of 32 integrated nodes, in which each is specifically designed like the lua programming workflow.
+The Lua Node Editor has currently a total of 32 integrated nodes in which more will be added later, Every node is specifically designed to work like the lua programming workflow.
 
 <img alt="flowchart" src="https://github.com/SanForgeStudio/LuaNodeEditor/assets/97965051/045dd7f4-0a77-45c8-ba7e-ed059574658b" width="600" />
 
 
 # Early Release?
-The Lua Node Editor has released but in a  early phase to receive community feedback and to overall showcase our innovation to the world. You can find all the releases [here](https://github.com/SanForgeStudio/LuaNodeEditor/releases).
+The Lua Node Editor has released but in a early phase to receive community feedback and to showcase our innovation to the world. You can find all the releases [here](https://github.com/SanForgeStudio/LuaNodeEditor/releases).
 
 
 # License?
