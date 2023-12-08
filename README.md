@@ -11,7 +11,7 @@
 <br/>
 
 # Why Lua?
-For those new to coding Lua is a very lightweight programming language, because it is a quick and powerful language and a very wanted language in alot of industries it is used in massive projects for example Roblox, BeamNG, Xplane. learning is key! With the Lua Node Editor, you see the logic unfold visually, in getting a deeper understanding of the programming concepts used by Lua.
+For those new to coding Lua is a very lightweight scripting language, because it is a quick and powerful language and a very wanted language in alot of industries it is used in massive projects for example Roblox, BeamNG, Xplane. learning is key! With the Lua Node Editor, you see the logic unfold visually, in getting a deeper understanding of the programming concepts used by Lua.
 
 
 # Why Visual Programming?
