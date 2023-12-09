@@ -15,9 +15,7 @@
 For those new to coding Lua is a very lightweight scripting language, because it is a quick and powerful language and a very wanted language in alot of industries it is used in massive projects for example Roblox, BeamNG, Xplane. learning is key! With the Lua Node Editor, you see the logic unfold visually, in getting a deeper understanding of the programming concepts used by Lua.
 
 <div align="left">
-  <a href="https://www.youtube.com/watch?v=A1gGT2HS6tQ">
-    <img src="https://img.youtube.com/vi/A1gGT2HS6tQ/0.jpg" alt="Video Thumbnail" width="320" height="230">
-  </a>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/A1gGT2HS6tQ" frameborder="0" allowfullscreen></iframe>
 </div>
 
 
