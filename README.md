@@ -2,8 +2,9 @@
 
 <div align="center">
   <img alt="Logo" src="https://github.com/SanForgeStudio/LuaNodeEditor/assets/97965051/e80e3288-7d94-43fa-9242-cc3e91798e3b" width="400" />
-
-  <a href="https://discord.gg/R4JnD2RHjR"><img alt="Discord" src="https://img.shields.io/badge/Discord-%235865F2.svg?style=for-the-badge&logo=discord&logoColor=white"></a> <a href=""><img alt="Discord" src="https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54"></a>
+  <br>
+   <br>
+  <a href="https://discord.gg/R4JnD2RHjR"><img alt="Discord" src="https://img.shields.io/badge/Discord-%235865F2.svg?style=for-the-badge&logo=discord&logoColor=white"></a> <a href="https://www.lua.org"><img alt="Lua" src="https://img.shields.io/badge/lua-%232C2D72.svg?style=for-the-badge&logo=lua&logoColor=white"></a> <a href="https://www.python.org/"><img alt="Python" src="https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54"></a>
 
 
 </div>
