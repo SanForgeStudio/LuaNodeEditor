@@ -6,12 +6,19 @@
 
 #
 
+
 <br/>
 <b>Lua Node Editor</b> is a powerful visual scripting IDE that uses nodes to program visually by using it with the Lua programming language. Our tool is unique and powerful in its own way as it can be used for major projects in multiple industries.
 <br/>
 
 # Why Lua?
 For those new to coding Lua is a very lightweight scripting language, because it is a quick and powerful language and a very wanted language in alot of industries it is used in massive projects for example Roblox, BeamNG, Xplane. learning is key! With the Lua Node Editor, you see the logic unfold visually, in getting a deeper understanding of the programming concepts used by Lua.
+
+<div align="left">
+  <a href="https://www.youtube.com/watch?v=A1gGT2HS6tQ">
+    <img src="https://img.youtube.com/vi/A1gGT2HS6tQ/0.jpg" alt="Video Thumbnail" width="320" height="230">
+  </a>
+</div>
 
 
 # Why Visual Programming?
