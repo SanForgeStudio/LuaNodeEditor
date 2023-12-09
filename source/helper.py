@@ -1,3 +1,8 @@
+# 
+# Copyright © 2023, SanForge Studio & Lua Node Editor, All Rights Reserved.
+# Licensed under the GNU General Public 3.0 License
+#
+
 import dearpygui.dearpygui as dpg
 def auto_align(item, alignment_type: int, x_align: float = 0.5, y_align: float = 0.5):
     def _center_h(_s, _d, data):

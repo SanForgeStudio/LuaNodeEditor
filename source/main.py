@@ -1,5 +1,7 @@
-# pyinstaller --onefile --name LuaNodeEditor --icon="icon.ico" --noconsole main.py
-
+# 
+# Copyright © 2023, SanForge Studio & Lua Node Editor, All Rights Reserved.
+# Licensed under the GNU General Public 3.0 License
+#
 
 import os
 

@@ -1,3 +1,8 @@
+# 
+# Copyright © 2023, SanForge Studio & Lua Node Editor, All Rights Reserved.
+# Licensed under the GNU General Public 3.0 License
+#
+
 import dearpygui.dearpygui as dpg
 import globals
 from globals import ind, inc_ind, dec_ind, Serializable

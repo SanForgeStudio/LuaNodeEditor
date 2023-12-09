@@ -1,3 +1,9 @@
+# 
+# Copyright © 2023, SanForge Studio & Lua Node Editor, All Rights Reserved.
+# Licensed under the GNU General Public 3.0 License
+#
+
+
 from abc import ABC, abstractmethod
 import dearpygui.dearpygui as dpg
 
