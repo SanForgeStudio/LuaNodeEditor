@@ -18,6 +18,7 @@ For those new to coding Lua is a very lightweight scripting language, because it
 
 
 *Watch here our first explainer video*
+
 https://github.com/SanForgeStudio/LuaNodeEditor/assets/97965051/ce6cee5a-e9d1-4867-ab7a-08445ded9b28
 
 
