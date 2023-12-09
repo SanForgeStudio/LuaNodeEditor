@@ -3,12 +3,12 @@
 <div align="center">
   <img alt="Logo" src="https://github.com/SanForgeStudio/LuaNodeEditor/assets/97965051/e80e3288-7d94-43fa-9242-cc3e91798e3b" width="400" />
 
-  <a href="https://discord.gg/R4JnD2RHjR"><img alt="Discord" src="https://img.shields.io/badge/Discord-%235865F2.svg?style=for-the-badge&logo=discord&logoColor=white"></a>
+  <a href="https://discord.gg/R4JnD2RHjR"><img alt="Discord" src="https://img.shields.io/badge/Discord-%235865F2.svg?style=for-the-badge&logo=discord&logoColor=white"></a> <a href=""><img alt="Discord" src="https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54"></a>
+
 
 </div>
 
 #
-
 
 <br/>
 <b>Lua Node Editor</b> is a powerful visual scripting IDE that uses nodes to program visually by using it with the Lua programming language. Our tool is unique and powerful in its own way as it can be used for major projects in multiple industries.
