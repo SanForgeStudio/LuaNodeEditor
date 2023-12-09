@@ -49,8 +49,6 @@ The overall idea of this tool is to ensure everyone can profit and integrate it 
 Because the Lua Node Editor is based on learning and exploring and making code more fun like many tools that use visual programming for example Google Scratch or the Unreal Engine, We hope to accomplish alot of breakthroughs with this tool.
 The Lua Node Editor has currently a total of 32 integrated nodes in which more will be added later, Every node is specifically designed to work like the lua programming workflow you can see them all individually [here](https://github.com/SanForgeStudio/LuaNodeEditor/wiki/Nodes-Library#integrated-nodes).
 
-<img alt="flowchart" src="https://github.com/SanForgeStudio/LuaNodeEditor/assets/97965051/045dd7f4-0a77-45c8-ba7e-ed059574658b" width="600" />
-
 
 # Early development release?
 The Lua Node Editor has released but in a early development phase. Purely to receive community feedback and to showcase our innovation to the world. You can find all the releases [here](https://github.com/SanForgeStudio/LuaNodeEditor/releases).
