@@ -1,2 +1,2 @@
 @echo off
-pyinstaller --onefile --name LuaNodeEditor --icon="Small Logo.ico" --noconsole main.py
+pyinstaller --onefile --name LuaNodeEditor --icon="icon.ico" --noconsole main.py

@@ -1,4 +1,4 @@
-# pyinstaller --onefile --name LuaNodeEditor --icon="Small Logo.ico" --noconsole main.py
+# pyinstaller --onefile --name LuaNodeEditor --icon="icon.ico" --noconsole main.py
 
 
 import os
@@ -15,7 +15,7 @@ import json
 dpg.create_context()
 dpg.configure_app(manual_callback_management=True)
 dpg.configure_app(init_file="settings.ini")
-dpg.create_viewport(title='Lua Node Editor', width=1200, height=800, small_icon="Small Logo.ico", large_icon="Small Logo.ico")
+dpg.create_viewport(title='Lua Node Editor', width=1200, height=800, small_icon="icon.ico", large_icon="icon.ico")
 
 def save_init():
     dpg.save_init_file("settings.ini")
