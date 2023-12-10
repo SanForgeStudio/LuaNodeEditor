@@ -12,7 +12,7 @@
 #
 
 <br/>
-<b>Lua Node Editor</b> is a powerful visual scripting IDE that uses nodes to program visually by using it with the Lua programming language. Our tool is unique and powerful in its own way as it can be used for major projects in multiple industries.
+<b>Lua Node Editor</b> is a powerful visual scripting IDE that uses nodes to program visually by using it with the Lua scripting language. Our tool is unique and powerful in its own way as it can be used for major projects in multiple industries.
 <br/>
 
 
@@ -28,8 +28,8 @@ https://github.com/SanForgeStudio/LuaNodeEditor/assets/97965051/ce6cee5a-e9d1-48
 
 
 # Why Visual Programming?
-Simplicity Meets Power, embrace coding without the intimidation of having knowledge. The Lua Node Editor simplifies Lua programming through a visual language, making it an ideal starting point for no experienced beginners, professionals and experts that wish to understand Lua better.
-The overall idea of this tool is to ensure everyone can profit and integrate it to your own system both games, mods and software and to customize it how you like.
+Simplicity simply Meets Power, embrace coding without the intimidation of having knowledge in programming. The Lua Node Editor simplifies Lua programming through a visual language, making it an ideal starting point for no experienced beginners, professionals and experts that wish to understand Lua better.
+The overall idea of this tool is to ensure everyone can use it how they want, use our binariew or integrate it to your own system or software and customize it how you like.
 
 <img width="440" alt="showcase2" src="https://github.com/SanForgeStudio/LuaNodeEditor/assets/97965051/08f0c276-c05e-4d12-82c2-ef6dd1b03f24">
 
@@ -37,7 +37,7 @@ The overall idea of this tool is to ensure everyone can profit and integrate it 
 - It can make Lua programming easier, faster, and more fun, especially for beginners or people who are not comfortable with writing code.
 - It can provide a visual overview of the structure and functionality of the program, which can help with debugging, testing, and understanding the code.
 - It can enable rapid prototyping and experimentation, because you can quickly create and modify nodes and see fast results.
-- It can easily integrate with other software and frameworks that use Lua like any other IDE.
+- It eventually can easily integrate with other software and frameworks that use Lua like any other IDE.
 
 
 *The overall application idea in a flowchart:*
