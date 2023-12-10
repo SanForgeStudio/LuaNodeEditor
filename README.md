@@ -18,7 +18,7 @@
 
 
 # Why Lua?
-For those new to coding Lua is a very lightweight scripting language, because it is a quick and powerful language and a very wanted language in alot of industries it is used in massive projects for example Roblox, BeamNG, Xplane. learning is key! With the Lua Node Editor, you see the logic unfold visually, in getting a deeper understanding of the programming concepts used by Lua.
+For those new to coding Lua is a very lightweight scripting language, because it is a quick and powerful language and a very needed language in alot of industries. It is used in massive projects for example Roblox, BeamNG, Xplane. For us we think that learning is key! With the Lua Node Editor, you see the logic unfold visually, in getting a deeper understanding of the programming concepts used by Lua.
 
 
 *Watch here our first explainer video*
@@ -29,7 +29,7 @@ https://github.com/SanForgeStudio/LuaNodeEditor/assets/97965051/ce6cee5a-e9d1-48
 
 # Why Visual Programming?
 Simplicity simply Meets Power, embrace coding without the intimidation of having knowledge in programming. The Lua Node Editor simplifies Lua programming through a visual language, making it an ideal starting point for no experienced beginners, professionals and experts that wish to understand Lua better.
-The overall idea of this tool is to ensure everyone can use it how they want, use our binariew or integrate it to your own system or software and customize it how you like.
+The overall idea of this tool is to ensure everyone can use it how they want, either use our binaries or integrate it to your own system or software and customize it how you like.
 
 <img width="440" alt="showcase2" src="https://github.com/SanForgeStudio/LuaNodeEditor/assets/97965051/08f0c276-c05e-4d12-82c2-ef6dd1b03f24">
 
@@ -40,18 +40,18 @@ The overall idea of this tool is to ensure everyone can use it how they want, us
 - It eventually can easily integrate with other software and frameworks that use Lua like any other IDE.
 
 
-*The overall application idea in a flowchart:*
+*A simple application idea in a flowchart:*
 
 <img alt="flowchart" src="https://github.com/SanForgeStudio/LuaNodeEditor/assets/97965051/12b3d742-63d8-478a-94a2-58c566f9b19e" width="600" />
 
 
 # The power of nodes
-Because the Lua Node Editor is based on learning and exploring and making code more fun like many tools that use visual programming for example Google Scratch or the Unreal Engine, We hope to accomplish alot of breakthroughs with this tool.
-The Lua Node Editor has currently a total of 32 integrated nodes in which more will be added later, Every node is specifically designed to work like the lua programming workflow you can see them all individually [here](https://github.com/SanForgeStudio/LuaNodeEditor/wiki/Nodes-Library#integrated-nodes).
+Because the Lua Node Editor is based on learning and exploring and making code more fun, similar to many tools that use visual programming for example Scratch or the Unreal Engine, We hope to accomplish alot of breakthroughs with this tool and making it a highly advanced tool.
+The Lua Node Editor has currently a total of 32 integrated nodes in which more will be added later, Every node is specifically designed to work with the lua programming workflow you can see them all explained and individually [here](https://github.com/SanForgeStudio/LuaNodeEditor/wiki/Nodes-Library#integrated-nodes).
 
 
 # Early development release?
-The Lua Node Editor has released but in a early development phase. Purely to receive community feedback and to showcase our innovation to the world. You can find all the releases [here](https://github.com/SanForgeStudio/LuaNodeEditor/releases).
+The Lua Node Editor has released but in a early development phase. Purely to receive community feedback and to showcase our innovation to the world. You can find all the old and new releases [here](https://github.com/SanForgeStudio/LuaNodeEditor/releases).
 
 
 # License?
