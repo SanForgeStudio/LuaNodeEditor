@@ -389,8 +389,8 @@ def file_dialog_cancel_callback(sender, app_data):
 
 with dpg.font_registry():
     # first argument ids the path to the .ttf or .otf file
-    bold_font = dpg.add_font("C:\\Users\\schon\\OneDrive\\Bureaublad\\Coding\\LuaNodeEditorAlam\\source\\robotoBold.ttf", 18, tag="bold_roboto") # Change back to "robotoBold.ttf" before asking to merge (Aram123456789)
-    default_font = dpg.add_font("C:\\Users\\schon\\OneDrive\\Bureaublad\\Coding\\LuaNodeEditorAlam\\source\\roboto.ttf", 14, tag="roboto") # Change back to "roboto.ttf" before asking to merge (Aram123456789)
+    bold_font = dpg.add_font("source\\robotoBold.ttf", 18, tag="bold_roboto") # Change back to "robotoBold.ttf" before asking to merge (Aram123456789)
+    default_font = dpg.add_font("source\\roboto.ttf", 14, tag="roboto") # Change back to "roboto.ttf" before asking to merge (Aram123456789)
 
 # file selector
 # load
