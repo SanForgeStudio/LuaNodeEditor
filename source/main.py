@@ -150,8 +150,6 @@ Code Generation:
 1. Generating Code:
 Click 'Generate Code': Once you've designed your node network, click the 'Generate Code' button to automatically generate the corresponding code.
     '''
-    center_pos = (dpg.get_item_pos(main_win)[0] + dpg.get_item_width(main_win) / 2,
-                  dpg.get_item_pos(main_win)[1] + dpg.get_item_height(main_win) / 2)
     show_modal("Help", help_text)
 
     pass
