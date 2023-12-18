@@ -20,7 +20,7 @@ body:
     id: lua-node-version
     attributes:
       label: Lua Node Editor Version
-      description: Which version of the Loa Node Editor are you using?
+      description: Which version of the Lua Node Editor are you using?
       options:
         - "V1.0"
     validations:
