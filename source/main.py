@@ -21,6 +21,7 @@ dpg.create_viewport(title='Lua Node Editor', width=1200, height=800, small_icon=
 
 # Variable list
 hasStartingNodeBeenLogged = False
+isCodeGenerated = False
 
 def save_init():
     dpg.save_init_file("settings.ini")
@@ -158,6 +159,7 @@ def generate_code():
     code = ""
     # add variable declaration code
     global hasStartingNodeBeenLogged
+    global isCodeGenerated
     for node in globals.nodes:
         if isinstance(node, LuaVariableNode) or isinstance(node, LuaTable):
         # if isinstance(node, LuaVariableNode):
@@ -173,13 +175,22 @@ def generate_code():
     start_node = get_starting_node()
     if start_node is None:
         show_modal("Warning", "Start node not found! Please add one.")
+        isCodeGenerated = False
         if not hasStartingNodeBeenLogged:
             call_threaded(add_log, ("Please add a starting node for proper code generation",))
             hasStartingNodeBeenLogged = True
     else:
         code += start_node.generate_code()
+        isCodeGenerated = True
 
     dpg.configure_item("generated_code", default_value=code)
+
+def copy_code():
+    global isCodeGenerated
+    if isCodeGenerated:
+        pc.copy(dpg.get_value("generated_code"))
+    else:
+        show_modal("Warning", "Please generate code before copying code.")
 
 
 def delete_selected_nodes():
@@ -459,7 +470,7 @@ with dpg.window(tag="main_window") as main_win:
             with dpg.group(horizontal=True):
                 # with dpg.child_window(tag="test_tag"):
                 dpg.add_button(label="Generate code", callback=generate_code)
-                dpg.add_button(label="Copy code", callback=lambda: pc.copy(dpg.get_value("generated_code")))
+                dpg.add_button(label="Copy code", callback=lambda: copy_code())
             dpg.add_input_text(height=-200, multiline=True, tag="generated_code", width=350)
             with dpg.tab_bar():
                 with dpg.tab(label="Log"):
