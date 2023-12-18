@@ -19,6 +19,9 @@ dpg.configure_app(manual_callback_management=True)
 dpg.configure_app(init_file="settings.ini")
 dpg.create_viewport(title='Lua Node Editor', width=1200, height=800, small_icon="icon.ico", large_icon="icon.ico")
 
+# Variable list
+hasStartingNodeBeenLogged = False
+
 def save_init():
     dpg.save_init_file("settings.ini")
 
@@ -147,6 +150,8 @@ Code Generation:
 1. Generating Code:
 Click 'Generate Code': Once you've designed your node network, click the 'Generate Code' button to automatically generate the corresponding code.
     '''
+    center_pos = (dpg.get_item_pos(main_win)[0] + dpg.get_item_width(main_win) / 2,
+                  dpg.get_item_pos(main_win)[1] + dpg.get_item_height(main_win) / 2)
     show_modal("Help", help_text)
 
     pass
@@ -154,6 +159,7 @@ Click 'Generate Code': Once you've designed your node network, click the 'Genera
 def generate_code():
     code = ""
     # add variable declaration code
+    global hasStartingNodeBeenLogged
     for node in globals.nodes:
         if isinstance(node, LuaVariableNode) or isinstance(node, LuaTable):
         # if isinstance(node, LuaVariableNode):
@@ -169,7 +175,9 @@ def generate_code():
     start_node = get_starting_node()
     if start_node is None:
         show_modal("Warning", "Start node not found! Please add one.")
-        call_threaded(add_log, ("Please add a starting node for proper code generation",))
+        if not hasStartingNodeBeenLogged:
+            call_threaded(add_log, ("Please add a starting node for proper code generation",))
+            hasStartingNodeBeenLogged = True
     else:
         code += start_node.generate_code()
 
