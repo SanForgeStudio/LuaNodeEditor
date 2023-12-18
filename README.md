@@ -24,3 +24,9 @@ I made a Bool Variable that checks if the User has generated code when pressing 
 * [Giving a Warning when copying empty code](https://github.com/SanForgeStudio/LuaNodeEditor/commit/fd70c467d5dd5a6f81e3863a59940d283771a701)
 * [Grammer issues + logging](https://github.com/SanForgeStudio/LuaNodeEditor/commit/2b529450daffc5a8776b7da117e5f82ecb7eb5eb)
 * * [If the `generate` log is the last log it will relog the failed copying + it only logs the copy code error once](https://github.com/SanForgeStudio/LuaNodeEditor/commit/206bcf246e2510ec9dfadf2d511c303b6d111977)
+
+## 3. Added Copy Code to the Help Modal!
+I have expended the Help Modal a little bit because i saw you forgot to add the `Copy Code` button.
+
+### Merges related to this Change
+* [Added `Copy Code` to the help modal](https://github.com/SanForgeStudio/LuaNodeEditor/commit/ed67272c12baa38c92f86512ea5ee9a50b32465a)
