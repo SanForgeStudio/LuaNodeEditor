@@ -20,7 +20,8 @@ dpg.configure_app(init_file="settings.ini")
 dpg.create_viewport(title='Lua Node Editor', width=1200, height=800, small_icon="icon.ico", large_icon="icon.ico")
 
 # Variable list
-hasStartingNodeBeenLogged = False
+hasGeneratingCodeBeenLogged = False
+hasCopyCodeBeenLogged = False
 isCodeGenerated = False
 
 def save_init():
@@ -158,7 +159,9 @@ Click 'Generate Code': Once you've designed your node network, click the 'Genera
 def generate_code():
     code = ""
     # add variable declaration code
-    global hasStartingNodeBeenLogged
+    # Variables
+    global hasGeneratingCodeBeenLogged
+    global hasCopyCodeBeenLogged
     global isCodeGenerated
     for node in globals.nodes:
         if isinstance(node, LuaVariableNode) or isinstance(node, LuaTable):
@@ -176,9 +179,10 @@ def generate_code():
     if start_node is None:
         show_modal("Warning", "Start node not found! Please add nodes.")
         isCodeGenerated = False
-        if not hasStartingNodeBeenLogged:
+        if not hasGeneratingCodeBeenLogged:
             call_threaded(add_log, ("Please add a starting node for proper code generation",))
-            hasStartingNodeBeenLogged = True
+            hasGeneratingCodeBeenLogged = True
+            hasCopyCodeBeenLogged = False
     else:
         code += start_node.generate_code()
         isCodeGenerated = True
@@ -186,12 +190,19 @@ def generate_code():
     dpg.configure_item("generated_code", default_value=code)
 
 def copy_code():
+    # Variables
+    global hasGeneratingCodeBeenLogged
+    global hasCopyCodeBeenLogged
     global isCodeGenerated
-    if isCodeGenerated:
-        pc.copy(dpg.get_value("generated_code"))
-    else:
+
+    if not isCodeGenerated:
         show_modal("Warning", "Generated code not found! Please generate code.")
-        call_threaded(add_log, ("Please generate code before copying the code.",))
+        if not hasCopyCodeBeenLogged:
+            call_threaded(add_log, ("Please generate code before copying the code.",))
+            hasCopyCodeBeenLogged = True
+            hasGeneratingCodeBeenLogged = False
+    else:
+        pc.copy(dpg.get_value("generated_code"))
 
 
 def delete_selected_nodes():
