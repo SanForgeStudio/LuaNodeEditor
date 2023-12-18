@@ -151,6 +151,8 @@ Shortcut: Press File + Load to open a previously saved file.
 Code Generation:
 1. Generating Code:
 Click 'Generate Code': Once you've designed your node network, click the 'Generate Code' button to automatically generate the corresponding code.
+2. Copy Code:
+Click 'Copy Code': Once you've generated your node network and what to copy the code.
     '''
     show_modal("Help", help_text)
 
