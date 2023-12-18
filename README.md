@@ -30,3 +30,11 @@ I have expended the Help Modal a little bit because i saw you forgot to add the 
 
 ### Merges related to this Change
 * [Added `Copy Code` to the help modal](https://github.com/SanForgeStudio/LuaNodeEditor/commit/ed67272c12baa38c92f86512ea5ee9a50b32465a)
+
+## 4. Made a Simple Bug Report Layout!
+When creating an issue you can now click on the Bug Report Layout and only answer some questions. that way the coders have a way more in depth explenation about the bug and how to fix it.
+
+### Merges related to this Change
+* [Created the layout](https://github.com/SanForgeStudio/LuaNodeEditor/commit/8571053e5ff3f75c6779688c980e06faae90b59b)
+* [fixed the label](https://github.com/SanForgeStudio/LuaNodeEditor/commit/35f8f8a951a1c6b1050e455cd5562b405b6c9010)
+* [fixed a typo](https://github.com/SanForgeStudio/LuaNodeEditor/commit/799bfcd3b2232f4ddf7976b08183672579c7f12d)
