@@ -174,7 +174,7 @@ def generate_code():
 
     start_node = get_starting_node()
     if start_node is None:
-        show_modal("Warning", "Start node not found! Please add one.")
+        show_modal("Warning", "Start node not found! Please add nodes.")
         isCodeGenerated = False
         if not hasStartingNodeBeenLogged:
             call_threaded(add_log, ("Please add a starting node for proper code generation",))
@@ -190,7 +190,8 @@ def copy_code():
     if isCodeGenerated:
         pc.copy(dpg.get_value("generated_code"))
     else:
-        show_modal("Warning", "Please generate code before copying code.")
+        show_modal("Warning", "Generated code not found! Please generate code.")
+        call_threaded(add_log, ("Please generate code before copying the code.",))
 
 
 def delete_selected_nodes():
