@@ -1,6 +1,6 @@
 # Dont Merge this file
 
-## I will explain the important Sync's to make sure that everyone knows what i am contributing with this fork
+### I will explain the important Sync's to make sure that everyone knows what i am contributing with this fork
 
 # Changes
 
