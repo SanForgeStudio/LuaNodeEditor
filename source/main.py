@@ -26,7 +26,7 @@ def show_splash_screen():
     center_y = int((screen_height - 350) / 2)
     splash_root.geometry(f"600x350+{center_x}+{center_y}")
 
-    gif_path = "source/startup.gif"
+    gif_path = "source\splash.gif"
     gif_image = Image.open(gif_path)
     gif_photo = ImageTk.PhotoImage(gif_image)
 
