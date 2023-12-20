@@ -1,0 +1,71 @@
+name: Feature Request
+description: Submit a feature request
+title: "[Feature Request]: "
+labels: ["features", "feature-request"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for submitting a Feature Request!
+  - type: textarea
+    id: feature-description
+    attributes:
+      label: Feature Description
+      description: |
+        Please provide a brief description of the feature you'd like to see added.
+    validations:
+      required: true
+  - type: textarea
+    id: use-case
+    attributes:
+      label: Use Case
+      description: |
+        Explain the use case or scenario in which this feature would be beneficial.
+    validations:
+      required: true
+  - type: textarea
+    id: implementation-ideas
+    attributes:
+      label: Implementation Ideas
+      description: |
+        If you have any ideas on how this feature could be implemented, please share them here.
+  - type: textarea
+    id: additional-information
+    attributes:
+      label: Additional Information
+      description: |
+        Add any extra information, context, or screenshots that might be helpful.
+  - type: text
+    id: priority
+    attributes:
+      label: Priority
+      description: |
+        Specify the priority of this feature request (e.g., Low, Medium, High).
+  - type: text
+    id: labels
+    attributes:
+      label: Labels
+      description: |
+        Assign relevant labels to this issue (e.g., enhancement, feature-request).
+  - type: text
+    id: assignees
+    attributes:
+      label: Assignees
+      description: |
+        Assign the issue to specific team members or individuals responsible for implementing this feature.
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: Dependencies
+      description: |
+        List any dependencies or prerequisites for implementing this feature.
+  - type: textarea
+    id: related-issues
+    attributes:
+      label: Related Issues
+      description: |
+        If there are any related issues, mention them here.
+  - type: note
+    attributes:
+      value: |
+        Please be respectful and provide constructive feedback. Thank you for contributing!
