@@ -40,6 +40,7 @@ lua_ntIndexTableByKey = 28
 lua_ntIteratePairs = 29
 lua_ntIterateIPairs = 30
 lua_ntTable = 31
+lua_ntXOR = 32
 
 lua_ntNames = {
     lua_ntStart: "Entry",
@@ -64,6 +65,7 @@ lua_ntNames = {
     lua_ntNotEqual: "Not equal",
     lua_ntAnd: "And",
     lua_ntOr: "Or",
+    lua_ntXOR: "Exclusive Or",
     lua_ntAssign: "Assign",
     lua_ntFunctionDeclaration: "Function Declaration",
     lua_ntFunctionCall: "Function Call",
@@ -74,6 +76,7 @@ lua_ntNames = {
     lua_ntIndexTableByKey: "Index Table By Key",
     lua_ntIteratePairs: "Iterate Pairs",
     lua_ntIterateIPairs: "Iterate IPairs"
+
 }
 
 
@@ -143,6 +146,8 @@ def create_node_of_type(type):
         node = LuaNodeIteratePairs()
     elif type == lua_ntIterateIPairs:
         node = LuaNodeIterateIPairs()
+    elif type == lua_ntXOR:
+        node = LuaNodeXOR()
 
     dpg.bind_item_font(node.id, "bold_roboto")
     return node
@@ -629,6 +634,12 @@ class LuaNodeOr(LuaNodeBinaryCombiner):
     def __init__(self):
         super().__init__("Or", " or ")
         self.node_type = lua_ntOr
+
+
+class LuaNodeXOR(LuaNodeBinaryCombiner):
+    def __init__(self):
+        super().__init__("XOR", " ~ ")
+        self.node_type = lua_ntXOR
 
 
 class LuaNodeConcat(LuaNodeBinaryCombiner):
