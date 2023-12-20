@@ -39,7 +39,7 @@ def init_themes():
     global themes
     themes[(lua_ntStart, )] = pink_theme
     themes[(lua_ntGreater, lua_ntGreaterOrEqual, lua_ntLess, lua_ntLessOrEqual, lua_ntEqual, lua_ntNotEqual)] = green_theme
-    themes[(lua_ntAdd, lua_ntSubtract, lua_ntMultiply, lua_ntDivide)] = blue_theme
+    themes[(lua_ntAdd, lua_ntSubtract, lua_ntMultiply, lua_ntDivide,lua_ntModulus)] = blue_theme
     themes[(lua_ntVariable, lua_ntTable, lua_ntExpression)] = red_theme
     themes[(lua_ntFunctionCall, lua_ntFunctionDeclaration)] = purple_theme
     themes[(lua_ntWhileLoop, lua_ntForLoop, lua_ntIteratePairs, lua_ntIterateIPairs, lua_ntIf, lua_ntElseIf, lua_ntElse)] = yellow_theme

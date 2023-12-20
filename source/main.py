@@ -458,14 +458,14 @@ if __name__ == "__main__":
             directory_selector=False, show=False, callback=load_file_callback, tag="load_dialog",
             cancel_callback=file_dialog_cancel_callback, width=700, height=400, modal=True, default_path="save_files"):
         dpg.add_file_extension(".*")
-        dpg.add_file_extension(".lvs", color=(0, 255, 0, 255), custom_text="[Lua Visual Save]")
+        dpg.add_file_extension(".lvs", color=(0, 255, 0, 255), custom_text="[Lua Visual Script]")
 
     # save
     with dpg.file_dialog(
             directory_selector=False, show=False, callback=save_file_callback, tag="save_dialog",
             cancel_callback=file_dialog_cancel_callback, width=700, height=400, modal=True, default_path="save_files"):
         dpg.add_file_extension(".*")
-        dpg.add_file_extension(".lvs", color=(0, 255, 0, 255), custom_text="[Lua Visual Save]")
+        dpg.add_file_extension(".lvs", color=(0, 255, 0, 255), custom_text="[Lua Visual Script]")
 
     # create node window popup
     with dpg.window(label="Create node", show=False, tag="menu_create_node", no_title_bar=True, popup=True,

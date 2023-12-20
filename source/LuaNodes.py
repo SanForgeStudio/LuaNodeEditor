@@ -40,7 +40,8 @@ lua_ntIndexTableByKey = 28
 lua_ntIteratePairs = 29
 lua_ntIterateIPairs = 30
 lua_ntTable = 31
-lua_ntXOR = 32
+lua_ntNot = 32
+lua_ntModulus = 33
 
 lua_ntNames = {
     lua_ntStart: "Entry",
@@ -53,19 +54,20 @@ lua_ntNames = {
     lua_ntIf: "If",
     lua_ntElseIf: "Else If",
     lua_ntElse: "Else",
-    lua_ntAdd: "Add",
-    lua_ntSubtract: "Subtract",
-    lua_ntMultiply: "Multiply",
-    lua_ntDivide: "Divide",
-    lua_ntGreater: "Greater",
-    lua_ntGreaterOrEqual: "Greater or equal",
-    lua_ntLess: "Less",
-    lua_ntLessOrEqual: "Less or equal",
-    lua_ntEqual: "Equal",
-    lua_ntNotEqual: "Not equal",
+    lua_ntAdd: "Add(+)",
+    lua_ntSubtract: "Subtract(-)",
+    lua_ntMultiply: "Multiply(*)",
+    lua_ntDivide: "Divide(/)",
+    lua_ntModulus: "Modulus(%)",
+    lua_ntGreater: "Greater(>)",
+    lua_ntGreaterOrEqual: "Greater or equal(>=)",
+    lua_ntLess: "Less(<)",
+    lua_ntLessOrEqual: "Less or equal(<=)",
+    lua_ntEqual: "Equal(==)",
+    lua_ntNotEqual: "Not equal(~=)",
     lua_ntAnd: "And",
     lua_ntOr: "Or",
-    lua_ntXOR: "Exclusive Or",
+    lua_ntNot: "Not",
     lua_ntAssign: "Assign",
     lua_ntFunctionDeclaration: "Function Declaration",
     lua_ntFunctionCall: "Function Call",
@@ -75,7 +77,7 @@ lua_ntNames = {
     lua_ntIndexTable: "Index Table",
     lua_ntIndexTableByKey: "Index Table By Key",
     lua_ntIteratePairs: "Iterate Pairs",
-    lua_ntIterateIPairs: "Iterate IPairs"
+    lua_ntIterateIPairs: "Iterate IPairs",
 
 }
 
@@ -146,8 +148,10 @@ def create_node_of_type(type):
         node = LuaNodeIteratePairs()
     elif type == lua_ntIterateIPairs:
         node = LuaNodeIterateIPairs()
-    elif type == lua_ntXOR:
-        node = LuaNodeXOR()
+    elif type == lua_ntNot:
+        node = LuaNodeNot()
+    elif type == lua_ntModulus:
+        node = LuaNodeModulus()
 
     dpg.bind_item_font(node.id, "bold_roboto")
     return node
@@ -587,6 +591,11 @@ class LuaNodeDivide(LuaNodeBinaryCombiner):
         super().__init__("Divide", " / ")
         self.node_type = lua_ntDivide
 
+class LuaNodeModulus(LuaNodeBinaryCombiner):
+    def __init__(self):
+        super().__init__("Modulus", " % ")
+        self.node_type = lua_ntModulus
+
 
 class LuaNodeGreater(LuaNodeBinaryCombiner):
     def __init__(self):
@@ -624,6 +633,12 @@ class LuaNodeNotEqual(LuaNodeBinaryCombiner):
         self.node_type = lua_ntNotEqual
 
 
+class LuaNodeNot(LuaNodeBinaryCombiner):
+    def __init__(self):
+        super().__init__("Not", " not ")
+        self.node_type = lua_ntNot
+
+
 class LuaNodeAnd(LuaNodeBinaryCombiner):
     def __init__(self):
         super().__init__("And", " and ")
@@ -634,13 +649,6 @@ class LuaNodeOr(LuaNodeBinaryCombiner):
     def __init__(self):
         super().__init__("Or", " or ")
         self.node_type = lua_ntOr
-
-
-class LuaNodeXOR(LuaNodeBinaryCombiner):
-    def __init__(self):
-        super().__init__("XOR", " ~ ")
-        self.node_type = lua_ntXOR
-
 
 class LuaNodeConcat(LuaNodeBinaryCombiner):
     def __init__(self):
@@ -736,6 +744,7 @@ class LuaNodeFunction(LuaNode):
 
 
 class LuaNodeFunctionCall(LuaNode):
+
     def __init__(self):
         super().__init__()
         self.node_type = lua_ntFunctionCall
@@ -775,6 +784,7 @@ class LuaNodeFunctionCall(LuaNode):
         call_on_object_code = f"{call_on_object_code}{'.' if not dpg.get_value(self.attribute_call_on_self.checkbox) else ':'}" if call_on_object_code != "" else ""
         # return f"{call_on_object_code}{ind()}{function_name}({params_code}){end}"
         return f"{call_on_object_code}{function_name}({params_code}){end}"
+
 
 class LuaNodeReturn(LuaNode):
     def __init__(self):
