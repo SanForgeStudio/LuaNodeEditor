@@ -1,20 +1,22 @@
 name: Feature Request
-description: Submit a feature request
-title: "[Feature Request]: "
-labels: ["features", "feature-request"]
+description: File a bug report
+title: "[features]: "
+labels: ["features"]
 body:
   - type: markdown
     attributes:
       value: |
-        Thank you for submitting a Feature Request!
-  - type: markdown
-    id: feature-description
+        Thank you for making a Feature Request!
+  - type: textarea
+    id: what-happened
     attributes:
-      label: Feature Description
+      label: What feature do you want to request?
       description: |
-        Please provide a brief description of the feature you'd like to see added.
+        Please tell us about the feature as detailed as possible.
+        Feel free to also add Media!
     validations:
       required: true
+      
   - type: textarea
     id: use-case
     attributes:
@@ -23,49 +25,9 @@ body:
         Explain the use case or scenario in which this feature would be beneficial.
     validations:
       required: true
+
   - type: textarea
-    id: implementation-ideas
+    id: more-information
     attributes:
-      label: Implementation Ideas
-      description: |
-        If you have any ideas on how this feature could be implemented, please share them here.
-  - type: textarea
-    id: additional-information
-    attributes:
-      label: Additional Information
-      description: |
-        Add any extra information, context, or screenshots that might be helpful.
-  - type: text
-    id: priority
-    attributes:
-      label: Priority
-      description: |
-        Specify the priority of this feature request (e.g., Low, Medium, High).
-  - type: text
-    id: labels
-    attributes:
-      label: Labels
-      description: |
-        Assign relevant labels to this issue (e.g., enhancement, feature-request).
-  - type: text
-    id: assignees
-    attributes:
-      label: Assignees
-      description: |
-        Assign the issue to specific team members or individuals responsible for implementing this feature.
-  - type: markdown
-    id: dependencies
-    attributes:
-      label: Dependencies
-      description: |
-        List any dependencies or prerequisites for implementing this feature.
-  - type: markdown
-    id: related-issues
-    attributes:
-      label: Related Issues
-      description: |
-        If there are any related issues, mention them here.
-  - type: markdown
-    attributes:
-      value: |
-        Please be respectful and provide constructive feedback. Thank you for contributing!
+      label: More information
+      description: Is there anything else relevant that you want/need to share.
