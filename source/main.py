@@ -26,7 +26,7 @@ def show_splash_screen():
     center_y = int((screen_height - 100) / 2)
     splash_root.geometry(f"600x100+{center_x}+{center_y}")
 
-    image_path = "source\Large_Logo.ico"
+    image_path = "Large_Logo.ico"
     original_image = Image.open(image_path)
     desired_width = 600
     desired_height = 450
@@ -47,7 +47,7 @@ if __name__ == "__main__":
     dpg.create_context()
     dpg.configure_app(manual_callback_management=True)
     dpg.configure_app(init_file="settings.ini")
-    dpg.create_viewport(title='Lua Node Editor', width=1200, height=800, small_icon="source\icon.ico", large_icon="source\icon.ico")
+    dpg.create_viewport(title='Lua Node Editor', width=1200, height=800, small_icon="icon.ico", large_icon="icon.ico")
 
     # Variable list
     hasGeneratingCodeBeenLogged = False
