@@ -14,16 +14,25 @@ from LuaNodes import *
 import pyperclip as pc
 import json
 
-import time
 import tkinter as tk
-from tkinter import ttk
+from PIL import Image, ImageTk
 
 def show_splash_screen():
     splash_root = tk.Tk()
-    splash_root.geometry("300x200")
+    splash_root.geometry("1000x500")
     splash_root.title("Splash")
 
-    splash_root.after(1000, splash_root.destroy) 
+    splash_root.iconbitmap("source/icon.ico")
+
+    gif_path = "source/logointro.gif"
+    gif_image = Image.open(gif_path)
+    gif_photo = ImageTk.PhotoImage(gif_image)
+
+    gif_label = tk.Label(splash_root, image=gif_photo)
+    gif_label.image = gif_photo
+    gif_label.pack()
+
+    splash_root.after(5000, splash_root.destroy) 
 
     splash_root.mainloop()
 
