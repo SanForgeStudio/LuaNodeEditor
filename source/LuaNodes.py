@@ -400,7 +400,7 @@ class LuaNodeForLoop(LuaNode):
 class LuaNodeWhileLoop(LuaNode):
     def __init__(self):
         super().__init__()
-        self.node_type = lua_ntForLoop
+        self.node_type = lua_ntWhileLoop
 
         self.node_attributes = [
             NodeAttributeExecuteIn(),
