@@ -19,7 +19,12 @@ from PIL import Image, ImageTk
 
 def show_splash_screen():
     splash_root = tk.Tk()
-    splash_root.geometry("1000x500")
+    splash_root.overrideredirect(True)
+    screen_width = splash_root.winfo_screenwidth()
+    screen_height = splash_root.winfo_screenheight()
+    center_x = int((screen_width - 1000) / 2)
+    center_y = int((screen_height - 500) / 2)
+    splash_root.geometry(f"1000x500+{center_x}+{center_y}")
     splash_root.title("Splash")
 
     splash_root.iconbitmap("source/icon.ico")
@@ -32,7 +37,7 @@ def show_splash_screen():
     gif_label.image = gif_photo
     gif_label.pack()
 
-    splash_root.after(5000, splash_root.destroy) 
+    splash_root.after(3000, splash_root.destroy) 
 
     splash_root.mainloop()
 
@@ -42,7 +47,7 @@ if __name__ == "__main__":
     dpg.create_context()
     dpg.configure_app(manual_callback_management=True)
     dpg.configure_app(init_file="settings.ini")
-    dpg.create_viewport(title='Lua Node Editor', width=1200, height=800, small_icon="icon.ico", large_icon="icon.ico")
+    dpg.create_viewport(title='Lua Node Editor', width=1200, height=800, small_icon="source\icon.ico", large_icon="source\icon.ico")
 
     # Variable list
     hasGeneratingCodeBeenLogged = False
