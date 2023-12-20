@@ -7,7 +7,7 @@ body:
     attributes:
       value: |
         Thank you for submitting a Feature Request!
-  - type: textarea
+  - type: markdown
     id: feature-description
     attributes:
       label: Feature Description
@@ -53,19 +53,19 @@ body:
       label: Assignees
       description: |
         Assign the issue to specific team members or individuals responsible for implementing this feature.
-  - type: textarea
+  - type: markdown
     id: dependencies
     attributes:
       label: Dependencies
       description: |
         List any dependencies or prerequisites for implementing this feature.
-  - type: textarea
+  - type: markdown
     id: related-issues
     attributes:
       label: Related Issues
       description: |
         If there are any related issues, mention them here.
-  - type: note
+  - type: markdown
     attributes:
       value: |
         Please be respectful and provide constructive feedback. Thank you for contributing!
