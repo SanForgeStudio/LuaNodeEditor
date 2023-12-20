@@ -43,7 +43,6 @@ def show_splash_screen():
 
 if __name__ == "__main__":
     show_splash_screen()
-
     dpg.create_context()
     dpg.configure_app(manual_callback_management=True)
     dpg.configure_app(init_file="settings.ini")
