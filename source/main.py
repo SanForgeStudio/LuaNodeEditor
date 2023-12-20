@@ -23,16 +23,19 @@ def show_splash_screen():
     screen_width = splash_root.winfo_screenwidth()
     screen_height = splash_root.winfo_screenheight()
     center_x = int((screen_width - 600) / 2)
-    center_y = int((screen_height - 350) / 2)
-    splash_root.geometry(f"600x350+{center_x}+{center_y}")
+    center_y = int((screen_height - 100) / 2)
+    splash_root.geometry(f"600x100+{center_x}+{center_y}")
 
-    gif_path = "source\splash.gif"
-    gif_image = Image.open(gif_path)
-    gif_photo = ImageTk.PhotoImage(gif_image)
+    image_path = "source\Large_Logo.ico"
+    original_image = Image.open(image_path)
+    desired_width = 600
+    desired_height = 450
+    resized_image = original_image.resize((desired_width, desired_height))
+    resized_photo = ImageTk.PhotoImage(resized_image)
 
-    gif_label = tk.Label(splash_root, image=gif_photo)
-    gif_label.image = gif_photo
-    gif_label.pack()
+    resized_label = tk.Label(splash_root, image=resized_photo)
+    resized_label.image = resized_photo
+    resized_label.pack()
 
     splash_root.after(3000, splash_root.destroy) 
 
