@@ -22,14 +22,11 @@ def show_splash_screen():
     splash_root.overrideredirect(True)
     screen_width = splash_root.winfo_screenwidth()
     screen_height = splash_root.winfo_screenheight()
-    center_x = int((screen_width - 1000) / 2)
-    center_y = int((screen_height - 500) / 2)
-    splash_root.geometry(f"1000x500+{center_x}+{center_y}")
-    splash_root.title("Splash")
+    center_x = int((screen_width - 600) / 2)
+    center_y = int((screen_height - 350) / 2)
+    splash_root.geometry(f"600x350+{center_x}+{center_y}")
 
-    splash_root.iconbitmap("source/icon.ico")
-
-    gif_path = "source/logointro.gif"
+    gif_path = "source/startup.gif"
     gif_image = Image.open(gif_path)
     gif_photo = ImageTk.PhotoImage(gif_image)
 
