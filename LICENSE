@@ -7,10 +7,14 @@
 
                             Preamble
 
-  The GNU General Public License is a free, copyleft license for
+The GNU General Public License is a free, copyleft license for
 software and other kinds of works.
 
-  The licenses for most software and other practical works are designed
+Product name: Lua Node Editor
+Company Name: SanForge Studio
+Email Adress: sanforgestudio@gmail.com, info@sanforgestudio.com
+
+The licenses for most software and other practical works are designed
 to take away your freedom to share and change the works.  By contrast,
 the GNU General Public License is intended to guarantee your freedom to
 share and change all versions of a program--to make sure it remains free
@@ -19,7 +23,7 @@ GNU General Public License for most of our software; it applies also to
 any other work released this way by its authors.  You can apply it to
 your programs, too.
 
-  When we speak of free software, we are referring to freedom, not
+When we speak of free software, we are referring to freedom, not
 price.  Our General Public Licenses are designed to make sure that you
 have the freedom to distribute copies of free software (and charge for
 them if you wish), that you receive source code or can get it if you
@@ -672,10 +676,3 @@ may consider it more useful to permit linking proprietary applications with
 the library.  If this is what you want to do, use the GNU Lesser General
 Public License instead of this License.  But first, please read
 <https://www.gnu.org/licenses/why-not-lgpl.html>.
-
-
-Product name: Lua Node Editor
-Company Name: SanForge Studio
-Email Adress: sanforgestudio@gmail.com, info@sanforgestudio.com
-
-Copyright © All Rights Reserved, SanForge Studio & Lua Node Editor                 
