@@ -156,6 +156,9 @@ if __name__ == "__main__":
 
     def show_help_modal():
         help_text = f'''
+    Copyright © 2023, SanForge Studio & Lua Node Editor, All Rights Reserved.
+    Licensed under the GNU General Public 3.0 License
+
     Interface Navigation:
     1. Panning the View:
     Middle Mouse Button: Hold down the middle mouse button and move the mouse to pan the view across the editor canvas.
