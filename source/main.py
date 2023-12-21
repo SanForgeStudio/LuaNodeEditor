@@ -22,14 +22,14 @@ def show_splash_screen():
     splash_root.overrideredirect(True)
     screen_width = splash_root.winfo_screenwidth()
     screen_height = splash_root.winfo_screenheight()
-    center_x = int((screen_width - 400) / 2)
-    center_y = int((screen_height - 86) / 2)
-    splash_root.geometry(f"400x86+{center_x}+{center_y}")
+    center_x = int((screen_width - 600) / 2)
+    center_y = int((screen_height - 200) / 2)
+    splash_root.geometry(f"600x200+{center_x}+{center_y}")
 
-    image_path = "LargeLogo.png"
+    image_path = "source\splash.png" # Remove Source/ if it cant find the image
     original_image = Image.open(image_path)
-    desired_width = 400
-    desired_height = 86
+    desired_width = 600
+    desired_height = 200
     resized_image = original_image.resize((desired_width, desired_height))
     resized_photo = ImageTk.PhotoImage(resized_image)
 
@@ -449,8 +449,8 @@ if __name__ == "__main__":
 
     with dpg.font_registry():
         # first argument ids the path to the .ttf or .otf file
-        bold_font = dpg.add_font("robotoBold.ttf", 18, tag="bold_roboto") # Change back to "robotoBold.ttf" before asking to merge (Aram123456789)
-        default_font = dpg.add_font("roboto.ttf", 14, tag="roboto") # Change back to "roboto.ttf" before asking to merge (Aram123456789)
+        bold_font = dpg.add_font("source\\robotoBold.ttf", 18, tag="bold_roboto") # Remove Source\\ if it cant find the Font
+        default_font = dpg.add_font("source\\roboto.ttf", 14, tag="roboto")  # Remove Source\\ if it cant find the Font
 
     # file selector
     # load
