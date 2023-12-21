@@ -26,7 +26,7 @@ def show_splash_screen():
     center_y = int((screen_height - 200) / 2)
     splash_root.geometry(f"600x200+{center_x}+{center_y}")
 
-    image_path = "source\splash.png" # Remove Source/ if it cant find the image
+    image_path = "splash.png" # Remove Source/ if it cant find the image
     original_image = Image.open(image_path)
     desired_width = 600
     desired_height = 200
@@ -452,8 +452,8 @@ if __name__ == "__main__":
 
     with dpg.font_registry():
         # first argument ids the path to the .ttf or .otf file
-        bold_font = dpg.add_font("source\\robotoBold.ttf", 18, tag="bold_roboto") # Remove Source\\ if it cant find the Font
-        default_font = dpg.add_font("source\\roboto.ttf", 14, tag="roboto")  # Remove Source\\ if it cant find the Font
+        bold_font = dpg.add_font("robotoBold.ttf", 18, tag="bold_roboto") # Remove Source\\ if it cant find the Font
+        default_font = dpg.add_font("roboto.ttf", 14, tag="roboto")  # Remove Source\\ if it cant find the Font
 
     # file selector
     # load
