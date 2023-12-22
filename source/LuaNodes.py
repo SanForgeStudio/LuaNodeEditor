@@ -86,7 +86,7 @@ def create_node_of_type(type):
     node = None
     if type == lua_ntVariable:
         node = LuaVariableNode()
-    if type == lua_ntTable:
+    elif type == lua_ntTable:
         node = LuaTable()
     elif type == lua_ntStart:
         node = LuaStartNode()
