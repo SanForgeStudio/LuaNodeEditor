@@ -12,7 +12,7 @@
 #
 
 <br/>
-<b>Lua Node Editor</b> is a powerful visual scripting IDE that uses nodes to program visually by using it with the Lua scripting language. Our tool is unique and powerful in its own way as it can be used for major projects in multiple industries.
+<b>Lua Node Editor</b> is a powerful visual scripting IDE that uses nodes to program visually by using it with the Lua scripting language. Our tool is unique and powerful in its own way as it can be used for projects in multiple industries.
 <br/>
 
 
