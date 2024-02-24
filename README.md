@@ -52,8 +52,8 @@ The Lua Node Editor has released but in a early development phase. Purely to rec
 The license falls under the **GNU General Public 3.0** license read it [here](https://github.com/SanForgeStudio/LuaNodeEditor/blob/main/LICENSE).
 
 # Author
-Author: SanForge Studio
-Email: info@sanforgestudio.com
+- Author: SanForge Studio
+- Email: info@sanforgestudio.com
 
 *Copyright © All rights reserved SanForge Studio.*
 
