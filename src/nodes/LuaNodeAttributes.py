@@ -4,15 +4,15 @@
 #
 
 import dearpygui.dearpygui as dpg
-import globals
-from globals import ind, inc_ind, dec_ind, Serializable
+import nodes.globals as globals
+from nodes.globals import ind, inc_ind, dec_ind, Serializable
 from abc import ABC, abstractmethod
 from pprint import pprint
 
 
 class NodeAttribute(Serializable):
     def __init__(self):
-        from LuaNodes import LuaNode
+        from nodes.LuaNodes import LuaNode
 
         self.parent_node: LuaNode = None
         self.id = None

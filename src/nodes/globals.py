@@ -93,8 +93,8 @@ def get_to_node_from_out_node_attribute(out_id):
 
 
 def get_out_node_attribute_from_in_node_attribute(in_id):
-    from LuaNodes import LuaNode, Link
-    from LuaNodeAttributes import NodeAttribute
+    from nodes.LuaNodes import LuaNode, Link
+    from nodes.LuaNodeAttributes import NodeAttribute
 
     link: Link = get_link_from_in_node_attribute(in_id)
     if link:
@@ -113,8 +113,8 @@ def get_out_node_attribute_from_in_node_attribute(in_id):
 
 
 def get_in_node_attribute_from_out_node_attribute(out_id):
-    from LuaNodes import LuaNode, Link
-    from LuaNodeAttributes import NodeAttribute
+    from nodes.LuaNodes import LuaNode, Link
+    from nodes.LuaNodeAttributes import NodeAttribute
 
     link: Link = get_link_from_out_node_attribute(out_id)
     if link:

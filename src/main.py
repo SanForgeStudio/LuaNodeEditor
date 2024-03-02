@@ -6,43 +6,19 @@
 import os
 
 import dearpygui.dearpygui as dpg
-from pprint import pprint
+import pprint as pprint
 import threading
-
-import themes
-from LuaNodes import *
 import pyperclip as pc
 import json
 
-import tkinter as tk
-from PIL import Image, ImageTk
-
-def show_splash_screen():
-    splash_root = tk.Tk()
-    splash_root.overrideredirect(True)
-    screen_width = splash_root.winfo_screenwidth()
-    screen_height = splash_root.winfo_screenheight()
-    center_x = int((screen_width - 600) / 2)
-    center_y = int((screen_height - 200) / 2)
-    splash_root.geometry(f"600x200+{center_x}+{center_y}")
-
-    image_path = "src/assets/images/splash.png"
-    original_image = Image.open(image_path)
-    desired_width = 600
-    desired_height = 200
-    resized_image = original_image.resize((desired_width, desired_height))
-    resized_photo = ImageTk.PhotoImage(resized_image)
-
-    resized_label = tk.Label(splash_root, image=resized_photo)
-    resized_label.image = resized_photo
-    resized_label.pack()
-
-    splash_root.after(3000, splash_root.destroy) 
-
-    splash_root.mainloop()
+import nodes
+import nodes.themes as themes
+from nodes.LuaNodes import *
+from splash import SplashScreen
 
 if __name__ == "__main__":
-    show_splash_screen()
+    splash_screen = SplashScreen("src/assets/images/splash.png", 600, 200, 3000)
+    splash_screen.show()
     dpg.create_context()
     dpg.configure_app(manual_callback_management=True)
     dpg.configure_app(init_file="settings.ini")
@@ -63,7 +39,7 @@ if __name__ == "__main__":
     # callback runs when user attempts to connect attributes
     def link_callback(sender, app_data):
         # check for no other link to have the same end
-        for l in globals.links:
+        for l in nodes.globals.links:
             if l.to_attribute == app_data[1]:
                 call_threaded(add_log, ("Can't have multiple inputs", ))
                 add_log("Can't have multiple inputs")
@@ -74,14 +50,14 @@ if __name__ == "__main__":
         from_node = dpg.get_item_parent(app_data[0])
         to_node = dpg.get_item_parent(app_data[1])
 
-        globals.links += [Link(id, from_node, to_node, app_data[0], app_data[1])]
+        nodes.globals.links += [Link(id, from_node, to_node, app_data[0], app_data[1])]
 
 
     # callback runs when user attempts to disconnect attributes
     def delink_callback(sender, app_data):
         # app_data -> link_id
         dpg.delete_item(app_data)
-        globals.links = list(filter(lambda l: l.id != app_data, globals.links))
+        nodes.globals.links = list(filter(lambda l: l.id != app_data, nodes.globals.links))
 
 
     def get_mouse_pos_relative_to(item):
@@ -102,7 +78,7 @@ if __name__ == "__main__":
 
 
     def get_starting_node():
-        for node in globals.nodes:
+        for node in nodes.globals.nodes:
             if isinstance(node, LuaStartNode):
                 return node
         return None
@@ -197,14 +173,14 @@ if __name__ == "__main__":
         global hasGeneratingCodeBeenLogged
         global hasCopyCodeBeenLogged
         global isCodeGenerated
-        for node in globals.nodes:
+        for node in nodes.globals.nodes:
             if isinstance(node, LuaVariableNode) or isinstance(node, LuaTable):
             # if isinstance(node, LuaVariableNode):
                 if not node.has_from_node():
                     code += node.generate_code()
 
         # add global functions code
-        for node in globals.nodes:
+        for node in nodes.globals.nodes:
             if isinstance(node, LuaNodeFunction):
                 if not node.has_from_node() and not node.is_inline():
                     code += node.generate_code()
@@ -241,7 +217,7 @@ if __name__ == "__main__":
 
     def delete_selected_nodes():
         selected_nodes = dpg.get_selected_nodes("node_editor")
-        globals.nodes = list(filter(lambda n: n.id not in selected_nodes, globals.nodes))
+        nodes.globals.nodes = list(filter(lambda n: n.id not in selected_nodes, nodes.globals.nodes))
 
         # ref_node = dpg.get_item_label(node)
         for node in selected_nodes:
@@ -251,8 +227,8 @@ if __name__ == "__main__":
             # dpg.delete_item(node)
 
         # delete links that are left hanging
-        node_ids = [node.id for node in globals.nodes]
-        globals.links = list(filter(lambda l: l.from_node in node_ids and l.to_node in node_ids, globals.links))
+        node_ids = [node.id for node in nodes.globals.nodes]
+        nodes.globals.links = list(filter(lambda l: l.from_node in node_ids and l.to_node in node_ids, nodes.globals.links))
 
 
     def create_node(node_type):
@@ -261,7 +237,7 @@ if __name__ == "__main__":
         if node:
             node.submit("node_editor")
             dpg.configure_item(node.id, pos=get_mouse_pos_in_node_editor())
-            globals.nodes.append(node)
+            nodes.globals.nodes.append(node)
             themes.apply_theme(node)
 
         dpg.configure_item("menu_create_node", show=False)
@@ -279,8 +255,8 @@ if __name__ == "__main__":
         if key == dpg.mvKey_Delete:
             delete_selected_nodes()
         elif key == dpg.mvKey_T:
-            print(globals.nodes)
-            print(globals.links)
+            print(nodes.globals.nodes)
+            print(nodes.globals.links)
             # for child in dpg.get_item_children("node_search_filter", slot=1):
             #     print(dpg.get_item_state(child))
 
@@ -314,7 +290,7 @@ if __name__ == "__main__":
 
 
     def is_editor_empty():
-        return globals.links == [] and globals.nodes == []
+        return nodes.globals.links == [] and nodes.globals.nodes == []
 
 
     def menu_pressed_new_file():
@@ -331,8 +307,8 @@ if __name__ == "__main__":
 
 
     def reset_node_editor():
-        globals.nodes = []
-        globals.links = []
+        nodes.globals.nodes = []
+        nodes.globals.links = []
         children = dpg.get_item_children("node_editor", slot=1)
         for child in children:
             # avoid deleting the reference node
@@ -350,10 +326,10 @@ if __name__ == "__main__":
             }
 
             nod: LuaNode
-            for node in globals.nodes:
+            for node in nodes.globals.nodes:
                 json_obj["nodes"][node.id] = node.serialize()
             link: Link
-            for link in globals.links:
+            for link in nodes.globals.links:
                 json_obj["links"][link.id] = link.serialize()
 
             json_string = json.dumps(json_obj, indent=2)
@@ -382,7 +358,7 @@ if __name__ == "__main__":
                     "new_attributes": dict(
                         zip(list(node_data["attributes"].keys()), [attr.id for attr in new_node.node_attributes]))
                 }
-                globals.nodes.append(new_node)
+                nodes.globals.nodes.append(new_node)
                 themes.apply_theme(new_node)
 
                 # except:
@@ -399,7 +375,7 @@ if __name__ == "__main__":
                 new_link_id = dpg.add_node_link(from_attribute, to_attribute, parent="node_editor")
                 new_link = Link(new_link_id, from_node, to_node, from_attribute, to_attribute)
 
-                globals.links.append(new_link)
+                nodes.globals.links.append(new_link)
                 # except:
                 #     pass
 

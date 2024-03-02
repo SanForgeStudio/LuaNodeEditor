@@ -5,7 +5,7 @@
 
 
 import dearpygui.dearpygui as dpg
-from LuaNodes import *
+from nodes.LuaNodes import *
 
 # dpg.add_theme_color(dpg.mvNodeCol_NodeBackground, (255, 0, 0, 0), category=dpg.mvThemeCat_Nodes)
 # dpg.add_theme_color(dpg.mvNodeCol_NodeBackgroundHovered, (255, 0, 0, 0), category=dpg.mvThemeCat_Nodes)

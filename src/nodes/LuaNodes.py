@@ -4,9 +4,9 @@
 #
 
 import dearpygui.dearpygui as dpg
-import globals
-from globals import ind, inc_ind, dec_ind, Serializable, bcksl
-from LuaNodeAttributes import *
+import nodes.globals as globals
+from nodes.globals import ind, inc_ind, dec_ind, Serializable, bcksl
+from nodes.LuaNodeAttributes import *
 
 lua_ntVariable = 0
 lua_ntStart = 1
