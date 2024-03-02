@@ -26,7 +26,7 @@ def show_splash_screen():
     center_y = int((screen_height - 200) / 2)
     splash_root.geometry(f"600x200+{center_x}+{center_y}")
 
-    image_path = "splash.png" # Remove Source/ if it cant find the image
+    image_path = "src/assets/images/splash.png"
     original_image = Image.open(image_path)
     desired_width = 600
     desired_height = 200
@@ -46,7 +46,7 @@ if __name__ == "__main__":
     dpg.create_context()
     dpg.configure_app(manual_callback_management=True)
     dpg.configure_app(init_file="settings.ini")
-    dpg.create_viewport(title='Lua Node Editor', width=1200, height=800, small_icon="icon.ico", large_icon="icon.ico")
+    dpg.create_viewport(title='Lua Node Editor', width=1200, height=800, small_icon="src/assets/images/icon.ico", large_icon="src/assets/images/icon.ico")
 
     # Variable list
     hasGeneratingCodeBeenLogged = False
@@ -452,8 +452,8 @@ if __name__ == "__main__":
 
     with dpg.font_registry():
         # first argument ids the path to the .ttf or .otf file
-        bold_font = dpg.add_font("robotoBold.ttf", 18, tag="bold_roboto") # Remove Source\\ if it cant find the Font
-        default_font = dpg.add_font("roboto.ttf", 14, tag="roboto")  # Remove Source\\ if it cant find the Font
+        bold_font = dpg.add_font("src/assets/font/robotoBold.ttf", 18, tag="bold_roboto")
+        default_font = dpg.add_font("src/assets/font/roboto.ttf", 14, tag="roboto")
 
     # file selector
     # load
