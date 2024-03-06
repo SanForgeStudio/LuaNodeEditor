@@ -26,7 +26,7 @@ def show_splash_screen():
     center_y = int((screen_height - 200) / 2)
     splash_root.geometry(f"600x200+{center_x}+{center_y}")
 
-    image_path = "assets/images/splash.png"
+    image_path = "splash.png" # Remove Source/ if it cant find the image
     original_image = Image.open(image_path)
     desired_width = 600
     desired_height = 200
@@ -46,7 +46,7 @@ if __name__ == "__main__":
     dpg.create_context()
     dpg.configure_app(manual_callback_management=True)
     dpg.configure_app(init_file="settings.ini")
-    dpg.create_viewport(title='Lua Node Editor', width=1200, height=800, small_icon="assets/images/icon.ico", large_icon="src/assets/images/icon.ico")
+    dpg.create_viewport(title='Lua Node Editor', width=1200, height=800, small_icon="icon.ico", large_icon="icon.ico")
 
     # Variable list
     hasGeneratingCodeBeenLogged = False
@@ -298,6 +298,10 @@ if __name__ == "__main__":
         create_folder_if_not_exists("save_files")
         dpg.show_item("save_dialog")
 
+    def open_export_dialog():
+        create_folder_if_not_exists("export_files")
+        dpg.show_item("export_dialog")
+
     def open_load_dialog():
         create_folder_if_not_exists("save_files")
         dpg.show_item("load_dialog")
@@ -446,29 +450,51 @@ if __name__ == "__main__":
         print(path)
         save(path)
 
+    def export_file_callback(sender, app_data):
+        path = None
+        if len(app_data["selections"]) == 0:
+            print(app_data)
+            path = app_data["file_path_name"]
+        else:
+            path = list(app_data["selections"].values())[0]
+        print(path)
+        save(path)
+
 
     def file_dialog_cancel_callback(sender, app_data):
         pass
 
     with dpg.font_registry():
         # first argument ids the path to the .ttf or .otf file
-        bold_font = dpg.add_font("assets/font/robotoBold.ttf", 18, tag="bold_roboto")
-        default_font = dpg.add_font("assets/font/roboto.ttf", 14, tag="roboto")
+        bold_font = dpg.add_font("robotoBold.ttf", 18, tag="bold_roboto") # Remove Source\\ if it cant find the Font
+        default_font = dpg.add_font("roboto.ttf", 14, tag="roboto")  # Remove Source\\ if it cant find the Font
 
     # file selector
-    # load
+    # Open Project / Importing
     with dpg.file_dialog(
             directory_selector=False, show=False, callback=load_file_callback, tag="load_dialog",
             cancel_callback=file_dialog_cancel_callback, width=700, height=400, modal=True, default_path="save_files"):
         dpg.add_file_extension(".*")
         dpg.add_file_extension(".lvs", color=(0, 255, 0, 255), custom_text="[Lua Visual Script]")
 
-    # save
+
+
+
+    # Save as
     with dpg.file_dialog(
             directory_selector=False, show=False, callback=save_file_callback, tag="save_dialog",
             cancel_callback=file_dialog_cancel_callback, width=700, height=400, modal=True, default_path="save_files"):
         dpg.add_file_extension(".*")
         dpg.add_file_extension(".lvs", color=(0, 255, 0, 255), custom_text="[Lua Visual Script]")
+
+
+
+    # Export
+    with dpg.file_dialog(
+            directory_selector=False, show=False, callback=export_file_callback, tag="export_dialog",
+            cancel_callback=file_dialog_cancel_callback, width=700, height=400, modal=True, default_path="export_files"):
+        dpg.add_file_extension(".lua", color=(0, 0, 138), custom_text="(WIP)[Lua]")
+
 
     # create node window popup
     with dpg.window(label="Create node", show=False, tag="menu_create_node", no_title_bar=True, popup=True,
@@ -486,9 +512,11 @@ if __name__ == "__main__":
     with dpg.window(tag="main_window") as main_win:
         with dpg.menu_bar():
             with dpg.menu(label="File"):
+                dpg.add_menu_item(label="Open", callback=lambda: open_load_dialog())
                 dpg.add_menu_item(label="New", callback=lambda: menu_pressed_new_file())
                 dpg.add_menu_item(label="Save as", callback=lambda: open_save_dialog())
-                dpg.add_menu_item(label="Load", callback=lambda: open_load_dialog())
+                dpg.add_menu_item(label="Export(WIP)", callback=lambda: open_export_dialog())
+                
             with dpg.menu(label="Settings"):
                 dpg.add_menu_item(label="Style editor", callback=lambda: dpg.show_style_editor())
                 # dpg.add_menu_item(label="Save style", callback=lambda: save_init())
@@ -519,8 +547,11 @@ if __name__ == "__main__":
                     dpg.add_button(label="Copy code", callback=lambda: copy_code())
                 dpg.add_input_text(height=-200, multiline=True, tag="generated_code", width=350)
                 with dpg.tab_bar():
-                    with dpg.tab(label="Log"):
+                    with dpg.tab(label="Console"):
                         with dpg.child_window(height=-1, border=False, tag="log_container"):
+                            pass
+                    with dpg.tab(label="Profiler(WIP)"):
+                        with dpg.child_window(height=-1, border=False, tag="profiler_container"):
                             pass
 
         dpg.bind_font(default_font)
