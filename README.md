@@ -36,8 +36,7 @@ The overall idea of this tool is to ensure everyone can use it how they want, ei
 
 *A simple application idea in a flowchart:*
 
-<img alt="flowchart" src="https://github.com/SanForgeStudio/LuaNodeEditor/assets/97965051/12b3d742-63d8-478a-94a2-58c566f9b19e" width="600" />
-
+<img alt="flowchart" src="https://github.com/SanForgeStudio/LuaNodeEditor/assets/97965051/c3f71a59-b209-4e8d-9212-78fb13a50281" width="500" />
 
 # The power of nodes
 Because the Lua Node Editor is based on learning and exploring and making code more fun, similar to many tools that use visual programming for example Scratch or the Unreal Engine, We hope to accomplish alot of breakthroughs with this tool and making it a highly advanced tool.
