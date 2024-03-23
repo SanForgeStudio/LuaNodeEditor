@@ -62,6 +62,7 @@ Yes, we have our own forum suite, still early, but there everyone can share scri
 [here](https://www.lua-node-editor.com/forum)
 
 # Author
+- Creator: Sander Kerkhoff
 - Author: SanForge Studio
 - Email: info@sanforgestudio.com
 
