@@ -52,7 +52,7 @@ The Lua Node Editor has released but in a early development phase. Purely to rec
 The primary repository license falls under the **GNU General Public 3.0** license, you can read it [here](https://github.com/SanForgeStudio/LuaNodeEditor/blob/main/LICENSE).
 
 ## Asset & Logo License
-Our Lua Node Editor logo's and assets fall under the **Creative Commons BY Attribution 4.0** License, you can read it [here](https://creativecommons.org/licenses/by/4.0/deed.en).
+Our Lua Node Editor logo's and graphical assets fall under the **Creative Commons BY Attribution 4.0** License, you can read it [here](https://creativecommons.org/licenses/by/4.0/deed.en).
 
 <img alt="Creative Commons BY 4.0 Icon" src="https://github.com/SanForgeStudio/LuaNodeEditor/assets/97965051/656f3487-f971-4f4f-9874-becfca4707fd" width="50" />
 
