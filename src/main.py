@@ -537,7 +537,7 @@ if __name__ == "__main__":
     with dpg.font_registry():
         # first argument ids the path to the .ttf or .otf file
         bold_font = dpg.add_font("assets/font/robotoBold.ttf", 18, tag="bold_roboto") # Remove Source\\ if it cant find the Font
-        default_font = dpg.add_font("assets/font/robotoBold.ttf", 14, tag="roboto")  # Remove Source\\ if it cant find the Font
+        default_font = dpg.add_font("assets/font/roboto.ttf", 14, tag="roboto")  # Remove Source\\ if it cant find the Font
 
     # file selector
     # load
