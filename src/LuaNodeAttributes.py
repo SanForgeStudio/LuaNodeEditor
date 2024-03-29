@@ -1,14 +1,10 @@
-# 
-# Copyright © 2023, SanForge Studio & Lua Node Editor, All Rights Reserved.
-# Licensed under the GNU General Public 3.0 License
-#
-
 import dearpygui.dearpygui as dpg
 import globals
 from globals import ind, inc_ind, dec_ind, Serializable
 from abc import ABC, abstractmethod
 from pprint import pprint
 
+from constants import *
 
 class NodeAttribute(Serializable):
     def __init__(self):
@@ -18,8 +14,11 @@ class NodeAttribute(Serializable):
         self.id = None
         self.stage = None
 
-    def generate_code(self):
-        return ""
+    def generate_code(self, color_coded=False):
+        if not color_coded:
+            return ""
+        else:
+            return [[]]
 
     def serialize(self):
         return {
@@ -46,8 +45,11 @@ class NodeAttributeVariable(NodeAttribute):
         self.multiline = not self.multiline
         dpg.configure_item(self.value, multiline=self.multiline)
 
-    def generate_code(self):
-        return f"{dpg.get_value(self.name)}"
+    def generate_code(self, color_coded=False):
+        if not color_coded:
+            return f"{dpg.get_value(self.name)}"
+        else:
+            return [[dpg.get_value(self.name), (255, 0, 0)]]
 
     def serialize(self):
         return {
@@ -103,8 +105,11 @@ class NodeAttributeMultipleExpressionOut(NodeAttribute):
         # TODO IMPORTANT check if attribute has connections and if so delete them
         dpg.delete_item(last_arg.id)
 
-    def generate_code(self):
-        return f"{dpg.get_value(self.name)}"
+    def generate_code(self, color_coded=False):
+        if not color_coded:
+            return f"{dpg.get_value(self.name)}"
+        else:
+            return [[dpg.get_value(self.name), color_variable]]
 
     def serialize(self):
         return {
@@ -165,14 +170,37 @@ class NodeAttributeMultipleTableEntry(NodeAttribute):
         dpg.delete_item(last_arg.name.id)
         dpg.delete_item(last_arg.value.id)
 
-    def generate_code(self):
+    def generate_code(self, color_coded=False):
         table_value_code = f"{{\n"
         inc_ind()
         for entry in self.entries:
             table_value_code += f"{ind()}{entry.generate_code()},\n"
         dec_ind()
         table_value_code += f"{ind()}}}"
-        return table_value_code
+
+
+        table_value_code_colored = []
+        table_value_code_colored += [
+            ["{{", color_default],
+            ["\n"]
+        ]
+        inc_ind()
+        for entry in self.entries:
+            table_value_code_colored += [
+                [ind()]
+            ] + entry.generate_code(color_coded=True) + [
+                [",", color_default],
+                ["\n"]
+            ]
+        dec_ind()
+        table_value_code_colored += [
+            [ind()],
+            ["}}", color_default]
+        ]
+
+        if not color_coded:
+            return table_value_code
+        return table_value_code_colored
 
     def serialize(self):
 
@@ -192,12 +220,23 @@ class NodeAttributeTableEntry(NodeAttribute):
         self.name = NodeAttributeExpressionOut(name, simple=True)
         self.value = NodeAttributeExpressionIn(value)
 
-    def generate_code(self):
+    def generate_code(self, color_coded=False):
         name_code = self.name.generate_code()
         value_code = self.value.generate_code()
+
+        name_code_colored = self.name.generate_code(True)
+        value_code_colored = self.value.generate_code(True)
+
         if name_code != "":
-            return f"{name_code} = {value_code}"
-        return value_code
+            if not color_coded:
+                return f"{name_code} = {value_code}"
+            return name_code_colored + [
+                [" = ", color_math_operator],
+            ] + value_code_colored
+
+        if not color_coded:
+            return value_code
+        return value_code_colored
 
     def serialize(self):
         return {
@@ -227,14 +266,24 @@ class NodeAttributeExpressionOut(NodeAttribute):
                 else:
                     dpg.add_text(hint)
 
-    def generate_code(self):
+    def generate_code(self, color_coded=False):
         # if not simple, we let the parent node decide what the code is for this
         if not self.simple:
             if self.parent_node:
-                return self.parent_node.generate_code()
-            return ""
+                if not color_coded:
+                    return self.parent_node.generate_code()
+                return self.parent_node.generate_code(color_coded=True)
 
-        return dpg.get_value(self.value)
+            if not color_coded:
+                return ""
+            return [[]]
+
+        if not color_coded:
+            return dpg.get_value(self.value)
+        else:
+            return [
+                [dpg.get_value(self.value), ]
+            ]
 
     def serialize(self):
         return {
@@ -259,12 +308,17 @@ class NodeAttributeExpressionIn(NodeAttribute):
                 if value:
                     dpg.set_value(self.value, value)
 
-    def generate_code(self):
+    def generate_code(self, color_coded=False):
         # need to find the nodeAttribute object this is referring to
         expression_out = globals.get_out_node_attribute_from_in_node_attribute(self.id)
         if expression_out:
-            return expression_out.generate_code()
-        return dpg.get_value(self.value)
+            if not color_coded:
+                return expression_out.generate_code()
+            return expression_out.generate_code(color_coded=True)
+
+        if not color_coded:
+            return dpg.get_value(self.value)
+        return [[dpg.get_value(self.value), color_immediate_value]]
 
     def serialize(self):
         return {
@@ -295,8 +349,10 @@ class NodeAttributeStaticInputText(NodeAttribute):
             with dpg.node_attribute(attribute_type=dpg.mvNode_Attr_Static) as self.id:
                 self.value = dpg.add_input_text(hint=name, width=150)
 
-    def generate_code(self):
-        return dpg.get_value(self.value)
+    def generate_code(self, color_coded=False):
+        if not color_coded:
+            return dpg.get_value(self.value)
+        return [[dpg.get_value(self.value), (0, 255, 0)]]
 
     def serialize(self):
         return {
@@ -317,9 +373,12 @@ class NodeAttributeExecuteIn(NodeAttribute):
                                     attribute_type=dpg.mvNode_Attr_Input) as self.id:
                 dpg.add_text(text)
 
-    def generate_code(self):
+    def generate_code(self, color_coded=False):
         # execute parent node code
-        return self.parent_node.generate_code()
+        if not color_coded:
+            return self.parent_node.generate_code()
+        else:
+            return self.parent_node.generate_code(color_coded=True)
 
     def serialize(self):
         return {
@@ -339,11 +398,15 @@ class NodeAttributeExecuteOut(NodeAttribute):
                                     indent=100) as self.id:
                 dpg.add_text(text)
 
-    def generate_code(self):
+    def generate_code(self, color_coded=False):
         expression_in = globals.get_in_node_attribute_from_out_node_attribute(self.id)
         if expression_in:
-            return expression_in.generate_code()
-        return ""
+            if not color_coded:
+                return expression_in.generate_code()
+            return expression_in.generate_code(color_coded=True)
+        if not color_coded:
+            return ""
+        return [[]]
 
     def serialize(self):
         return {
@@ -381,8 +444,10 @@ class NodeAttributeInlineDeclarationOut(NodeAttribute):
             with dpg.node_attribute(attribute_type=dpg.mvNode_Attr_Output) as self.id:
                 dpg.add_text("Inline declaration")
 
-    def generate_code(self):
-        return self.parent_node.generate_code(True)
+    def generate_code(self, color_coded=False):
+        if not color_coded:
+            return self.parent_node.generate_code(inline=True)
+        return self.parent_node.generate_code(color_coded=True)
 
 
 class NodeAttributeCustomCallerOut(NodeAttribute):
@@ -397,5 +462,5 @@ class NodeAttributeCustomCallerOut(NodeAttribute):
                                     attribute_type=dpg.mvNode_Attr_Output) as self.id:
                 dpg.add_text(name)
 
-    def generate_code(self):
-        return self.callback(self.params)
+    def generate_code(self, color_coded):
+        return self.callback(self.params, color_coded=color_coded)

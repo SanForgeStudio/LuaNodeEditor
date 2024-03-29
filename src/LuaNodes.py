@@ -7,6 +7,7 @@ import dearpygui.dearpygui as dpg
 import globals
 from globals import ind, inc_ind, dec_ind, Serializable, bcksl
 from LuaNodeAttributes import *
+from constants import *
 
 lua_ntVariable = 0
 lua_ntStart = 1
@@ -206,8 +207,11 @@ class LuaNode(Serializable):
         dpg.pop_container_stack()
         dpg.delete_item(self.stage)
 
-    def generate_code(self):
-        return ""
+    def generate_code(self, color_coded=False):
+        if not color_coded:
+            return ""
+        else:
+            return [[]]
 
     def serialize(self):
         return {
@@ -250,17 +254,32 @@ class LuaVariableNode(LuaNode):
     def has_from_node(self):
         return globals.get_from_node_from_in_node_attribute(self.attribute_execute_in.id) is not None
 
-    def generate_code(self):
+    def generate_code(self, color_coded=False):
         name = dpg.get_value(self.attribute_var.name)
         value = dpg.get_value(self.attribute_var.value)
         if not self.has_from_node():
-            return f'{name} = {value}\n'
-
+            if not color_coded:
+                return f'{name} = {value}\n'
+            return [
+                [name, color_variable],
+                ['=', color_math_operator],
+                [value, color_immediate_value],
+                ["\n"]
+            ]
         execute_out_code = self.attribute_execute_out.generate_code()
 
         assign_code = f"={value}" if value != "" else ""
-        return f"{ind()}local {name} {assign_code}\n{execute_out_code}"
-
+        if not color_coded:
+            return f"{ind()}local {name} {assign_code}\n{execute_out_code}"
+        else:
+            return [
+                [ind()],
+                ["local ", color_default],
+                [name, color_variable],
+                [" =", color_math_operator],
+                [f" {assign_code[1:]}", color_test],
+                ["\n"]
+            ] + self.attribute_execute_out.generate_code(True)
 
 class LuaTable(LuaNode):
     def __init__(self):
@@ -292,16 +311,40 @@ class LuaTable(LuaNode):
     def return_table_value(self, params):
         return self.attribute_table_entries.generate_code()
 
-    def generate_code(self):
+    def generate_code(self, color_coded=False):
         name_code = self.attribute_table_name.generate_code()
         local_code = ""
         if self.has_from_node():
             local_code = f"local "
         code_without_flow_out = f"{ind()}{local_code}{name_code} = {self.attribute_table_entries.generate_code()}\n"
         if not self.has_from_node():
-            return local_code
-        out_code = self.attribute_execute_out.generate_code()
-        return f"{code_without_flow_out}{out_code}"
+            if not color_coded:
+                return f"{name_code} = {self.attribute_table_entries.generate_code()}"
+            else:
+                name_code_color = self.attribute_table_name.generate_code(color_coded=True)
+                entries_code_color = self.attribute_table_entries.generate_code(color_coded=True)
+
+                return name_code_color + [
+                    [" = ", color_math_operator]
+                ] + entries_code_color
+        if not color_coded:
+            out_code = self.attribute_execute_out.generate_code()
+            return f"{code_without_flow_out}{out_code}"
+        else:
+            out_code_color = self.attribute_execute_out.generate_code(color_coded=True)
+            name_code_color = self.attribute_table_name.generate_code(color_coded=True)
+            entries_code_color = self.attribute_table_entries.generate_code(color_coded=True)
+
+            ret = [
+                [ind()],
+                [local_code, color_keyword]
+            ] + name_code_color + [
+                [" = ", color_math_operator],
+            ] + entries_code_color + [
+                ["\n"]
+            ] + out_code_color
+
+            return ret
 
 class LuaStartNode(LuaNode):
     def __init__(self):
@@ -318,12 +361,16 @@ class LuaStartNode(LuaNode):
             with dpg.node(label="Entry point") as self.id:
                 pass
 
-    def generate_code(self):
+    def generate_code(self, color_coded=False):
         to_node: LuaNode = globals.get_to_node_from_out_node_attribute(self.attribute_execute_out.id)
         if to_node:
-            return to_node.generate_code()
-        return ""
+            if not color_coded:
+                return to_node.generate_code()
+            return to_node.generate_code(color_coded)
 
+        if not color_coded:
+            return ""
+        return [[]]
 
 class LuaPrintNode(LuaNode):
     def __init__(self):
@@ -343,11 +390,21 @@ class LuaPrintNode(LuaNode):
             with dpg.node(label="Print") as self.id:
                 pass
 
-    def generate_code(self):
+    def generate_code(self, color_coded=False):
         my_code = self.attribute_expression.generate_code()
 
-        return f"{ind()}print({my_code})\n{self.attribute_execute_out.generate_code()}"
-
+        if not color_coded:
+            return f"{ind()}print({my_code})\n{self.attribute_execute_out.generate_code()}"
+        else:
+            my_code_colored = self.attribute_expression.generate_code(color_coded=True)
+            out_code_colored = self.attribute_execute_out.generate_code(color_coded=True)
+            return [
+                [ind()],
+                ["print(", color_default],
+            ] + my_code_colored + [
+                [")", color_default],
+                ["\n"],
+            ] + out_code_colored
 
 class LuaExpressionNode(LuaNode):
     def __init__(self):
@@ -364,9 +421,13 @@ class LuaExpressionNode(LuaNode):
             with dpg.node(label="Expression") as self.id:
                 pass
 
-    def generate_code(self):
-        return f"{dpg.get_value(self.attribute_expression.value)}"
-
+    def generate_code(self, color_coded=False):
+        if not color_coded:
+            return f"{dpg.get_value(self.attribute_expression.value)}"
+        else:
+            return [
+                [dpg.get_value(self.attribute_expression.value), color_immediate_value]
+            ]
 
 class LuaNodeForLoop(LuaNode):
     def __init__(self):
@@ -392,7 +453,7 @@ class LuaNodeForLoop(LuaNode):
             with dpg.node(label="For Loop") as self.id:
                 pass
 
-    def generate_code(self):
+    def generate_code(self, color_coded=False):
         inc_ind()
         execute_code = f"{self.attribute_code_to_execute.generate_code()}"
         dec_ind()
@@ -403,8 +464,32 @@ class LuaNodeForLoop(LuaNode):
 
         execute_out_code = self.attribute_execute_out.generate_code()
 
-        return f"{ind()}for {iterator_code} = {from_value}, {to_value} do\n{execute_code}{ind()}end\n{execute_out_code}"
+        if not color_coded:
+            return f"{ind()}for {iterator_code} = {from_value}, {to_value} do\n{execute_code}{ind()}end\n{execute_out_code}"
+        else:
 
+            inc_ind()
+            execute_code_colored = self.attribute_code_to_execute.generate_code(color_coded=True)
+            dec_ind()
+
+            iterator_code_colored = self.attribute_iterator.generate_code(color_coded=True)
+            from_value_colored = self.attribute_from.generate_code(color_coded=True)
+            to_value_colored = self.attribute_to.generate_code(color_coded=True)
+
+            execute_out_code_colored = self.attribute_execute_out.generate_code(color_coded=True)
+            return [
+                [ind()],
+                ["for ", color_keyword]
+            ] + iterator_code_colored + [
+                [" = ", color_math_operator]
+            ] + from_value_colored + [
+                [", ", color_default]
+            ] + to_value_colored + [
+                [" do", color_keyword]
+            ] + execute_code_colored + [
+                ["end", color_keyword],
+                ["\n"]
+            ] + execute_out_code_colored
 
 class LuaNodeWhileLoop(LuaNode):
     def __init__(self):
@@ -426,17 +511,35 @@ class LuaNodeWhileLoop(LuaNode):
             with dpg.node(label="While Loop") as self.id:
                 pass
 
-    def generate_code(self):
+    def generate_code(self, color_coded=False):
         inc_ind()
         execute_code = f"{self.attribute_code_to_execute.generate_code()}"
         dec_ind()
 
         condition_code = self.attribute_condition_expression.generate_code()
-
         execute_out_code = self.attribute_execute_out.generate_code()
 
-        return f"{ind()}while {condition_code} do\n{execute_code}{ind()}end\n{execute_out_code}"
+        if not color_coded:
+            return f"{ind()}while {condition_code} do\n{execute_code}{ind()}end\n{execute_out_code}"
+        else:
+            inc_ind()
+            execute_code_colored = self.attribute_code_to_execute.generate_code(color_coded=True)
+            dec_ind()
 
+            condition_code_colored = self.attribute_condition_expression.generate_code(color_coded=True)
+            execute_out_code_colored = self.attribute_execute_out.generate_code(color_coded=True)
+
+            return [
+                [ind()],
+                ["while ", color_keyword],
+            ] + condition_code_colored + [
+                [" do", color_keyword],
+                ["\n"]
+            ] + execute_code_colored + [
+                [ind()],
+                ["end", color_keyword],
+                ["\n"]
+            ] + execute_out_code_colored
 
 class LuaIfNode(LuaNode):
     def __init__(self):
@@ -458,13 +561,12 @@ class LuaIfNode(LuaNode):
             with dpg.node(label="If") as self.id:
                 pass
 
-    def generate_code(self):
+    def generate_code(self, color_coded=False):
         inc_ind()
         execute_code = f"{self.attribute_execute_if_true.generate_code()}"
         dec_ind()
 
         condition_code = self.attribute_expression.generate_code()
-
         execute_out_code = self.attribute_execute_out.generate_code()
 
         execute_out_node = globals.get_to_node_from_out_node_attribute(self.attribute_execute_out.id)
@@ -472,8 +574,27 @@ class LuaIfNode(LuaNode):
         if execute_out_node:
             is_last_else_if_or_else = isinstance(execute_out_node, LuaElseIfNode) or isinstance(execute_out_node,
                                                                                                 LuaElseNode)
-        return f"{ind()}if {condition_code} then\n{execute_code}{f'{ind()}end{bcksl()}' if not is_last_else_if_or_else else ''}{execute_out_code}"
 
+        if not color_coded:
+            return f"{ind()}if {condition_code} then\n{execute_code}{f'{ind()}end{bcksl()}' if not is_last_else_if_or_else else ''}{execute_out_code}"
+        else:
+            inc_ind()
+            execute_code_colored = self.attribute_execute_if_true.generate_code(color_coded=True)
+            dec_ind()
+
+            condition_code_colored = self.attribute_expression.generate_code(color_coded=True)
+            execute_out_code_colored = self.attribute_execute_out.generate_code(color_coded=True)
+
+            return [
+                [ind()],
+                ["if ", color_keyword]
+            ] + condition_code_colored + [
+                [" then", color_keyword]
+            ] + execute_code_colored + [
+                [ind()],
+                ["end", color_keyword],
+                ["\n"]
+            ] if not is_last_else_if_or_else else [] + execute_out_code_colored
 
 class LuaElseIfNode(LuaNode):
     def __init__(self):
@@ -495,13 +616,12 @@ class LuaElseIfNode(LuaNode):
             with dpg.node(label="Else If") as self.id:
                 pass
 
-    def generate_code(self):
+    def generate_code(self, color_coded=False):
         inc_ind()
         execute_code = f"{self.attribute_execute_if_true.generate_code()}"
         dec_ind()
 
         condition_code = self.attribute_expression.generate_code()
-
         execute_out_code = self.attribute_execute_out.generate_code()
 
         execute_out_node = globals.get_to_node_from_out_node_attribute(self.attribute_execute_out.id)
@@ -510,8 +630,27 @@ class LuaElseIfNode(LuaNode):
             is_last_else_if_or_else = isinstance(execute_out_node, LuaElseIfNode) or isinstance(execute_out_node,
                                                                                                 LuaElseNode)
 
-        return f"{ind()}else if {condition_code} then\n{execute_code}{f'{ind()}end{bcksl()}' if not is_last_else_if_or_else else ''}{execute_out_code}"
+        if not color_coded:
+            return f"{ind()}else if {condition_code} then\n{execute_code}{f'{ind()}end{bcksl()}' if not is_last_else_if_or_else else ''}{execute_out_code}"
+        else:
+            inc_ind()
+            execute_code_colored = self.attribute_execute_if_true.generate_code(color_coded=True)
+            dec_ind()
 
+            condition_code_colored = self.attribute_expression.generate_code(color_coded=True)
+            execute_out_code_colored = self.attribute_execute_out.generate_code(color_coded=True)
+
+            return [
+                [ind()],
+                ["else if ", color_keyword]
+            ] + condition_code_colored + [
+                [" then", color_keyword],
+                ["\n"]
+            ] + execute_code_colored + [
+                [ind()],
+                ["end", color_keyword],
+                ["\n"],
+            ] if not is_last_else_if_or_else else [] + execute_out_code_colored
 
 class LuaElseNode(LuaNode):
     def __init__(self):
@@ -531,15 +670,30 @@ class LuaElseNode(LuaNode):
             with dpg.node(label="Else") as self.id:
                 pass
 
-    def generate_code(self):
+    def generate_code(self, color_coded=False):
         inc_ind()
         execute_code = f"{self.attribute_execute_if_true.generate_code()}"
         dec_ind()
 
         execute_out_code = self.attribute_execute_out.generate_code()
 
-        return f"{ind()}else\n{execute_code}{ind()}end\n{execute_out_code}"
+        if not color_coded:
+            return f"{ind()}else\n{execute_code}{ind()}end\n{execute_out_code}"
+        else:
+            inc_ind()
+            execute_code_colored = self.attribute_execute_if_true.generate_code(color_coded=True)
+            dec_ind()
+            execute_out_code_colored = self.attribute_execute_out.generate_code(color_coded=True)
 
+            return [
+                [ind()],
+                ["else", color_keyword],
+                ["\n"]
+            ] + execute_code_colored + [
+                [ind()],
+                ["end", color_keyword],
+                ["\n"]
+            ] + execute_out_code_colored
 
 class LuaNodeBinaryCombiner(LuaNode):
     def __init__(self, name, symbol):
@@ -562,9 +716,19 @@ class LuaNodeBinaryCombiner(LuaNode):
             with dpg.node(label=name) as self.id:
                 pass
 
-    def generate_code(self):
+    def generate_code(self, color_coded=False):
         check = dpg.get_value(self.checkbox_attribute.checkbox)
-        return f"{'(' if check else ''}{self.node_attribute_expression_in_a.generate_code()}{self.symbol}{self.node_attribute_expression_in_b.generate_code()}{')' if check else ''}"
+
+        if not color_coded:
+            return f"{'(' if check else ''}{self.node_attribute_expression_in_a.generate_code()}{self.symbol}{self.node_attribute_expression_in_b.generate_code()}{')' if check else ''}"
+        else:
+            return [
+                ["(" if check else "", color_default]
+            ] + self.node_attribute_expression_in_a.generate_code(color_coded=True) + [
+                [self.symbol, color_math_operator],
+            ] + self.node_attribute_expression_in_b.generate_code(color_coded=True) + [
+                [")" if check else "", color_default]
+            ]
         # return self.attribute_expression.generate_code()
 
 
@@ -683,14 +847,28 @@ class LuaNodeAssign(LuaNode):
             with dpg.node(label="Assign") as self.id:
                 pass
 
-    def generate_code(self):
+    def generate_code(self, color_coded=False):
         variable_code = self.attribute_expression_variable.generate_code()
         value_code = self.attribute_expression_value.generate_code()
 
         execute_out_code = self.attribute_execute_out.generate_code()
 
-        return f"{ind()}{variable_code} = {value_code}\n{execute_out_code}"
 
+        if not color_coded:
+            return f"{ind()}{variable_code} = {value_code}\n{execute_out_code}"
+        else:
+            variable_code_colored = self.attribute_expression_variable.generate_code(color_coded=True)
+            value_code_colored = self.attribute_expression_value.generate_code(color_coded=True)
+
+            execute_out_code_colored = self.attribute_execute_out.generate_code(color_coded=True)
+
+            return [
+                [ind()]
+            ] + variable_code_colored + [
+                [" = ", color_math_operator]
+            ] + value_code_colored + [
+                ["\n"]
+            ] + execute_out_code_colored
 
 class LuaNodeFunction(LuaNode):
     def __init__(self):
@@ -723,7 +901,7 @@ class LuaNodeFunction(LuaNode):
     def is_inline(self):
         return globals.get_to_node_from_out_node_attribute(self.attribute_inline_decl_out.id) is not None
 
-    def generate_code(self, inline=False):
+    def generate_code(self, inline=False, color_coded=False):
         name = self.attribute_function_name.generate_code()
 
         params_code = "".join([f"{arg.generate_code()}{', ' if i != len(self.attribute_params.arguments) - 1 else ''}" for
@@ -740,7 +918,47 @@ class LuaNodeFunction(LuaNode):
         is_local_function = self.has_from_node()
         local_code = f"{ind()}local " if is_local_function else ""
         end_code = f"\n{execute_out_code}" if not inline else ""
-        return f"{local_code}function{f' {name}' if not inline else ''}({params_code})\n{execute_code}{ind()}end{end_code}"
+
+        if not color_coded:
+            return f"{local_code}function{f' {name}' if not inline else ''}({params_code})\n{execute_code}{ind()}end{end_code}"
+        else:
+            name_colored = self.attribute_function_name.generate_code(color_coded=True)
+
+            params_code_colored = []
+            for i, arg in enumerate(self.attribute_params.arguments):
+                params_code_colored += arg.generate_code(color_coded=True) + [
+                    [", ", color_default] if (i != len(self.attribute_params.arguments) - 1) else []
+                ]
+
+            inc_ind()
+            execute_code_colored = self.attribute_execute_code.generate_code(color_coded=True)
+            dec_ind()
+
+            execute_out_code_colored = self.attribute_execute_out.generate_code(color_coded=True)
+
+            is_local_function = self.has_from_node()
+            local_code_colored = [
+                [ind()],
+                ["local ", color_keyword]
+            ] if is_local_function else []
+            p1 = [
+                ["\n"]
+            ] + execute_out_code_colored
+            end_code_colored = p1 if not inline else []
+
+            xx = name_colored if not inline else []
+
+            return local_code_colored + [
+                ["function", color_keyword],
+            ] + xx + [
+                ["(", color_default],
+            ] + params_code_colored + [
+                [")", color_default],
+                ["\n"]
+            ] + execute_code_colored + [
+                [ind()],
+                ["end", color_default]
+            ] + end_code_colored
 
 
 class LuaNodeFunctionCall(LuaNode):
@@ -770,7 +988,7 @@ class LuaNodeFunctionCall(LuaNode):
             with dpg.node(label="Function Call") as self.id:
                 pass
 
-    def generate_code(self):
+    def generate_code(self, color_coded=False):
         call_on_object_code = self.attribute_call_on_object.generate_code()
 
         function_name = self.attribute_function_name.generate_code()
@@ -780,11 +998,42 @@ class LuaNodeFunctionCall(LuaNode):
 
         execute_out_code = self.attribute_execute_out.generate_code()
 
-        end = f"\n{execute_out_code}" if execute_out_code != "" else ""
+        end_code = f"\n{execute_out_code}" if execute_out_code != "" else ""
         call_on_object_code = f"{call_on_object_code}{'.' if not dpg.get_value(self.attribute_call_on_self.checkbox) else ':'}" if call_on_object_code != "" else ""
         # return f"{call_on_object_code}{ind()}{function_name}({params_code}){end}"
-        return f"{call_on_object_code}{function_name}({params_code}){end}"
 
+
+        if not color_coded:
+            return f"{call_on_object_code}{function_name}({params_code}){end_code}"
+        else:
+            call_on_object_code_colored = self.attribute_call_on_object.generate_code(color_coded=True)
+            function_name_colored = self.attribute_function_name.generate_code(color_coded=True)
+
+            params_code_colored = []
+            for i, arg in enumerate(self.attribute_params.arguments):
+                params_code_colored += arg.generate_code(color_coded=True) + [
+                    [", ", color_default] if (i != len(self.attribute_params.arguments) - 1) else []
+                ]
+
+            execute_out_code_colored = self.attribute_execute_out.generate_code(color_coded=True)
+
+            v1 = [
+                ["\n"]
+            ] + execute_out_code_colored
+            v2 = []
+            end_code_colored = v1 if execute_out_code != "" else v2
+
+            v1 = call_on_object_code_colored + [
+                [".", color_default] if not dpg.get_value(self.attribute_call_on_self.checkbox) else [":", color_default]
+            ]
+            v2 = []
+            call_on_object_code_colored = v1 if call_on_object_code != "" else v2
+
+            return call_on_object_code_colored + function_name_colored + [
+                ["(", color_default]
+            ] + params_code_colored + [
+                [")", color_default]
+            ] + end_code_colored
 
 class LuaNodeReturn(LuaNode):
     def __init__(self):
@@ -802,11 +1051,20 @@ class LuaNodeReturn(LuaNode):
             with dpg.node(label="Return") as self.id:
                 pass
 
-    def generate_code(self):
+    def generate_code(self, color_coded=False):
         my_code = self.attribute_expression.generate_code()
 
-        return f"{ind()}return {my_code}\n"
+        if not color_coded:
+            return f"{ind()}return {my_code}\n"
+        else:
+            my_code_colored = self.attribute_expression.generate_code(color_coded=True)
 
+            return [
+                [ind()],
+                ["return ", color_keyword]
+            ] + my_code_colored + [
+                ["\n"]
+            ]
 
 class LuaNodeIndexTable(LuaNode):
     def __init__(self):
@@ -826,11 +1084,21 @@ class LuaNodeIndexTable(LuaNode):
             with dpg.node(label="Index Table") as self.id:
                 pass
 
-    def generate_code(self):
+    def generate_code(self, color_coded=False):
         table_code = self.attribute_expression_table.generate_code()
         index_code = self.attribute_expression_index.generate_code()
-        return f"{table_code}[{index_code}]"
 
+        if not color_coded:
+            return f"{table_code}[{index_code}]"
+        else:
+            table_code_colored = self.attribute_expression_table.generate_code(color_coded=True)
+            index_code_colored = self.attribute_expression_index.generate_code(color_coded=True)
+
+            return table_code_colored + [
+                ["[", color_default]
+            ] + index_code_colored + [
+                ["]", color_default]
+            ]
 
 class LuaNodeIndexTableByKey(LuaNode):
     def __init__(self):
@@ -850,10 +1118,19 @@ class LuaNodeIndexTableByKey(LuaNode):
             with dpg.node(label="Index Table By Key") as self.id:
                 pass
 
-    def generate_code(self):
+    def generate_code(self, color_coded=False):
         table_code = self.attribute_expression_table.generate_code()
         index_code = self.attribute_expression_index.generate_code()
-        return f"{table_code}.{index_code}"
+
+        if not color_coded:
+            return f"{table_code}.{index_code}"
+        else:
+            table_code_colored = self.attribute_expression_table.generate_code(color_coded=True)
+            index_code_colored = self.attribute_expression_index.generate_code(color_coded=True)
+
+            return table_code_colored + [
+                [".", color_default]
+            ] + index_code_colored
 
 
 class LuaNodeIteratePairs(LuaNode):
@@ -882,7 +1159,7 @@ class LuaNodeIteratePairs(LuaNode):
             with dpg.node(label=self.node_name) as self.id:
                 pass
 
-    def generate_code(self):
+    def generate_code(self, color_coded=False):
         inc_ind()
         execute_code = f"{self.attribute_code_to_execute.generate_code()}"
         dec_ind()
@@ -893,7 +1170,37 @@ class LuaNodeIteratePairs(LuaNode):
 
         execute_out_code = self.attribute_execute_out.generate_code()
 
-        return f"{ind()}for {it1_code}, {it2_code} in {self.iterate_func}({table_name}) do\n{execute_code}{ind()}end\n{execute_out_code}"
+        if not color_coded:
+            return f"{ind()}for {it1_code}, {it2_code} in {self.iterate_func}({table_name}) do\n{execute_code}{ind()}end\n{execute_out_code}"
+        else:
+            inc_ind()
+            execute_code_colored = self.attribute_code_to_execute.generate_code(color_coded=True)
+            dec_ind()
+
+            it1_code_colored = self.attribute_it1.generate_code(color_coded=True)
+            it2_code_colored = self.attribute_it2.generate_code(color_coded=True)
+            table_name_colored = self.attribute_table.generate_code(color_coded=True)
+
+            execute_out_code = self.attribute_execute_out.generate_code(color_coded=True)
+
+            return [
+                [ind()],
+                ["for ", color_keyword]
+            ] + it1_code_colored + [
+                [", ", color_default]
+            ] + it2_code_colored + [
+                [" in ", color_keyword],
+                [self.iterate_func, color_keyword],
+                ["(", color_default]
+            ] + table_name_colored + [
+                [") ", color_default],
+                ["do", color_keyword],
+                ["\n"]
+            ] + execute_code_colored + [
+                [ind()],
+                ["end", color_keyword],
+                ["\n"]
+            ] + execute_code_colored
 
 
 class LuaNodeIterateIPairs(LuaNodeIteratePairs):

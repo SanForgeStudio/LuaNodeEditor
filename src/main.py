@@ -9,6 +9,11 @@ import dearpygui.dearpygui as dpg
 from pprint import pprint
 import threading
 
+from lupa.lua54 import LuaRuntime
+
+import sys
+from io import StringIO
+
 import themes
 from LuaNodes import *
 import pyperclip as pc
@@ -26,7 +31,7 @@ def show_splash_screen():
     center_y = int((screen_height - 200) / 2)
     splash_root.geometry(f"600x200+{center_x}+{center_y}")
 
-    image_path = "assets/images/splash.png" # Remove Source/ if it cant find the image
+    image_path = "splash.png" # Remove Source/ if it cant find the image
     original_image = Image.open(image_path)
     desired_width = 600
     desired_height = 200
@@ -37,7 +42,7 @@ def show_splash_screen():
     resized_label.image = resized_photo
     resized_label.pack()
 
-    splash_root.after(3000, splash_root.destroy) 
+    splash_root.after(300, splash_root.destroy)
 
     splash_root.mainloop()
 
@@ -46,12 +51,13 @@ if __name__ == "__main__":
     dpg.create_context()
     dpg.configure_app(manual_callback_management=True)
     dpg.configure_app(init_file="settings.ini")
-    dpg.create_viewport(title='Lua Node Editor', width=1200, height=800, small_icon="assets/images/icon.ico", large_icon="assets/images/icon.ico")
+    dpg.create_viewport(title='Lua Node Editor', width=1200, height=800, small_icon="icon.ico", large_icon="icon.ico")
 
     # Variable list
     hasGeneratingCodeBeenLogged = False
     hasCopyCodeBeenLogged = False
     isCodeGenerated = False
+    isNodeLibraryVisible = True
 
     def save_init():
         dpg.save_init_file("settings.ini")
@@ -159,18 +165,14 @@ if __name__ == "__main__":
     Copyright © 2023, SanForge Studio & Lua Node Editor, All Rights Reserved.
     Licensed under the GNU General Public 3.0 License
 
-    Interface Navigation:
-    1. Panning the View:
-    Middle Mouse Button: Hold down the middle mouse button and move the mouse to pan the view across the editor canvas.
-    2. Selecting Nodes and Links:
-    Click and Drag: Select multiple nodes and links by clicking and dragging a selection box around them.
-    Clear Selection: Click outside of the selected area to clear the current selection.
-    3. Connecting Nodes:
-    Drag to Connect: To establish connections between nodes, click on a pin of one node and drag to the pin of another. Release the mouse button to create a connection.
-    4. Disconnecting Nodes:
-    Control + Drag: To disconnect a pin, hold down the Control key and drag the pin away from its connected node.
-    5. Node Creation:
-    Right-Click: Open the context menu by right-clicking on the editor window. Select 'Create New Node' to add a new node to your workflow.
+    Interface Navigation: 1. Panning the View: Middle Mouse Button: Hold down the middle mouse button and move the 
+    mouse to pan the view across the editor canvas. 2. Selecting Nodes and Links: Click and Drag: Select multiple 
+    nodes and links by clicking and dragging a selection box around them. Clear Selection: Click outside of the 
+    selected area to clear the current selection. 3. Connecting Nodes: Drag to Connect: To establish connections 
+    between nodes, click on a pin of one node and drag to the pin of another. Release the mouse button to create a 
+    connection. 4. Disconnecting Nodes: Control + Drag: To disconnect a pin, hold down the Control key and drag the 
+    pin away from its connected node. 5. Node Creation: Right-Click: Open the context menu by right-clicking on the 
+    editor window. Select 'Create New Node' to add a new node to your workflow.
 
     File Management:
     1. Creating a New File:
@@ -190,8 +192,11 @@ if __name__ == "__main__":
 
         pass
 
-    def generate_code():
+    def generate_code(color_coded=False):
         code = ""
+        if color_coded:
+            code = []
+
         # add variable declaration code
         # Variables
         global hasGeneratingCodeBeenLogged
@@ -201,13 +206,13 @@ if __name__ == "__main__":
             if isinstance(node, LuaVariableNode) or isinstance(node, LuaTable):
             # if isinstance(node, LuaVariableNode):
                 if not node.has_from_node():
-                    code += node.generate_code()
+                    code += node.generate_code(color_coded)
 
         # add global functions code
         for node in globals.nodes:
             if isinstance(node, LuaNodeFunction):
                 if not node.has_from_node() and not node.is_inline():
-                    code += node.generate_code()
+                    code += node.generate_code(color_coded)
 
         start_node = get_starting_node()
         if start_node is None:
@@ -218,10 +223,43 @@ if __name__ == "__main__":
                 hasGeneratingCodeBeenLogged = True
                 hasCopyCodeBeenLogged = False
         else:
-            code += start_node.generate_code()
+            code += start_node.generate_code(color_coded)
             isCodeGenerated = True
 
-        dpg.configure_item("generated_code", default_value=code)
+        if not color_coded:
+            dpg.configure_item("generated_code", default_value=code)
+
+        if color_coded:
+            dpg.delete_item("generated_code_group", children_only=True)
+
+            code: []
+
+            code += [["\n"]]
+
+            with dpg.stage() as horizontal_group_stage:
+                horizontal_group = dpg.add_group(horizontal=True)
+            for entry in code:
+                if len(entry) == 0:
+                    continue
+                if len(entry) == 1 and entry[0] == '\n':
+                    # create new horizontal group
+                    dpg.move_item(horizontal_group, parent="generated_code_group")
+                    dpg.delete_item(horizontal_group_stage)
+
+                    with dpg.stage() as horizontal_group_stage:
+                        horizontal_group = dpg.add_group(horizontal=True)
+                elif len(entry) >= 1:
+                    text = entry[0]
+                    color = entry[1] if len(entry) >= 2 else (255, 255, 255)
+
+                    with dpg.stage() as text_widget_stage:
+                        new_text = dpg.add_text(default_value=text, color=color)
+
+                    dpg.move_item(new_text, parent=horizontal_group)
+                    dpg.delete_item(text_widget_stage)
+
+            dpg.delete_item(horizontal_group_stage)
+
 
     def copy_code():
         # Variables
@@ -238,6 +276,37 @@ if __name__ == "__main__":
         else:
             pc.copy(dpg.get_value("generated_code"))
 
+
+    def call_external_function_and_get_output(function_name, code):
+        # Construct the command to call the external script with the function name and arguments
+        # command = ['python', 'lua_execute.py', function_name, code]
+        command = ['python', 'lua_execute.py', function_name, code]
+
+        import subprocess
+        # Run the external script and capture its output
+        print(f"executing {command}")
+        result = subprocess.run(command, capture_output=True, text=True, check=True)
+
+        # Check if the command was successful
+        if result.returncode == 0:
+            # Access the output from the result object
+            captured_output = result.stdout
+            # Now you can do whatever you want with the captured output
+            return captured_output
+        else:
+            call_threaded(add_log, ("Error executing the external script.",))
+            return None
+
+    def run_code():
+        code = dpg.get_value("generated_code")
+        # print(code)
+        try:
+            # res = call_external_function_and_get_output("execute", code)
+            res = call_external_function_and_get_output("execute", code)
+            call_threaded(add_log, (res,))
+        except Exception as e:
+            # print("rip")
+            call_threaded(add_log, ("Error executing code", ))
 
     def delete_selected_nodes():
         selected_nodes = dpg.get_selected_nodes("node_editor")
@@ -297,10 +366,6 @@ if __name__ == "__main__":
     def open_save_dialog():
         create_folder_if_not_exists("save_files")
         dpg.show_item("save_dialog")
-
-    def open_export_dialog():
-        create_folder_if_not_exists("export_files")
-        dpg.show_item("export_dialog")
 
     def open_load_dialog():
         create_folder_if_not_exists("save_files")
@@ -435,6 +500,10 @@ if __name__ == "__main__":
 
     themes.init_themes()
 
+    with dpg.theme() as generated_code_theme:
+        with dpg.theme_component(dpg.mvAll):
+            dpg.add_theme_style(dpg.mvStyleVar_ItemSpacing, 0, 0, category=dpg.mvThemeCat_Core)
+
     def load_file_callback(sender, app_data):
         path = list(app_data["selections"].values())[0]
         load(path)
@@ -450,51 +519,40 @@ if __name__ == "__main__":
         print(path)
         save(path)
 
-    def export_file_callback(sender, app_data):
-        path = None
-        if len(app_data["selections"]) == 0:
-            print(app_data)
-            path = app_data["file_path_name"]
-        else:
-            path = list(app_data["selections"].values())[0]
-        print(path)
-        save(path)
+    def toggle_node_library():
+        global isNodeLibraryVisible
+        isNodeLibraryVisible = not isNodeLibraryVisible
 
+        if isNodeLibraryVisible:
+            dpg.show_item("node_library")
+        else:
+            dpg.hide_item("node_library")
 
     def file_dialog_cancel_callback(sender, app_data):
         pass
 
+    def on_drop(s, a):
+        create_node(a)
+
     with dpg.font_registry():
         # first argument ids the path to the .ttf or .otf file
-        bold_font = dpg.add_font("assets/font/robotoBold.ttf", 18, tag="bold_roboto") # Remove Source\\ if it cant find the Font
-        default_font = dpg.add_font("assets/font/roboto.ttf", 14, tag="roboto")  # Remove Source\\ if it cant find the Font
+        bold_font = dpg.add_font("robotoBold.ttf", 18, tag="bold_roboto") # Remove Source\\ if it cant find the Font
+        default_font = dpg.add_font("roboto.ttf", 14, tag="roboto")  # Remove Source\\ if it cant find the Font
 
     # file selector
-    # Open Project / Importing
+    # load
     with dpg.file_dialog(
             directory_selector=False, show=False, callback=load_file_callback, tag="load_dialog",
             cancel_callback=file_dialog_cancel_callback, width=700, height=400, modal=True, default_path="save_files"):
         dpg.add_file_extension(".*")
         dpg.add_file_extension(".lvs", color=(0, 255, 0, 255), custom_text="[Lua Visual Script]")
 
-
-
-
-    # Save as
+    # save
     with dpg.file_dialog(
             directory_selector=False, show=False, callback=save_file_callback, tag="save_dialog",
             cancel_callback=file_dialog_cancel_callback, width=700, height=400, modal=True, default_path="save_files"):
         dpg.add_file_extension(".*")
         dpg.add_file_extension(".lvs", color=(0, 255, 0, 255), custom_text="[Lua Visual Script]")
-
-
-
-    # Export
-    with dpg.file_dialog(
-            directory_selector=False, show=False, callback=export_file_callback, tag="export_dialog",
-            cancel_callback=file_dialog_cancel_callback, width=700, height=400, modal=True, default_path="export_files"):
-        dpg.add_file_extension(".lua", color=(0, 0, 138), custom_text="(WIP)[Lua]")
-
 
     # create node window popup
     with dpg.window(label="Create node", show=False, tag="menu_create_node", no_title_bar=True, popup=True,
@@ -510,22 +568,29 @@ if __name__ == "__main__":
 
     # main window
     with dpg.window(tag="main_window") as main_win:
+
         with dpg.menu_bar():
             with dpg.menu(label="File"):
-                dpg.add_menu_item(label="Open", callback=lambda: open_load_dialog())
                 dpg.add_menu_item(label="New", callback=lambda: menu_pressed_new_file())
                 dpg.add_menu_item(label="Save as", callback=lambda: open_save_dialog())
-                dpg.add_menu_item(label="Export(WIP)", callback=lambda: open_export_dialog())
-                
+                dpg.add_menu_item(label="Load", callback=lambda: open_load_dialog())
             with dpg.menu(label="Settings"):
                 dpg.add_menu_item(label="Style editor", callback=lambda: dpg.show_style_editor())
                 # dpg.add_menu_item(label="Save style", callback=lambda: save_init())
             dpg.add_menu_item(label="Help", callback=lambda: show_help_modal())
 
         with dpg.group(horizontal=True):
-            # with dpg.child_window(width=150):
-            #     pass
-            with dpg.group(tag="node_editor_container"):
+            dpg.add_button(tag="nodes_library_button", label="Nodes", callback=toggle_node_library)
+
+            with dpg.child_window(tag="node_library", height=-1, width=150):
+                # with dpg.group(tag="node_library", horizontal=False):
+                    for node_type, name in lua_ntNames.items():
+                        dpg.add_button(label=name)
+                        with dpg.drag_payload(parent=dpg.last_item(), drag_data=node_type, payload_type="node"):
+                            dpg.add_text(name)
+
+
+            with dpg.group(tag="node_editor_container", payload_type="node", drop_callback=on_drop):
                 # with dpg.child_window(tag="test_tag", width=-350):
                 with dpg.node_editor(callback=link_callback, delink_callback=delink_callback, minimap=True,
                                     minimap_location=dpg.mvNodeMiniMap_Location_BottomRight,
@@ -540,18 +605,38 @@ if __name__ == "__main__":
                     #     with dpg.node_attribute(label="Node A4", attribute_type=dpg.mvNode_Attr_Output):
                     #         dpg.add_input_float(label="F4", width=200)
 
+            code_output_text = False
+
             with dpg.group():
                 with dpg.group(horizontal=True):
                     # with dpg.child_window(tag="test_tag"):
-                    dpg.add_button(label="Generate code", callback=generate_code)
+                    # if code_output_text:
+                    #     dpg.add_button(label="Generate code", callback=lambda: generate_code())
+                    # else:
+                    #     dpg.add_button(label="Generate code", callback=lambda: generate_code(True))
+                    dpg.add_button(label="Generate code", callback=lambda: (
+                        generate_code(),
+                        generate_code(True)
+                    ))
                     dpg.add_button(label="Copy code", callback=lambda: copy_code())
-                dpg.add_input_text(height=-200, multiline=True, tag="generated_code", width=350)
+                    dpg.add_button(label="Run code", callback=lambda: run_code())
+
                 with dpg.tab_bar():
-                    with dpg.tab(label="Console"):
+                    with dpg.tab(label="Generated"):
+                        with dpg.child_window(height=-200, width=350):
+                            with dpg.group(tag="generated_code_group"):
+                                pass
+                        dpg.bind_item_theme("generated_code_group", generated_code_theme)
+                    with dpg.tab(label="Editor"):
+                        dpg.add_input_text(height=-200, multiline=True, tag="generated_code", width=350)
+
+                # if code_output_text:
+                # else:
+
+
+                with dpg.tab_bar():
+                    with dpg.tab(label="Log"):
                         with dpg.child_window(height=-1, border=False, tag="log_container"):
-                            pass
-                    with dpg.tab(label="Profiler(WIP)"):
-                        with dpg.child_window(height=-1, border=False, tag="profiler_container"):
                             pass
 
         dpg.bind_font(default_font)
@@ -579,6 +664,7 @@ if __name__ == "__main__":
     while dpg.is_dearpygui_running():
         jobs = dpg.get_callback_queue()  # retrieves and clears queue
         dpg.run_callbacks(jobs)
+
         dpg.render_dearpygui_frame()
 
     # dpg.start_dearpygui()
