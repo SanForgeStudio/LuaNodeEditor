@@ -59,7 +59,6 @@ Our Lua Node Editor logo's and graphical assets fall under the **Creative Common
 
 <img alt="Creative Commons BY 4.0 Icon" src="https://github.com/SanForgeStudio/LuaNodeEditor/assets/97965051/656f3487-f971-4f4f-9874-becfca4707fd" width="50" />
 
-
 # Forum?
 Yes, we have our own forum suite, still early, but there everyone can share scripts, bugs, talk or simply connect with eachother, find it:
 [here](https://www.lua-node-editor.com/forum)
