@@ -10,7 +10,7 @@ public class GridBagHelper {
         gbc.gridy = 0;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.anchor = GridBagConstraints.CENTER;
-        gbc.insets = new Insets(0, 0, 0, 5);
+        gbc.insets = new Insets(0, 0, 0, 0);
         return gbc;
     }
 

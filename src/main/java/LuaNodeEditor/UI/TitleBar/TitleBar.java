@@ -22,12 +22,8 @@ public class TitleBar extends BasePanel {
         gbc.gridx = 0;
         leftPanel.add(logoLoader, gbc);
 
-        TextLabel titleLabel = new TextLabel("Lua Node Editor");
-        gbc.gridx = 1;
-        leftPanel.add(titleLabel, gbc);
-
         FileButton fileButton = new FileButton();
-        gbc.gridx = 2;
+        gbc.gridx = 1;
         leftPanel.add(fileButton, gbc);
 
         add(leftPanel, BorderLayout.WEST);
