@@ -2,47 +2,26 @@ package LuaNodeEditor.UI.TitleBar;
 
 import javax.swing.*;
 import java.awt.*;
-import java.net.URL;
-import LuaNodeEditor.LuaNodeEditor;
+
+import LuaNodeEditor.UI.Components.*;
+import LuaNodeEditor.UI.Listeners.MouseDragListener;
 import LuaNodeEditor.UI.TitleBar.Buttons.*;
 
-public class TitleBar extends JPanel {
+public class TitleBar extends BasePanel {
 
-    public TitleBar(JFrame frame) {
-        setBackground(new Color(45, 45, 45));
-        setLayout(new BorderLayout());
-        setPreferredSize(new Dimension(frame.getWidth(), 30));
+    public TitleBar(JFrame pFrame) {
+        super(new Color(45, 45, 45), 30);
 
-        // Add logo
-        URL iconURL = LuaNodeEditor.class.getResource("/assets/images/logo.png");
-        if (iconURL != null) {
-            ImageIcon icon = new ImageIcon(new ImageIcon(iconURL).getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH));
-            JLabel logoLabel = new JLabel(icon);
-            logoLabel.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 5));
-            add(logoLabel, BorderLayout.WEST);
-        }
+        ImageLoader logoLoader = new ImageLoader("/assets/images/logo.png", 25, 25);
+        add(logoLoader, BorderLayout.WEST);
 
-        // Add title
-        JLabel titleLabel = new JLabel("Lua Node Editor");
-        titleLabel.setForeground(Color.WHITE);
-        titleLabel.setFont(new Font("Arial", Font.PLAIN, 15));
-        add(titleLabel, BorderLayout.CENTER);
+        add(new TextLabel("Lua Node Editor"), BorderLayout.CENTER);
 
-        // Add buttons
-        JPanel buttonPanel = new JPanel(new GridBagLayout());
-        buttonPanel.setOpaque(false);
-        buttonPanel.add(new MinimizeButton(frame), createGridBagConstraints());
-        buttonPanel.add(new MaximizeButton(frame), createGridBagConstraints());
-        buttonPanel.add(new CloseButton(frame), createGridBagConstraints());
+        ButtonPanel buttonPanel = new ButtonPanel(pFrame);
         add(buttonPanel, BorderLayout.EAST);
-    }
 
-    private GridBagConstraints createGridBagConstraints() {
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.gridx = GridBagConstraints.RELATIVE;
-        gbc.gridy = 0;
-        gbc.fill = GridBagConstraints.VERTICAL;
-        gbc.anchor = GridBagConstraints.CENTER;
-        return gbc;
+        MouseDragListener dragListener = new MouseDragListener(pFrame);
+        addMouseListener(dragListener);
+        addMouseMotionListener(dragListener);
     }
 }

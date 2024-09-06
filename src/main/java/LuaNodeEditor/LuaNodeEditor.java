@@ -2,6 +2,8 @@ package LuaNodeEditor;
 
 import javax.swing.*;
 import java.awt.*;
+
+import LuaNodeEditor.UI.MainPanel;
 import LuaNodeEditor.UI.TitleBar.TitleBar;
 import java.net.URL;
 

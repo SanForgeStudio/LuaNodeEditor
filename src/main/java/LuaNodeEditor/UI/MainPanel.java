@@ -1,4 +1,4 @@
-package LuaNodeEditor;
+package LuaNodeEditor.UI;
 
 import javax.swing.*;
 import java.awt.*;
