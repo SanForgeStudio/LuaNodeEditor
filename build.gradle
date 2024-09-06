@@ -1,0 +1,17 @@
+plugins {
+    id 'application'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.9.1'
+
+    implementation 'com.google.guava:guava:32.0.0-android'
+}
+
+application {
+    mainClass = 'LuaNodeEditor.LuaNodeEditor'
+}
