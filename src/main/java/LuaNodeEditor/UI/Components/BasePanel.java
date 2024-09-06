@@ -5,9 +5,9 @@ import java.awt.*;
 
 public class BasePanel extends JPanel {
 
-    public BasePanel(Color backgroundColor, int height) {
-        setBackground(backgroundColor);
+    public BasePanel(Color pBackgroundColor, int pHeight) {
+        setBackground(pBackgroundColor);
         setLayout(new BorderLayout());
-        setPreferredSize(new Dimension(getWidth(), height));
+        setPreferredSize(new Dimension(getWidth(), pHeight));
     }
 }

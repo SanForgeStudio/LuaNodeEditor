@@ -8,7 +8,7 @@ import java.awt.*;
 public class CloseButton extends TextButton {
 
     public CloseButton(JFrame pFrame) {
-        super("x", new Color(60, 60, 60), new Color(255, 10, 10));
+        super("x", new Color(60, 60, 60), new Color(255, 10, 10), new Dimension(40, 30));
         addActionListener(e -> pFrame.dispose());
     }
 }

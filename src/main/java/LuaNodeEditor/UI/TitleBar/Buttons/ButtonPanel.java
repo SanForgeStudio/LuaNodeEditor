@@ -5,14 +5,13 @@ import java.awt.*;
 
 public class ButtonPanel extends JPanel {
 
-    public ButtonPanel(JFrame frame) {
+    public ButtonPanel(JFrame pFrame) {
         setLayout(new GridBagLayout());
         setOpaque(false);
 
-        // Add buttons to panel
-        add(new MinimizeButton(frame), createGridBagConstraints());
-        add(new MaximizeButton(frame), createGridBagConstraints());
-        add(new CloseButton(frame), createGridBagConstraints());
+        add(new MinimizeButton(pFrame), createGridBagConstraints());
+        add(new MaximizeButton(pFrame), createGridBagConstraints());
+        add(new CloseButton(pFrame), createGridBagConstraints());
     }
 
     private GridBagConstraints createGridBagConstraints() {

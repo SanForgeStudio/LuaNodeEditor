@@ -8,7 +8,7 @@ import java.awt.*;
 public class MinimizeButton extends TextButton {
 
     public MinimizeButton(JFrame pFrame) {
-        super("-", new Color(60, 60, 60), new Color(80, 80, 80));
+        super("-", new Color(60, 60, 60), new Color(80, 80, 80), new Dimension(40, 30));
         addActionListener(e -> pFrame.setState(JFrame.ICONIFIED));
     }
 }

@@ -1,10 +1,14 @@
 package LuaNodeEditor;
 
-import javax.swing.*;
-import java.awt.*;
-
+import LuaNodeEditor.UI.Components.ImageLoader;
+import LuaNodeEditor.UI.ResizableWindow;
 import LuaNodeEditor.UI.MainPanel;
 import LuaNodeEditor.UI.TitleBar.TitleBar;
+
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
+import java.io.IOException;
 import java.net.URL;
 
 public class LuaNodeEditor {
@@ -14,22 +18,20 @@ public class LuaNodeEditor {
             JFrame frame = new JFrame("Lua Node Editor");
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setSize(1200, 800);
-            frame.setLocationRelativeTo(null);
             frame.setUndecorated(true);
+            frame.setLocationRelativeTo(null);
             frame.getContentPane().setBackground(new Color(35, 35, 35));
 
-            // Set the application icon
-            URL iconURL = LuaNodeEditor.class.getResource("/assets/images/logo.png");
-            if (iconURL != null) {
-                frame.setIconImage(new ImageIcon(iconURL).getImage());
-            }
+            ImageLoader imageLoader = new ImageLoader("/assets/images/logo.png", 25, 25);
+            Image image = imageLoader.getImage("/assets/images/logo.png");
+            frame.setIconImage(image);
 
-            // Create and add the custom title bar
+            new ResizableWindow(frame);
+
             TitleBar titleBar = new TitleBar(frame);
-            frame.getContentPane().add(titleBar, BorderLayout.NORTH);
-
-            // Create and add the main panel for the content
             MainPanel mainPanel = new MainPanel();
+
+            frame.getContentPane().add(titleBar, BorderLayout.NORTH);
             frame.getContentPane().add(mainPanel, BorderLayout.CENTER);
 
             frame.setVisible(true);

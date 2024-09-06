@@ -7,12 +7,12 @@ import java.awt.event.MouseEvent;
 
 public class TextButton extends JButton {
 
-    public TextButton(String pText, Color pNormalColor, Color pHoverColor) {
+    public TextButton(String pText, Color pNormalColor, Color pHoverColor, Dimension pSize) {
         super(pText);
         setForeground(Color.WHITE);
         setBackground(pNormalColor);
         setBorder(BorderFactory.createEmptyBorder());
-        setPreferredSize(new Dimension(40, 30));
+        setPreferredSize(pSize);
         setFocusPainted(false);
 
         addMouseListener(new MouseAdapter() {
