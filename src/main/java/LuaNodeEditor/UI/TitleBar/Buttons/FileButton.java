@@ -21,11 +21,11 @@ public class FileButton extends TextButton {
                 new Color(45, 45, 45),
                 new Color(55, 55, 55),
                 new Color(80, 80, 80),
-                "New", "Load", "Save", "Save As"
+                "New", "Open", "Save", "Save As"
         );
 
         popupMenu.getMenuItem("New").addActionListener(new NewAction());
-        popupMenu.getMenuItem("Load").addActionListener(new LoadAction());
+        popupMenu.getMenuItem("Open").addActionListener(new OpenAction());
         popupMenu.getMenuItem("Save").addActionListener(new SaveAction());
         popupMenu.getMenuItem("Save As").addActionListener(new SaveAsAction());
 
