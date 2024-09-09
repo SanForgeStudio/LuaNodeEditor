@@ -5,12 +5,12 @@ import javax.swing.filechooser.FileSystemView;
 import java.awt.*;
 import java.io.File;
 
-public class CustomFolderChooser extends JFrame {
+public class FolderChooser extends JFrame {
     private final JList<File> folderList;
     private final DefaultListModel<File> folderListModel;
     private final JTextField pathField;
 
-    public CustomFolderChooser() {
+    public FolderChooser() {
         setTitle("Custom Folder Chooser");
         setSize(600, 400);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -72,6 +72,6 @@ public class CustomFolderChooser extends JFrame {
     }
 
     public static void showFolderChooser() {
-        SwingUtilities.invokeLater(() -> new CustomFolderChooser().setVisible(true));
+        SwingUtilities.invokeLater(() -> new FolderChooser().setVisible(true));
     }
 }

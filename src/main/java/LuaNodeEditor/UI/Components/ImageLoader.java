@@ -17,8 +17,8 @@ public class ImageLoader extends JLabel {
         }
     }
 
-    public Image getImage(String pImagePath) {
-        URL imageURL = getClass().getResource(pImagePath);
+    public static Image getImage(String pImagePath) {
+        URL imageURL = ImageLoader.class.getResource(pImagePath);
         if (imageURL != null) {
             return new ImageIcon(imageURL).getImage();
         } else {

@@ -22,8 +22,8 @@ public class LuaNodeEditor {
             frame.setLocationRelativeTo(null);
             frame.getContentPane().setBackground(new Color(35, 35, 35));
 
-            ImageLoader imageLoader = new ImageLoader("/assets/images/logo.png", 25, 25);
-            Image image = imageLoader.getImage("/assets/images/logo.png");
+            
+            Image image = ImageLoader.getImage("/assets/images/logo.png");
             frame.setIconImage(image);
 
             new ResizableWindow(frame);
