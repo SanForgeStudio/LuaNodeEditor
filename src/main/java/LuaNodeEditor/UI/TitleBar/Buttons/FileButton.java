@@ -1,34 +1,41 @@
 package LuaNodeEditor.UI.TitleBar.Buttons;
 
-import LuaNodeEditor.UI.Components.BasePopupMenu;
-import LuaNodeEditor.UI.Components.RoundedButtonUI;
-import LuaNodeEditor.UI.Components.TextButton;
 import LuaNodeEditor.UI.TitleBar.Buttons.Actions.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuItem;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
+import javafx.geometry.Insets;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.stage.Window;
 
-import java.awt.*;
+public class FileButton extends Button {
 
-public class FileButton extends TextButton {
+    public FileButton(Window pWindow) {
+        setText("File");
+        setFont(new Font(12));
+        setTextFill(Color.WHITE);
+        setBackground(new Background(new BackgroundFill(Color.rgb(45, 45, 45), new CornerRadii(10), Insets.EMPTY)));
 
-    public FileButton() {
-        super("File", new Color(45, 45, 45), new Color(45, 45, 45), new Dimension(40, 20));
-        Color normalColor = new Color(45, 45, 45);
-        Color hoverColor = new Color(80, 80, 80);
-        int arc = 10;
+        setOnMouseEntered(event -> setBackground(new Background(new BackgroundFill(Color.rgb(80, 80, 80), new CornerRadii(10), Insets.EMPTY))));
+        setOnMouseExited(event -> setBackground(new Background(new BackgroundFill(Color.rgb(45, 45, 45), new CornerRadii(10), Insets.EMPTY))));
 
-        setUI(new RoundedButtonUI(normalColor, hoverColor, arc));
+        ContextMenu contextMenu = new ContextMenu();
+        MenuItem newItem = new MenuItem("New");
+        MenuItem openItem = new MenuItem("Open");
+        MenuItem saveItem = new MenuItem("Save");
+        MenuItem saveAsItem = new MenuItem("Save As");
 
-        BasePopupMenu popupMenu = new BasePopupMenu(
-                new Color(45, 45, 45),
-                new Color(55, 55, 55),
-                new Color(80, 80, 80),
-                "New", "Open", "Save", "Save As"
-        );
+        newItem.setOnAction(event -> new NewAction().actionPerformed(null));
+        openItem.setOnAction(event -> new OpenAction().actionPerformed(null));
+        saveItem.setOnAction(event -> new SaveAction().actionPerformed(null));
+        saveAsItem.setOnAction(event -> new SaveAsAction().actionPerformed(null));
 
-        popupMenu.getMenuItem("New").addActionListener(new NewAction());
-        popupMenu.getMenuItem("Open").addActionListener(new OpenAction());
-        popupMenu.getMenuItem("Save").addActionListener(new SaveAction());
-        popupMenu.getMenuItem("Save As").addActionListener(new SaveAsAction());
+        contextMenu.getItems().addAll(newItem, openItem, saveItem, saveAsItem);
 
-        addActionListener(e -> popupMenu.show(FileButton.this, 0, FileButton.this.getHeight()));
+        setOnAction(event -> contextMenu.show(FileButton.this, 0, FileButton.this.getHeight()));
     }
 }

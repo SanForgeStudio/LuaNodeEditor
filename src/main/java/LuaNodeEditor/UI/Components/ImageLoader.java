@@ -1,26 +1,33 @@
 package LuaNodeEditor.UI.Components;
 
-import javax.swing.*;
-import java.awt.*;
-import java.net.URL;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.geometry.Pos;
 
-public class ImageLoader extends JLabel {
+import java.io.InputStream;
+
+public class ImageLoader extends HBox {
 
     public ImageLoader(String pImagePath, int pWidth, int pHeight) {
-        URL imageURL = getClass().getResource(pImagePath);
-        if (imageURL != null) {
-            ImageIcon icon = new ImageIcon(new ImageIcon(imageURL).getImage().getScaledInstance(pWidth, pHeight, Image.SCALE_SMOOTH));
-            setIcon(icon);
-            setBorder(BorderFactory.createEmptyBorder(0, 3, 0, 5));
+        InputStream imageStream = getClass().getResourceAsStream(pImagePath);
+        if (imageStream != null) {
+            Image image = new Image(imageStream, pWidth, pHeight, true, true);
+            ImageView imageView = new ImageView(image);
+            imageView.setFitWidth(pWidth);
+            imageView.setFitHeight(pHeight);
+            getChildren().add(imageView);
+            setSpacing(5);
+            setAlignment(Pos.CENTER);
         } else {
             System.out.println("Image not found: " + pImagePath);
         }
     }
 
     public static Image getImage(String pImagePath) {
-        URL imageURL = ImageLoader.class.getResource(pImagePath);
-        if (imageURL != null) {
-            return new ImageIcon(imageURL).getImage();
+        InputStream imageStream = ImageLoader.class.getResourceAsStream(pImagePath);
+        if (imageStream != null) {
+            return new Image(imageStream);
         } else {
             System.out.println("Image not found: " + pImagePath);
             return null;

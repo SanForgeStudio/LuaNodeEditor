@@ -1,25 +1,30 @@
 package LuaNodeEditor.UI.TitleBar.Buttons;
 
-import javax.swing.*;
-import java.awt.*;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.control.Button;
+import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 
-public class ButtonPanel extends JPanel {
+public class ButtonPanel extends HBox {
 
-    public ButtonPanel(JFrame pFrame) {
-        setLayout(new GridBagLayout());
-        setOpaque(false);
+    public ButtonPanel(Stage pStage) {
+        setAlignment(Pos.CENTER_RIGHT);
 
-        add(new MinimizeButton(pFrame), createGridBagConstraints());
-        add(new MaximizeButton(pFrame), createGridBagConstraints());
-        add(new CloseButton(pFrame), createGridBagConstraints());
-    }
+        MinimizeButton minimizeButton = new MinimizeButton(pStage);
+        MaximizeButton maximizeButton = new MaximizeButton(pStage);
+        CloseButton closeButton = new CloseButton(pStage);
 
-    private GridBagConstraints createGridBagConstraints() {
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.gridx = GridBagConstraints.RELATIVE;
-        gbc.gridy = 0;
-        gbc.fill = GridBagConstraints.VERTICAL;
-        gbc.anchor = GridBagConstraints.CENTER;
-        return gbc;
+        double buttonWidth = 40;
+        double buttonHeight = 30;
+        minimizeButton.setPrefSize(buttonWidth, buttonHeight);
+        maximizeButton.setPrefSize(buttonWidth, buttonHeight);
+        closeButton.setPrefSize(buttonWidth, buttonHeight);
+
+        getChildren().addAll(minimizeButton, maximizeButton, closeButton);
+
+        setSpacing(5);
+
+        setPadding(new Insets(5, 10, 5, 10));
     }
 }

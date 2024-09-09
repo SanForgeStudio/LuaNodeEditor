@@ -1,52 +1,39 @@
 package LuaNodeEditor.UI.Components;
 
-import javax.swing.*;
-import java.awt.*;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuItem;
+import javafx.scene.paint.Color;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
+import javafx.geometry.Insets;
+import javafx.scene.control.CustomMenuItem;
+import javafx.scene.layout.Region;
+
 import java.util.HashMap;
 import java.util.Map;
 
-public class BasePopupMenu extends JPopupMenu {
+public class BasePopupMenu extends ContextMenu {
 
-    private final Color backgroundColor;
-    private final Color itemColor;
-    private final Color itemHoverColor;
-    private final Map<String, JMenuItem> menuItems = new HashMap<>();
+    private final Map<String, MenuItem> menuItems = new HashMap<>();
 
     public BasePopupMenu(Color pBackgroundColor, Color pItemColor, Color pItemHoverColor, String... pItems) {
-        this.backgroundColor = pBackgroundColor;
-        this.itemColor = pItemColor;
-        this.itemHoverColor = pItemHoverColor;
-        initializeMenu(pItems);
+        initializeMenu(pBackgroundColor, pItemColor, pItemHoverColor, pItems);
     }
 
-    private void initializeMenu(String... pItems) {
-        setBackground(backgroundColor);
-
+    private void initializeMenu(Color pBackgroundColor, Color pItemColor, Color pItemHoverColor, String... pItems) {
         for (String itemText : pItems) {
-            JMenuItem menuItem = new JMenuItem(itemText);
-            menuItem.setBackground(itemColor);
-            menuItem.setForeground(Color.WHITE);
-            menuItem.setOpaque(true);
-            menuItem.setBorder(BorderFactory.createEmptyBorder());
+            MenuItem menuItem = new MenuItem(itemText);
+            Region backgroundRegion = new Region();
+            backgroundRegion.setBackground(new Background(new BackgroundFill(pItemColor, new CornerRadii(5), Insets.EMPTY)));
+            CustomMenuItem customMenuItem = new CustomMenuItem();
 
-            menuItem.addMouseListener(new java.awt.event.MouseAdapter() {
-                @Override
-                public void mouseEntered(java.awt.event.MouseEvent pEvent) {
-                    menuItem.setBackground(itemHoverColor);
-                }
-
-                @Override
-                public void mouseExited(java.awt.event.MouseEvent pEvent) {
-                    menuItem.setBackground(itemColor);
-                }
-            });
-
-            add(menuItem);
+            this.getItems().add(customMenuItem);
             menuItems.put(itemText, menuItem);
         }
     }
 
-    public JMenuItem getMenuItem(String pText) {
+    public MenuItem getMenuItem(String pText) {
         return menuItems.get(pText);
     }
 }

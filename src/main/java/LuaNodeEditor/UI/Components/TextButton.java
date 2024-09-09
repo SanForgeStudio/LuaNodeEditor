@@ -1,49 +1,28 @@
 package LuaNodeEditor.UI.Components;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import javafx.scene.control.Button;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
+import javafx.geometry.Insets;
 
-public class TextButton extends JButton {
+public class TextButton extends Button {
 
-    public TextButton(String pText, Color pNormalColor, Color pHoverColor, Dimension pSize) {
+    public TextButton(String pText, Color pNormalColor, Color pHoverColor, double pWidth, double pHeight) {
         super(pText);
-        setForeground(Color.WHITE);
-        setBackground(pNormalColor);
-        setBorder(BorderFactory.createEmptyBorder());
-        setPreferredSize(pSize);
-        setFocusPainted(false);
+        setTextFill(Color.WHITE);
+        setBackground(new Background(new BackgroundFill(pNormalColor, new CornerRadii(5), Insets.EMPTY)));
+        setPrefSize(pWidth, pHeight);
+        setFont(Font.font(14));
 
-        addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseEntered(MouseEvent pEvent) {
-                setBackground(pHoverColor);
-            }
+        // Mouse hover effect
+        setOnMouseEntered(event -> setBackground(new Background(new BackgroundFill(pHoverColor, new CornerRadii(5), Insets.EMPTY))));
+        setOnMouseExited(event -> setBackground(new Background(new BackgroundFill(pNormalColor, new CornerRadii(5), Insets.EMPTY))));
 
-            @Override
-            public void mouseExited(MouseEvent pEvent) {
-                setBackground(pNormalColor);
-            }
-
-            @Override
-            public void mousePressed(MouseEvent pEvent) {
-                setBackground(pHoverColor);
-            }
-
-            @Override
-            public void mouseDragged(MouseEvent pEvent) {
-                setBackground(pHoverColor);
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent pEvent) {
-                if (getBounds().contains(pEvent.getPoint())) {
-                    setBackground(pHoverColor);
-                } else {
-                    setBackground(pNormalColor);
-                }
-            }
-        });
+        // Mouse pressed and released effect
+        setOnMousePressed(event -> setBackground(new Background(new BackgroundFill(pHoverColor, new CornerRadii(5), Insets.EMPTY))));
+        setOnMouseReleased(event -> setBackground(new Background(new BackgroundFill(pNormalColor, new CornerRadii(5), Insets.EMPTY))));
     }
 }

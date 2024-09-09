@@ -1,39 +1,36 @@
 package LuaNodeEditor.UI.Components;
 
-import javax.swing.*;
-import javax.swing.plaf.basic.BasicButtonUI;
-import java.awt.*;
+import javafx.scene.control.Button;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.Region;
+import javafx.geometry.Insets;
 
-public class RoundedButtonUI extends BasicButtonUI {
+public class RoundedButtonUI extends Button {
 
-    private final Color normalColor;
-    private final Color hoverColor;
-    private final int arc;
+    public RoundedButtonUI(String pText, Color pNormalColor, Color pHoverColor, double pArc) {
+        super(pText);
 
-    public RoundedButtonUI(Color pNormalColor, Color pHoverColor, int pArc) {
-        this.normalColor = pNormalColor;
-        this.hoverColor = pHoverColor;
-        this.arc = pArc;
+        setFont(new Font(14));
+        setTextFill(Color.WHITE);
+        setBackground(new Background(new BackgroundFill(pNormalColor, new CornerRadii(pArc), Insets.EMPTY)));
+
+        setOnMouseEntered(event -> setBackground(new Background(new BackgroundFill(pHoverColor, new CornerRadii(pArc), Insets.EMPTY))));
+        setOnMouseExited(event -> setBackground(new Background(new BackgroundFill(pNormalColor, new CornerRadii(pArc), Insets.EMPTY))));
     }
 
     @Override
-    public void paint(Graphics pGraphics, JComponent pComponent) {
-        AbstractButton button = (AbstractButton) pComponent;
-        Graphics2D g2d = (Graphics2D) pGraphics;
+    protected void layoutChildren() {
+        super.layoutChildren();
 
-        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
-        int width = button.getWidth();
-        int height = button.getHeight();
-        Color backgroundColor = button.getModel().isRollover() ? hoverColor : normalColor;
-        g2d.setColor(backgroundColor);
-        g2d.fillRoundRect(0, 0, width, height, arc, arc);
-
-        g2d.setColor(button.getForeground());
-        FontMetrics fm = g2d.getFontMetrics();
-        String text = button.getText();
-        int x = (width - fm.stringWidth(text)) / 2;
-        int y = ((height - fm.getHeight()) / 2) + fm.getAscent();
-        g2d.drawString(text, x, y);
+        Text text = (Text) lookup(".text");
+        if (text != null) {
+            text.setTranslateX((getWidth() - text.getBoundsInLocal().getWidth()) / 2);
+            text.setTranslateY((getHeight() - text.getBoundsInLocal().getHeight()) / 2);
+        }
     }
 }

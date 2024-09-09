@@ -1,30 +1,43 @@
 package LuaNodeEditor.UI;
 
-import javax.swing.*;
-import java.awt.*;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
 
-public class MainPanel extends JPanel {
+public class MainPanel extends BorderPane {
 
     private static final int GRID_SIZE = 25;
-    private static final Color GRID_COLOR = Color.DARK_GRAY;
+    private static final Color GRID_COLOR = Color.rgb(75, 75, 75);
+
+    private final Canvas canvas;
+    private final GraphicsContext graphicsContext;
 
     public MainPanel() {
-        setLayout(new BorderLayout());
-        setOpaque(false);
+        canvas = new Canvas();
+        graphicsContext = canvas.getGraphicsContext2D();
+
+        canvas.widthProperty().bind(widthProperty());
+        canvas.heightProperty().bind(heightProperty());
+
+        widthProperty().addListener((observable, oldValue, newValue) -> drawGrid());
+        heightProperty().addListener((observable, oldValue, newValue) -> drawGrid());
+
+        setCenter(canvas);
     }
 
-    @Override
-    protected void paintComponent(Graphics pGraphics) {
-        super.paintComponent(pGraphics);
+    private void drawGrid() {
+        double width = canvas.getWidth();
+        double height = canvas.getHeight();
 
-        pGraphics.setColor(new Color(35, 35, 35));
-        pGraphics.fillRect(0, 0, getWidth(), getHeight());
+        graphicsContext.setFill(Color.rgb(35, 35, 35));
+        graphicsContext.fillRect(0, 0, width, height);
 
-        pGraphics.setColor(GRID_COLOR);
+        graphicsContext.setStroke(GRID_COLOR);
 
-        for (int x = 0; x < getWidth(); x += GRID_SIZE) {
-            for (int y = 0; y < getHeight(); y += GRID_SIZE) {
-                pGraphics.drawRect(x, y, GRID_SIZE, GRID_SIZE);
+        for (int x = 0; x < width; x += GRID_SIZE) {
+            for (int y = 0; y < height; y += GRID_SIZE) {
+                graphicsContext.strokeRect(x, y, GRID_SIZE, GRID_SIZE);
             }
         }
     }

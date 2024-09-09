@@ -1,38 +1,40 @@
 package LuaNodeEditor.UI.TitleBar;
 
-import javax.swing.*;
-import java.awt.*;
+import LuaNodeEditor.UI.Components.ImageLoader;
+import LuaNodeEditor.UI.TitleBar.Buttons.ButtonPanel;
+import LuaNodeEditor.UI.TitleBar.Buttons.FileButton;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
-import LuaNodeEditor.UI.Components.*;
-import LuaNodeEditor.UI.Helpers.GridBagHelper; // Import the GridBagHelper
-import LuaNodeEditor.UI.Listeners.MouseDragListener;
-import LuaNodeEditor.UI.TitleBar.Buttons.*;
+public class TitleBar extends BorderPane {
 
-public class TitleBar extends BasePanel {
+    public TitleBar(Stage pStage) {
+        setStyle("-fx-background-color: #2D2D2D;");
+        setPrefHeight(30);
 
-    public TitleBar(JFrame pFrame) {
-        super(new Color(45, 45, 45), 30);
+        HBox leftPanel = new HBox();
+        leftPanel.setPadding(new Insets(0, 10, 0, 10));
+        leftPanel.setSpacing(10);
+        leftPanel.setAlignment(Pos.CENTER_LEFT);
 
-        JPanel leftPanel = new JPanel(new GridBagLayout());
-        leftPanel.setOpaque(false);
+        HBox contentContainer = new HBox();
+        contentContainer.setAlignment(Pos.CENTER_LEFT);
 
-        GridBagConstraints gbc = GridBagHelper.createStandardConstraints();
+        ImageLoader logoLoader = new ImageLoader("/assets/images/logo.png", 30, 30);
+        contentContainer.getChildren().add(logoLoader);
 
-        ImageLoader logoLoader = new ImageLoader("/assets/images/logo.png", 25, 25);
-        gbc.gridx = 0;
-        leftPanel.add(logoLoader, gbc);
+        FileButton fileButton = new FileButton(pStage);
+        contentContainer.getChildren().add(fileButton);
 
-        FileButton fileButton = new FileButton();
-        gbc.gridx = 1;
-        leftPanel.add(fileButton, gbc);
+        leftPanel.getChildren().add(contentContainer);
 
-        add(leftPanel, BorderLayout.WEST);
+        ButtonPanel buttonPanel = new ButtonPanel(pStage);
+        setRight(buttonPanel);
+        setLeft(leftPanel);
 
-        ButtonPanel buttonPanel = new ButtonPanel(pFrame);
-        add(buttonPanel, BorderLayout.EAST);
-
-        MouseDragListener dragListener = new MouseDragListener(pFrame);
-        addMouseListener(dragListener);
-        addMouseMotionListener(dragListener);
     }
 }
