@@ -36,6 +36,8 @@ public class LuaNodeEditor extends Application {
         Scene scene = new Scene(root);
         pPrimaryStage.setScene(scene);
 
+        pPrimaryStage.setFullScreen(true);
+
         pPrimaryStage.show();
     }
 

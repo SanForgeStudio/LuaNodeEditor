@@ -1,12 +1,12 @@
 package LuaNodeEditor.UI.Components;
 
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
-import javafx.geometry.Insets;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 
 public class TextButton extends Button {
 

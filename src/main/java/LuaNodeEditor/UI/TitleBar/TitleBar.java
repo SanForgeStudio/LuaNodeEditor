@@ -7,24 +7,26 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 
 public class TitleBar extends BorderPane {
+
+    private final StackPane stackPane;
 
     public TitleBar(Stage pStage) {
         setStyle("-fx-background-color: #2D2D2D;");
         setPrefHeight(30);
 
         HBox leftPanel = new HBox();
-        leftPanel.setPadding(new Insets(0, 10, 0, 10));
+        leftPanel.setPadding(new Insets(0, 5, 0, 5));
         leftPanel.setSpacing(10);
         leftPanel.setAlignment(Pos.CENTER_LEFT);
-
         HBox contentContainer = new HBox();
         contentContainer.setAlignment(Pos.CENTER_LEFT);
 
-        ImageLoader logoLoader = new ImageLoader("/assets/images/logo.png", 30, 30);
+        ImageLoader logoLoader = new ImageLoader("/assets/images/logo.png", 40, 40);
+        logoLoader.setPadding(new Insets(0, 5, 0, 5));
         contentContainer.getChildren().add(logoLoader);
 
         FileButton fileButton = new FileButton(pStage);
@@ -32,9 +34,25 @@ public class TitleBar extends BorderPane {
 
         leftPanel.getChildren().add(contentContainer);
 
+        stackPane = new StackPane();
         ButtonPanel buttonPanel = new ButtonPanel(pStage);
-        setRight(buttonPanel);
-        setLeft(leftPanel);
+        stackPane.getChildren().addAll(buttonPanel);
+        stackPane.setAlignment(Pos.TOP_RIGHT);
+        setCenter(stackPane);
 
+        updatePadding(pStage.getWidth());
+
+        pStage.widthProperty().addListener((observable, oldValue, newValue) -> updatePadding(newValue.doubleValue()));
+
+        setLeft(leftPanel);
+    }
+
+    // TODO: This Method is really inefficient, it should be Optimized and fixed
+    private void updatePadding(double pWindowWidth) {
+        if (stackPane != null) {
+            double leftPadding = Math.max(0, pWindowWidth - 250);
+            stackPane.setPadding(new Insets(0, 0, 0, leftPadding));
+        }
     }
 }
+

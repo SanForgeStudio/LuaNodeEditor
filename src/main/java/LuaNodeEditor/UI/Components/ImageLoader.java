@@ -1,9 +1,9 @@
 package LuaNodeEditor.UI.Components;
 
+import javafx.geometry.Pos;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.geometry.Pos;
 
 import java.io.InputStream;
 

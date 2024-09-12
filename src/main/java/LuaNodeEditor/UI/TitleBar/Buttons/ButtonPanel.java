@@ -1,15 +1,12 @@
 package LuaNodeEditor.UI.TitleBar.Buttons;
 
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 public class ButtonPanel extends HBox {
 
     public ButtonPanel(Stage pStage) {
-        setAlignment(Pos.CENTER_RIGHT);
 
         MinimizeButton minimizeButton = new MinimizeButton(pStage);
         MaximizeButton maximizeButton = new MaximizeButton(pStage);
