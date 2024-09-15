@@ -20,9 +20,7 @@ public class MaximizeButton extends Button {
         setOnMouseEntered(event -> setBackground(new Background(new BackgroundFill(Color.rgb(80, 80, 80), new CornerRadii(5), Insets.EMPTY))));
         setOnMouseExited(event -> setBackground(new Background(new BackgroundFill(Color.rgb(60, 60, 60), new CornerRadii(5), Insets.EMPTY))));
 
-        setOnAction(event -> {
-            pStage.setMaximized(!pStage.isMaximized());
-        });
+        setOnAction(event -> pStage.setMaximized(!pStage.isMaximized()));
 
         setPrefSize(40, 30);
     }

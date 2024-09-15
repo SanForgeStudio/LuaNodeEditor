@@ -1,8 +1,9 @@
 package LuaNodeEditor.UI.ContentBrowser;
 
-import javafx.scene.control.TreeView;
 import javafx.scene.control.TreeItem;
+import javafx.scene.control.TreeView;
 import javafx.scene.layout.VBox;
+
 import java.io.File;
 
 public class ContentBrowser extends VBox {
@@ -14,19 +15,19 @@ public class ContentBrowser extends VBox {
         setStyle("-fx-background-color: #2e2e2e; -fx-padding: 10;");
     }
 
-    public static void updateContent(File folder) {
-        TreeItem<String> rootItem = new TreeItem<>(folder.getName());
+    public static void updateContent(File pFolder) {
+        TreeItem<String> rootItem = new TreeItem<>(pFolder.getName());
         rootItem.setExpanded(true);
-        populateTree(rootItem, folder);
+        populateTree(rootItem, pFolder);
         treeView.setRoot(rootItem);
     }
 
-    private static void populateTree(TreeItem<String> parentItem, File folder) {
-        File[] files = folder.listFiles();
+    private static void populateTree(TreeItem<String> pParentItem, File pFolder) {
+        File[] files = pFolder.listFiles();
         if (files != null) {
             for (File file : files) {
                 TreeItem<String> item = new TreeItem<>(file.getName());
-                parentItem.getChildren().add(item);
+                pParentItem.getChildren().add(item);
                 if (file.isDirectory()) {
                     populateTree(item, file);
                 }

@@ -8,7 +8,7 @@ public class WindowDragger {
     private double xOffset = 0;
     private double yOffset = 0;
 
-        public void enableWindowDrag(Stage stage, Region titleBar) {
+    public void enableWindowDrag(Stage stage, Region titleBar) {
         titleBar.setOnMousePressed(event -> {
             xOffset = event.getSceneX();
             yOffset = event.getSceneY();
