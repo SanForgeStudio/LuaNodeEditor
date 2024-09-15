@@ -1,6 +1,7 @@
 package LuaNodeEditor.UI.TitleBar.Buttons.Actions;
 
 import LuaNodeEditor.Logging.BaseLogger;
+import LuaNodeEditor.LuaNodeEditor;
 import LuaNodeEditor.UI.Components.FolderSelectionPopup;
 import javafx.application.Platform;
 import javafx.stage.Stage;
@@ -13,7 +14,7 @@ public class OpenAction {
                 Stage stage = new Stage();
 
                 FolderSelectionPopup popup = new FolderSelectionPopup(true, stage, directory -> {
-                    System.out.println("Selected directory: " + directory.getAbsolutePath());
+                    LuaNodeEditor.contentBrowser.updateContent(directory);
                 });
 
                 popup.show();
