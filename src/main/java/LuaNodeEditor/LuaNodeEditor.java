@@ -3,7 +3,6 @@ package LuaNodeEditor;
 import LuaNodeEditor.Listener.WindowDragger;
 import LuaNodeEditor.Listener.WindowResizer;
 import LuaNodeEditor.Logging.BaseLogger;
-import LuaNodeEditor.UI.Components.ContentBrowser;
 import LuaNodeEditor.UI.Components.ImageLoader;
 import LuaNodeEditor.UI.MainPanel;
 import LuaNodeEditor.UI.TitleBar.TitleBar;
@@ -15,8 +14,6 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class LuaNodeEditor extends Application {
-
-    public static ContentBrowser contentBrowser;
 
     @Override
     public void start(Stage pPrimaryStage) {
@@ -41,10 +38,8 @@ public class LuaNodeEditor extends Application {
 
             MainPanel mainPanel = new MainPanel();
 
-            contentBrowser = new ContentBrowser();
             root.setTop(titleBar);
             root.setCenter(mainPanel);
-            root.setBottom(contentBrowser);
 
             Scene scene = new Scene(root);
 

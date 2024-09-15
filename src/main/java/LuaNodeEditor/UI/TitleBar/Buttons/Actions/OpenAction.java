@@ -13,8 +13,8 @@ public class OpenAction {
             try {
                 Stage stage = new Stage();
 
-                FolderSelectionPopup popup = new FolderSelectionPopup(true, stage, directory -> {
-                    LuaNodeEditor.contentBrowser.updateContent(directory);
+                FolderSelectionPopup popup = new FolderSelectionPopup(false, stage, directory -> {
+                    //LuaNodeEditor.contentBrowser.updateContent(directory);
                 });
 
                 popup.show();
