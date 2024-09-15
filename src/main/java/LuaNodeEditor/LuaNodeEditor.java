@@ -16,6 +16,9 @@ import javafx.stage.StageStyle;
 
 public class LuaNodeEditor extends Application {
 
+    public static ContentBrowser contentBrowser;
+    private static BorderPane root;
+
     @Override
     public void start(Stage pPrimaryStage) {
         try {
@@ -29,7 +32,7 @@ public class LuaNodeEditor extends Application {
             Image icon = ImageLoader.getImage("/assets/images/logo.png");
             pPrimaryStage.getIcons().add(icon);
 
-            BorderPane root = new BorderPane();
+            root = new BorderPane();
             root.setStyle("-fx-background-color: #232323;");
 
             TitleBar titleBar = new TitleBar(pPrimaryStage);
@@ -39,10 +42,9 @@ public class LuaNodeEditor extends Application {
             windowResizer.enableWindowResize(pPrimaryStage, root);
             MainPanel mainPanel = new MainPanel();
 
-            ContentBrowser contentBrowser = new ContentBrowser();
+            contentBrowser = new ContentBrowser();
             root.setTop(titleBar);
             root.setCenter(mainPanel);
-            root.setBottom(contentBrowser);
 
             Scene scene = new Scene(root);
             pPrimaryStage.setScene(scene);
@@ -55,5 +57,15 @@ public class LuaNodeEditor extends Application {
 
     public static void main(String[] pArgs) {
         launch(pArgs);
+    }
+
+    public static void showContentBrowser() {
+        if (!root.getChildren().contains(contentBrowser)) {
+            root.setBottom(contentBrowser);
+        }
+    }
+
+    public static void hideContentBrowser() {
+        root.getChildren().remove(contentBrowser);
     }
 }
