@@ -1,9 +1,8 @@
 package LuaNodeEditor;
 
-import LuaNodeEditor.Listener.WindowDragger;
-import LuaNodeEditor.Listener.WindowResizer;
 import LuaNodeEditor.Logging.BaseLogger;
 import LuaNodeEditor.UI.Components.ImageLoader;
+import LuaNodeEditor.UI.ContentBrowser.ContentBrowser;
 import LuaNodeEditor.UI.MainPanel;
 import LuaNodeEditor.UI.TitleBar.TitleBar;
 import javafx.application.Application;
@@ -32,20 +31,14 @@ public class LuaNodeEditor extends Application {
             root.setStyle("-fx-background-color: #232323;");
 
             TitleBar titleBar = new TitleBar(pPrimaryStage);
-
-            WindowDragger dragger = new WindowDragger();
-            dragger.enableWindowDrag(pPrimaryStage, titleBar);
-
             MainPanel mainPanel = new MainPanel();
 
+            ContentBrowser contentBrowser = new ContentBrowser();
             root.setTop(titleBar);
             root.setCenter(mainPanel);
+            root.setBottom(contentBrowser);
 
             Scene scene = new Scene(root);
-
-            WindowResizer resizer = new WindowResizer();
-            resizer.enableWindowResize(pPrimaryStage, root);
-
             pPrimaryStage.setScene(scene);
 
             pPrimaryStage.show();

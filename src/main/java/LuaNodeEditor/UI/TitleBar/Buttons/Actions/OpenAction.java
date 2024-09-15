@@ -3,8 +3,11 @@ package LuaNodeEditor.UI.TitleBar.Buttons.Actions;
 import LuaNodeEditor.Logging.BaseLogger;
 import LuaNodeEditor.LuaNodeEditor;
 import LuaNodeEditor.UI.Components.FolderSelectionPopup;
+import LuaNodeEditor.UI.ContentBrowser.ContentBrowser;
 import javafx.application.Platform;
 import javafx.stage.Stage;
+
+import java.io.File;
 
 public class OpenAction {
 
@@ -14,7 +17,7 @@ public class OpenAction {
                 Stage stage = new Stage();
 
                 FolderSelectionPopup popup = new FolderSelectionPopup(false, stage, directory -> {
-                    //LuaNodeEditor.contentBrowser.updateContent(directory);
+                    ContentBrowser.updateContent(new File(directory.getAbsolutePath()));
                 });
 
                 popup.show();
