@@ -1,12 +1,26 @@
 package LuaNodeEditor.UI.TitleBar.Buttons.Actions;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import LuaNodeEditor.Logging.BaseLogger;
+import LuaNodeEditor.UI.Components.FolderSelectionPopup;
+import javafx.application.Platform;
+import javafx.stage.Stage;
 
-public class OpenAction implements ActionListener {
+public class OpenAction {
 
-    @Override
-    public void actionPerformed(ActionEvent pEvent) {
-        System.out.println("Load file action triggered");
+    public static void handleOpenAction() {
+        Platform.runLater(() -> {
+            try {
+                Stage stage = new Stage();
+
+                FolderSelectionPopup popup = new FolderSelectionPopup(true, stage, directory -> {
+                    System.out.println("Selected directory: " + directory.getAbsolutePath());
+                });
+
+                popup.show();
+
+            } catch (Exception pException) {
+                BaseLogger.logError("Error while trying to open the OpenAction popup", pException);
+            }
+        });
     }
 }

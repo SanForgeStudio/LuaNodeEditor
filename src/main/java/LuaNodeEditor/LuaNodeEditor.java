@@ -1,5 +1,6 @@
 package LuaNodeEditor;
 
+import LuaNodeEditor.Logging.BaseLogger;
 import LuaNodeEditor.UI.Components.ImageLoader;
 import LuaNodeEditor.UI.MainPanel;
 import LuaNodeEditor.UI.TitleBar.TitleBar;
@@ -14,31 +15,35 @@ public class LuaNodeEditor extends Application {
 
     @Override
     public void start(Stage pPrimaryStage) {
-        pPrimaryStage.setTitle("Lua Node Editor");
-        pPrimaryStage.setWidth(1200);
-        pPrimaryStage.setHeight(800);
-        pPrimaryStage.centerOnScreen();
+        try {
+            pPrimaryStage.setTitle("Lua Node Editor");
+            pPrimaryStage.setWidth(1200);
+            pPrimaryStage.setHeight(800);
+            pPrimaryStage.centerOnScreen();
 
-        pPrimaryStage.initStyle(StageStyle.UNDECORATED);
+            pPrimaryStage.initStyle(StageStyle.UNDECORATED);
 
-        Image icon = ImageLoader.getImage("/assets/images/logo.png");
-        pPrimaryStage.getIcons().add(icon);
+            Image icon = ImageLoader.getImage("/assets/images/logo.png");
+            pPrimaryStage.getIcons().add(icon);
 
-        BorderPane root = new BorderPane();
-        root.setStyle("-fx-background-color: #232323;");
+            BorderPane root = new BorderPane();
+            root.setStyle("-fx-background-color: #232323;");
 
-        TitleBar titleBar = new TitleBar(pPrimaryStage);
-        MainPanel mainPanel = new MainPanel();
+            TitleBar titleBar = new TitleBar(pPrimaryStage);
+            MainPanel mainPanel = new MainPanel();
 
-        root.setTop(titleBar);
-        root.setCenter(mainPanel);
+            root.setTop(titleBar);
+            root.setCenter(mainPanel);
 
-        Scene scene = new Scene(root);
-        pPrimaryStage.setScene(scene);
+            Scene scene = new Scene(root);
+            pPrimaryStage.setScene(scene);
 
-        pPrimaryStage.setFullScreen(true);
+            //pPrimaryStage.setFullScreen(true);
 
-        pPrimaryStage.show();
+            pPrimaryStage.show();
+        } catch (Exception pException) {
+            BaseLogger.logError("An error occurred while starting the application.", pException);
+        }
     }
 
     public static void main(String[] pArgs) {

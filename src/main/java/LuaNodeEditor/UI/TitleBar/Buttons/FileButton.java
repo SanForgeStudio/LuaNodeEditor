@@ -1,6 +1,5 @@
 package LuaNodeEditor.UI.TitleBar.Buttons;
 
-import LuaNodeEditor.UI.Components.BasePopupMenu;
 import LuaNodeEditor.UI.TitleBar.Buttons.Actions.NewAction;
 import LuaNodeEditor.UI.TitleBar.Buttons.Actions.OpenAction;
 import LuaNodeEditor.UI.TitleBar.Buttons.Actions.SaveAction;
@@ -29,21 +28,29 @@ public class FileButton extends Button {
         setOnMouseEntered(event -> setBackground(new Background(new BackgroundFill(Color.rgb(80, 80, 80), new CornerRadii(10), Insets.EMPTY))));
         setOnMouseExited(event -> setBackground(new Background(new BackgroundFill(Color.rgb(45, 45, 45), new CornerRadii(10), Insets.EMPTY))));
 
+        ContextMenu contextMenu = createContextMenu();
+
+        setOnAction(event -> {
+            double x = localToScreen(getBoundsInLocal()).getMinX();
+            double y = localToScreen(getBoundsInLocal()).getMaxY();
+            contextMenu.show(FileButton.this, x, y);
+        });
+    }
+
+    private ContextMenu createContextMenu() {
+        ContextMenu contextMenu = new ContextMenu();
         MenuItem newItem = new MenuItem("New");
         MenuItem openItem = new MenuItem("Open");
         MenuItem saveItem = new MenuItem("Save");
         MenuItem saveAsItem = new MenuItem("Save As");
 
-        newItem.setOnAction(event -> new NewAction().actionPerformed(null));
-        openItem.setOnAction(event -> new OpenAction().actionPerformed(null));
-        saveItem.setOnAction(event -> new SaveAction().actionPerformed(null));
-        saveAsItem.setOnAction(event -> new SaveAsAction().actionPerformed(null));
+        newItem.setOnAction(event -> NewAction.handleNewAction());
+        openItem.setOnAction(event -> OpenAction.handleOpenAction());
+        saveItem.setOnAction(event -> SaveAction.handleSaveAction());
+        saveAsItem.setOnAction(event -> SaveAsAction.handleSaveAsAction());
 
-        BasePopupMenu contextMenu = new BasePopupMenu(Color.rgb(50, 50, 50), Color.rgb(255, 255, 255), Color.rgb(80, 80, 80), newItem, openItem, saveItem, saveAsItem);
+        contextMenu.getItems().addAll(newItem, openItem, saveItem, saveAsItem);
 
-        //TODO: Doesn't work in Non Fullscreen mode
-        setOnAction(event -> {
-            contextMenu.show(FileButton.this, getLayoutX(), getLayoutY() + getHeight());
-        });
+        return contextMenu;
     }
 }
