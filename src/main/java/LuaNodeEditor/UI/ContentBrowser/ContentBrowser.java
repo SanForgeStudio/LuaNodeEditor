@@ -15,7 +15,7 @@ public class ContentBrowser extends VBox {
 
     public ContentBrowser() {
         treeView = new TreeView<>();
-        treeView.setStyle("-fx-background-color: #2e2e2e;");
+        treeView.setStyle("-fx-background: #2e2e2e; -fx-control-inner-background: #2e2e2e;");
 
         treeView.setCellFactory(new Callback<>() {
             @Override
@@ -26,7 +26,7 @@ public class ContentBrowser extends VBox {
                         super.updateItem(item, empty);
                         if (empty || item == null) {
                             setText(null);
-                            setStyle("");
+                            setStyle("-fx-background-color: #2e2e2e;");
                         } else {
                             setText(item);
                             setStyle("-fx-text-fill: white; -fx-background-color: #2e2e2e;");
@@ -37,8 +37,9 @@ public class ContentBrowser extends VBox {
         });
 
         getChildren().add(treeView);
-        setStyle("-fx-background-color: #2e2e2e; -fx-padding: 10; -fx-end-margin: 20");
+        setStyle("-fx-background-color: #2e2e2e;");
     }
+
 
     public void updateContent(File folder) {
         if (folder != null && folder.exists() && folder.isDirectory()) {

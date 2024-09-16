@@ -63,8 +63,8 @@ public class LuaNodeEditor extends Application {
     public static void showContentBrowser() {
         if (!root.getChildren().contains(contentBrowser)) {
             root.setBottom(contentBrowser);
-            contentBrowser.prefHeightProperty().bind(root.heightProperty().divide(2));
-            MainPanel.canvas.heightProperty().bind(root.heightProperty().divide(2));
+            contentBrowser.prefHeightProperty().bind(root.heightProperty().divide(4));
+            MainPanel.canvas.heightProperty().bind(root.heightProperty().subtract(contentBrowser.heightProperty()));
         }
     }
 
