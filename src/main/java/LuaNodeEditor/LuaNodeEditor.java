@@ -17,8 +17,8 @@ import javafx.stage.StageStyle;
 public class LuaNodeEditor extends Application {
 
     public static ContentBrowser contentBrowser;
-    private static BorderPane root;
-    private static MainPanel mainPanel;
+    public static BorderPane root;
+    public static MainPanel mainPanel;
 
     @Override
     public void start(Stage pPrimaryStage) {
@@ -58,20 +58,5 @@ public class LuaNodeEditor extends Application {
 
     public static void main(String[] pArgs) {
         launch(pArgs);
-    }
-
-    public static void showContentBrowser() {
-        if (!root.getChildren().contains(contentBrowser)) {
-            root.setBottom(contentBrowser);
-            contentBrowser.prefHeightProperty().bind(root.heightProperty().divide(4));
-            MainPanel.canvas.heightProperty().bind(root.heightProperty().subtract(contentBrowser.heightProperty()));
-        }
-    }
-
-    public static void hideContentBrowser() {
-        root.getChildren().remove(contentBrowser);
-
-        mainPanel.prefHeightProperty().bind(root.heightProperty());
-        mainPanel.prefWidthProperty().bind(root.widthProperty());
     }
 }
