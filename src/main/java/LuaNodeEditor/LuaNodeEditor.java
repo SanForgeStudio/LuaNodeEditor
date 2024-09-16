@@ -18,15 +18,15 @@ public class LuaNodeEditor extends Application {
     public static MainPanel mainPanel;
 
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage pPrimaryStage) {
         try {
-            StageConfigurer.configureStage(primaryStage);
+            StageConfigurer.configureStage(pPrimaryStage);
 
-            initializeComponents(primaryStage);
+            initializeComponents(pPrimaryStage);
 
-            SceneConfigurer.configureScene(primaryStage, root);
+            SceneConfigurer.configureScene(pPrimaryStage, root);
 
-            primaryStage.show();
+            pPrimaryStage.show();
         } catch (Exception pException) {
             BaseLogger.logError("An error occurred while starting the LuaNodeEditor application.", pException);
         }
