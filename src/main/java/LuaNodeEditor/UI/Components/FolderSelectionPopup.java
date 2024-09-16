@@ -8,6 +8,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 
+import javax.swing.filechooser.FileSystemView;
 import java.io.File;
 
 public class FolderSelectionPopup {
@@ -54,12 +55,12 @@ public class FolderSelectionPopup {
     }
 
     private File getDownloadsFolder() {
-        String userHome = System.getProperty("user.home");
-        File downloadsFolder = new File(userHome, "Downloads");
-        if (downloadsFolder.exists() && downloadsFolder.isDirectory()) {
-            return downloadsFolder;
+        FileSystemView fileSystemView = FileSystemView.getFileSystemView();
+        File documentsFolder = fileSystemView.getDefaultDirectory();
+        if (documentsFolder.exists() && documentsFolder.isDirectory()) {
+            return documentsFolder;
         } else {
-            return new File(userHome);
+            return new File(documentsFolder.getParent());
         }
     }
 
