@@ -37,7 +37,7 @@ public class ContentBrowser extends VBox {
         });
 
         getChildren().add(treeView);
-        setStyle("-fx-background-color: #2e2e2e; -fx-padding: 10;");
+        setStyle("-fx-background-color: #2e2e2e; -fx-padding: 10; -fx-end-margin: 20");
     }
 
     public void updateContent(File folder) {

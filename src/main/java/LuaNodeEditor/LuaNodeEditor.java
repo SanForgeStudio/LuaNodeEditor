@@ -18,6 +18,7 @@ public class LuaNodeEditor extends Application {
 
     public static ContentBrowser contentBrowser;
     private static BorderPane root;
+    private static MainPanel mainPanel;
 
     @Override
     public void start(Stage pPrimaryStage) {
@@ -40,7 +41,7 @@ public class LuaNodeEditor extends Application {
             windowDragger.enableWindowDrag(pPrimaryStage, titleBar);
             WindowResizer windowResizer = new WindowResizer();
             windowResizer.enableWindowResize(pPrimaryStage, root);
-            MainPanel mainPanel = new MainPanel();
+            mainPanel = new MainPanel();
 
             contentBrowser = new ContentBrowser();
             root.setTop(titleBar);
@@ -62,10 +63,15 @@ public class LuaNodeEditor extends Application {
     public static void showContentBrowser() {
         if (!root.getChildren().contains(contentBrowser)) {
             root.setBottom(contentBrowser);
+            contentBrowser.prefHeightProperty().bind(root.heightProperty().divide(2));
+            MainPanel.canvas.heightProperty().bind(root.heightProperty().divide(2));
         }
     }
 
     public static void hideContentBrowser() {
         root.getChildren().remove(contentBrowser);
+
+        mainPanel.prefHeightProperty().bind(root.heightProperty());
+        mainPanel.prefWidthProperty().bind(root.widthProperty());
     }
 }

@@ -10,11 +10,10 @@ public class MainPanel extends BorderPane {
     private static final int GRID_SIZE = 25;
     private static final Color GRID_COLOR = Color.rgb(75, 75, 75);
 
-    private final Canvas canvas;
+    public static Canvas canvas = new Canvas();
     private final GraphicsContext graphicsContext;
 
     public MainPanel() {
-        canvas = new Canvas();
         graphicsContext = canvas.getGraphicsContext2D();
 
         canvas.widthProperty().bind(widthProperty());
