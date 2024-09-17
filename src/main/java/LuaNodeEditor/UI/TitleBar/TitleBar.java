@@ -1,7 +1,7 @@
 package LuaNodeEditor.UI.TitleBar;
 
 import LuaNodeEditor.UI.Components.ImageLoader;
-import LuaNodeEditor.UI.TitleBar.Buttons.ButtonPanel;
+import LuaNodeEditor.UI.TitleBar.Buttons.ControlButtons.ButtonPanel;
 import LuaNodeEditor.UI.TitleBar.Buttons.FileButton;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;

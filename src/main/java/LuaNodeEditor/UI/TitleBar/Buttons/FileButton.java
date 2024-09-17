@@ -8,10 +8,6 @@ import LuaNodeEditor.UI.TitleBar.Buttons.Actions.SaveAsAction;
 import javafx.geometry.Insets;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class FileButton extends TextButton {
@@ -19,11 +15,6 @@ public class FileButton extends TextButton {
     public FileButton(Stage pStage) {
         super("File", TextButton.NORMAL_COLOR, TextButton.HOVER_COLOR, 45, 30);
         setPadding(new Insets(5, 10, 5, 10));
-
-        setBackground(new Background(new BackgroundFill(Color.rgb(45, 45, 45), new CornerRadii(10), Insets.EMPTY)));
-
-        setOnMouseEntered(event -> setBackground(new Background(new BackgroundFill(Color.rgb(80, 80, 80), new CornerRadii(10), Insets.EMPTY))));
-        setOnMouseExited(event -> setBackground(new Background(new BackgroundFill(Color.rgb(45, 45, 45), new CornerRadii(10), Insets.EMPTY))));
 
         ContextMenu contextMenu = createContextMenu();
 

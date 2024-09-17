@@ -1,4 +1,4 @@
-package LuaNodeEditor.UI.TitleBar.Buttons;
+package LuaNodeEditor.UI.TitleBar.Buttons.ControlButtons;
 
 import LuaNodeEditor.UI.Components.TextButton;
 import javafx.stage.Stage;
