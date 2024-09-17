@@ -23,3 +23,13 @@ javafx {
     version = '22.0.2'
     modules = ['javafx.web', 'javafx.swing']
 }
+
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'LuaNodeEditor.LuaNodeEditor',
+                'Application-Version': '1.0.0',
+                'Implementation-Vendor': 'SanForgeStudio, MeAlam'
+        )
+    }
+}
