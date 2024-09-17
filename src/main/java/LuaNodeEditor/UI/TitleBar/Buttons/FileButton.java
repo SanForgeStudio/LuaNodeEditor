@@ -1,10 +1,10 @@
 package LuaNodeEditor.UI.TitleBar.Buttons;
 
 import LuaNodeEditor.UI.Components.TextButton;
-import LuaNodeEditor.UI.TitleBar.Buttons.Actions.NewAction;
-import LuaNodeEditor.UI.TitleBar.Buttons.Actions.OpenAction;
-import LuaNodeEditor.UI.TitleBar.Buttons.Actions.SaveAction;
-import LuaNodeEditor.UI.TitleBar.Buttons.Actions.SaveAsAction;
+import LuaNodeEditor.UI.TitleBar.Buttons.Actions.FileButton.NewAction;
+import LuaNodeEditor.UI.TitleBar.Buttons.Actions.FileButton.OpenAction;
+import LuaNodeEditor.UI.TitleBar.Buttons.Actions.FileButton.SaveAction;
+import LuaNodeEditor.UI.TitleBar.Buttons.Actions.FileButton.SaveAsAction;
 import javafx.geometry.Insets;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;

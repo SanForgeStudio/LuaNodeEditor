@@ -1,4 +1,4 @@
-package LuaNodeEditor.UI.TitleBar.Buttons.Actions;
+package LuaNodeEditor.UI.TitleBar.Buttons.Actions.FileButton;
 
 public class SaveAsAction {
 

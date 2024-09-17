@@ -1,4 +1,4 @@
-package LuaNodeEditor.UI.TitleBar.Buttons.Actions;
+package LuaNodeEditor.UI.TitleBar.Buttons.Actions.FileButton;
 
 import LuaNodeEditor.Logging.BaseLogger;
 import LuaNodeEditor.LuaNodeEditor;
@@ -8,22 +8,23 @@ import javafx.stage.Stage;
 
 import java.io.File;
 
-public class OpenAction {
+public class NewAction {
 
-    public static void handleOpenAction() {
+    public static void handleNewAction() {
         Platform.runLater(() -> {
             try {
                 Stage stage = new Stage();
 
-                FolderSelectionPopup popup = new FolderSelectionPopup(false, stage, directory -> {
+                FolderSelectionPopup popup = new FolderSelectionPopup(true, stage, directory -> {
                     System.out.println("Selected directory: " + directory.getAbsolutePath());
                     LuaNodeEditor.contentBrowser.updateContent(new File(directory.getAbsolutePath()));
                 });
 
                 popup.show();
 
+
             } catch (Exception pException) {
-                BaseLogger.logError("Error while trying to open the OpenAction popup", pException);
+                BaseLogger.logError("Error while trying to open the NewAction popup", pException);
             }
         });
     }
