@@ -1,4 +1,4 @@
-package LuaNodeEditor.Utils;
+package LuaNodeEditor.Utils.MainApp;
 
 import LuaNodeEditor.Logging.BaseLogger;
 import LuaNodeEditor.UI.Components.ImageLoader;

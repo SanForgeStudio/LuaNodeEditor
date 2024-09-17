@@ -1,4 +1,4 @@
-package LuaNodeEditor.Utils;
+package LuaNodeEditor.Utils.MainApp;
 
 import LuaNodeEditor.Listener.WindowDragger;
 import LuaNodeEditor.Listener.WindowResizer;

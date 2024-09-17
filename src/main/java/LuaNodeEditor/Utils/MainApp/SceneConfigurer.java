@@ -1,4 +1,4 @@
-package LuaNodeEditor.Utils;
+package LuaNodeEditor.Utils.MainApp;
 
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
