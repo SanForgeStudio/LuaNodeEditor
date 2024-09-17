@@ -34,6 +34,7 @@ public class MainPanel extends BorderPane {
         gridDrawer.drawGrid(graphicsContext, width, height);
     }
 
+    // TODO: Code under here is purely to test the GridSnapping feature
     private void handleMouseClick(MouseEvent event) {
         double mouseX = event.getX();
         double mouseY = event.getY();
