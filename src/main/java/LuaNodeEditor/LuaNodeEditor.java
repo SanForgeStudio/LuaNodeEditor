@@ -2,7 +2,7 @@ package LuaNodeEditor;
 
 import LuaNodeEditor.Logging.BaseLogger;
 import LuaNodeEditor.UI.ContentBrowser.ContentBrowser;
-import LuaNodeEditor.UI.MainPanel;
+import LuaNodeEditor.UI.MainPanel.MainPanel;
 import LuaNodeEditor.UI.TitleBar.TitleBar;
 import LuaNodeEditor.Utils.SceneConfigurer;
 import LuaNodeEditor.Utils.StageConfigurer;

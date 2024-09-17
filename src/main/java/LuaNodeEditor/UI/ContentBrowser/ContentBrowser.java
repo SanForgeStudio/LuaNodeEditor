@@ -1,7 +1,7 @@
 package LuaNodeEditor.UI.ContentBrowser;
 
 import LuaNodeEditor.LuaNodeEditor;
-import LuaNodeEditor.UI.MainPanel;
+import LuaNodeEditor.UI.MainPanel.MainPanel;
 import javafx.scene.control.TreeCell;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
