@@ -9,6 +9,7 @@ import LuaNodeEditor.Utils.StageConfigurer;
 import LuaNodeEditor.Utils.WindowInteractionHandler;
 import javafx.application.Application;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class LuaNodeEditor extends Application {
@@ -16,6 +17,7 @@ public class LuaNodeEditor extends Application {
     public static ContentBrowser contentBrowser;
     public static BorderPane root;
     public static MainPanel mainPanel;
+    public static final Color BACKGROUND_COLOR = Color.rgb(35, 35, 35);
 
     @Override
     public void start(Stage pPrimaryStage) {

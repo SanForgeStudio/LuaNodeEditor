@@ -35,9 +35,9 @@ public class MainPanel extends BorderPane {
     }
 
     // TODO: Code under here is purely to test the GridSnapping feature
-    private void handleMouseClick(MouseEvent event) {
-        double mouseX = event.getX();
-        double mouseY = event.getY();
+    private void handleMouseClick(MouseEvent pEvent) {
+        double mouseX = pEvent.getX();
+        double mouseY = pEvent.getY();
 
         int snappedX = gridDrawer.snapToGrid(mouseX);
         int snappedY = gridDrawer.snapToGrid(mouseY);
@@ -45,13 +45,13 @@ public class MainPanel extends BorderPane {
         drawBlock(snappedX, snappedY);
     }
 
-    private void drawBlock(int x, int y) {
+    private void drawBlock(int pX, int pY) {
         int blockSize = 25;
 
         graphicsContext.setFill(Color.BLUE);
-        graphicsContext.fillRect(x, y, blockSize, blockSize);
+        graphicsContext.fillRect(pX, pY, blockSize, blockSize);
 
         graphicsContext.setStroke(Color.BLACK);
-        graphicsContext.strokeRect(x, y, blockSize, blockSize);
+        graphicsContext.strokeRect(pX, pY, blockSize, blockSize);
     }
 }
