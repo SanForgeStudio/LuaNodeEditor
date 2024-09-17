@@ -10,8 +10,9 @@ import javafx.scene.text.Font;
 
 public class TextButton extends Button {
 
-    public static final Color NORMAL_COLOR = Color.rgb(60, 60, 60);
+    public static final Color BUTTON_PANEL_COLOR = Color.rgb(60, 60, 60);
     public static final Color HOVER_COLOR = Color.rgb(80, 80, 80);
+    public static final Color NORMAL_COLOR = Color.rgb(45, 45, 45);
 
     public TextButton(String pText, Color pNormalColor, Color pHoverColor, double pWidth, double pHeight) {
         super(pText);

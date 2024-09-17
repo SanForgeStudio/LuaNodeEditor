@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 public class CloseButton extends TextButton {
 
     public CloseButton(Stage pStage) {
-        super("x", TextButton.NORMAL_COLOR, TextButton.HOVER_COLOR, 40, 30);
+        super("x", TextButton.BUTTON_PANEL_COLOR, TextButton.HOVER_COLOR, 40, 30);
 
         setOnAction(event -> pStage.close());
     }

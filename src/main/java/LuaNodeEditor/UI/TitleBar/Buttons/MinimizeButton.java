@@ -6,7 +6,7 @@ import javafx.stage.Stage;
 public class MinimizeButton extends TextButton {
 
     public MinimizeButton(Stage pStage) {
-        super("-", TextButton.NORMAL_COLOR, TextButton.HOVER_COLOR, 40, 30);
+        super("-", TextButton.BUTTON_PANEL_COLOR, TextButton.HOVER_COLOR, 40, 30);
 
         setOnAction(event -> pStage.setIconified(true));
     }
