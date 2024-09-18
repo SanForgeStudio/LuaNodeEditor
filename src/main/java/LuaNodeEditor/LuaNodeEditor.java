@@ -29,6 +29,7 @@ public class LuaNodeEditor extends Application {
             SceneConfigurer.configureScene(pPrimaryStage, root);
 
             pPrimaryStage.show();
+            BaseLogger.logSuccess("LuaNodeEditor application started successfully.");
         } catch (Exception pException) {
             BaseLogger.logError("An error occurred while starting the LuaNodeEditor application.", pException);
         }
@@ -46,6 +47,8 @@ public class LuaNodeEditor extends Application {
 
         root.setTop(titleBar);
         root.setCenter(mainPanel);
+
+        BaseLogger.logSuccess("Components initialized successfully.");
     }
 
     public static void main(String[] pArgs) {

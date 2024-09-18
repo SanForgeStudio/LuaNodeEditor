@@ -1,8 +1,10 @@
 package LuaNodeEditor.UI.TitleBar;
 
+import LuaNodeEditor.Logging.BaseLogger;
 import LuaNodeEditor.UI.Components.ImageLoader;
 import LuaNodeEditor.UI.TitleBar.Buttons.ControlButtons.ButtonPanel;
 import LuaNodeEditor.UI.TitleBar.Buttons.FileButton;
+import LuaNodeEditor.UI.TitleBar.Buttons.SettingsButton;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.layout.BorderPane;
@@ -32,6 +34,9 @@ public class TitleBar extends BorderPane {
         FileButton fileButton = new FileButton(pStage);
         contentContainer.getChildren().add(fileButton);
 
+        SettingsButton settingsButton = new SettingsButton(pStage);
+        contentContainer.getChildren().add(settingsButton);
+
         leftPanel.getChildren().add(contentContainer);
 
         stackPane = new StackPane();
@@ -45,12 +50,14 @@ public class TitleBar extends BorderPane {
         pStage.widthProperty().addListener((observable, oldValue, newValue) -> updatePadding(newValue.doubleValue()));
 
         setLeft(leftPanel);
+
+        BaseLogger.logSuccess("TitleBar has been created successfully");
     }
 
     // TODO: This Method is really inefficient, it should be Optimized and fixed
     private void updatePadding(double pWindowWidth) {
         if (stackPane != null) {
-            double leftPadding = Math.max(0, pWindowWidth - 250);
+            double leftPadding = Math.max(0, pWindowWidth - 325);
             stackPane.setPadding(new Insets(0, 0, 0, leftPadding));
         }
     }

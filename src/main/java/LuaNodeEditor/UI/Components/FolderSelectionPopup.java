@@ -1,5 +1,6 @@
 package LuaNodeEditor.UI.Components;
 
+import LuaNodeEditor.Logging.BaseLogger;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -37,11 +38,13 @@ public class FolderSelectionPopup {
                 File selectedDirectory = directoryChooser.showDialog(primaryStage);
 
                 if (selectedDirectory == null) {
+                    BaseLogger.logWarning("No folder selected.");
                     break;
                 }
 
                 if (selectedDirectory.isDirectory()) {
                     if (!checkIfEmpty || isDirectoryEmpty(selectedDirectory)) {
+                        BaseLogger.logWarning("Selected folder: " + selectedDirectory.getAbsolutePath());
                         callback.onDirectorySelected(selectedDirectory);
                         break;
                     } else {

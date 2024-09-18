@@ -1,5 +1,6 @@
 package LuaNodeEditor.UI.Components;
 
+import LuaNodeEditor.Logging.BaseLogger;
 import javafx.geometry.Pos;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -19,17 +20,20 @@ public class ImageLoader extends HBox {
             getChildren().add(imageView);
             setSpacing(5);
             setAlignment(Pos.CENTER);
+
+            BaseLogger.logInfo("Image found: " + pImagePath);
         } else {
-            System.out.println("Image not found: " + pImagePath);
+            BaseLogger.logError("Image not found: " + pImagePath, null);
         }
     }
 
     public static Image getImage(String pImagePath) {
         InputStream imageStream = ImageLoader.class.getResourceAsStream(pImagePath);
         if (imageStream != null) {
+            BaseLogger.logInfo("Image found: " + pImagePath);
             return new Image(imageStream);
         } else {
-            System.out.println("Image not found: " + pImagePath);
+            BaseLogger.logError("Image not found: " + pImagePath, null);
             return null;
         }
     }

@@ -1,5 +1,6 @@
 package LuaNodeEditor.UI.MainPanel;
 
+import LuaNodeEditor.Logging.BaseLogger;
 import LuaNodeEditor.LuaNodeEditor;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;

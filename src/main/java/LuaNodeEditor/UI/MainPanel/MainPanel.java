@@ -1,5 +1,6 @@
 package LuaNodeEditor.UI.MainPanel;
 
+import LuaNodeEditor.Logging.BaseLogger;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.MouseEvent;
@@ -25,6 +26,8 @@ public class MainPanel extends BorderPane {
         setCenter(canvas);
 
         canvas.addEventHandler(MouseEvent.MOUSE_CLICKED, this::handleMouseClick);
+
+        BaseLogger.logSuccess("MainPanel initialized");
     }
 
     private void drawGrid() {
@@ -32,6 +35,8 @@ public class MainPanel extends BorderPane {
         double height = canvas.getHeight();
 
         gridDrawer.drawGrid(graphicsContext, width, height);
+
+        BaseLogger.logSuccess("Grid drawn");
     }
 
     // TODO: Code under here is purely to test the GridSnapping feature

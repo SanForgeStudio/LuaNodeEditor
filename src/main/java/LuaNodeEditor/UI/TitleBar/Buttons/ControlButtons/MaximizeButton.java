@@ -1,5 +1,6 @@
 package LuaNodeEditor.UI.TitleBar.Buttons.ControlButtons;
 
+import LuaNodeEditor.Logging.BaseLogger;
 import LuaNodeEditor.UI.Components.TextButton;
 import javafx.stage.Stage;
 
@@ -9,5 +10,7 @@ public class MaximizeButton extends TextButton {
         super("+", TextButton.BUTTON_PANEL_COLOR, TextButton.HOVER_COLOR, 40, 30);
 
         setOnAction(event -> pStage.setMaximized(!pStage.isMaximized()));
+
+        BaseLogger.logSuccess("Maximize button created");
     }
 }

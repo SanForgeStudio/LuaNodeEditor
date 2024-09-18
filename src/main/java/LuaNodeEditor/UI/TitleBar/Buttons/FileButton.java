@@ -1,5 +1,6 @@
 package LuaNodeEditor.UI.TitleBar.Buttons;
 
+import LuaNodeEditor.Logging.BaseLogger;
 import LuaNodeEditor.UI.Components.TextButton;
 import LuaNodeEditor.UI.TitleBar.Buttons.Actions.FileButton.NewAction;
 import LuaNodeEditor.UI.TitleBar.Buttons.Actions.FileButton.OpenAction;
@@ -23,6 +24,8 @@ public class FileButton extends TextButton {
             double y = localToScreen(getBoundsInLocal()).getMaxY();
             contextMenu.show(FileButton.this, x, y);
         });
+
+        BaseLogger.logSuccess("FileButton created");
     }
 
     private ContextMenu createContextMenu() {
@@ -38,6 +41,8 @@ public class FileButton extends TextButton {
         saveAsItem.setOnAction(event -> SaveAsAction.handleSaveAsAction());
 
         contextMenu.getItems().addAll(newItem, openItem, saveItem, saveAsItem);
+
+        BaseLogger.logSuccess("FileButton context menu created");
 
         return contextMenu;
     }

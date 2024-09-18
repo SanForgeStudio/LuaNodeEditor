@@ -20,10 +20,13 @@ public class StageConfigurer {
         pStage.centerOnScreen();
         pStage.initStyle(StageStyle.UNDECORATED);
         pStage.getIcons().add(loadIcon());
+
+        BaseLogger.logSuccess("Stage configured successfully.");
     }
 
     private static Image loadIcon() {
         try {
+            BaseLogger.logSuccess("Application icon loaded successfully.");
             return ImageLoader.getImage(LOGO_PATH);
         } catch (Exception pException) {
             BaseLogger.logError("Failed to load application icon.", pException);

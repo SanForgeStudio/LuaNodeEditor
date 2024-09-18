@@ -2,6 +2,7 @@ package LuaNodeEditor.Utils.MainApp;
 
 import LuaNodeEditor.Listener.WindowDragger;
 import LuaNodeEditor.Listener.WindowResizer;
+import LuaNodeEditor.Logging.BaseLogger;
 import LuaNodeEditor.UI.TitleBar.TitleBar;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -14,5 +15,7 @@ public class WindowInteractionHandler {
 
         WindowResizer windowResizer = new WindowResizer();
         windowResizer.enableWindowResize(pStage, pRoot);
+
+        BaseLogger.logSuccess("Window interactions setup successfully.");
     }
 }

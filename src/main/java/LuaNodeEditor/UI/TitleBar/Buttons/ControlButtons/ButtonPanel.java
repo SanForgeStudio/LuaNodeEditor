@@ -1,5 +1,6 @@
 package LuaNodeEditor.UI.TitleBar.Buttons.ControlButtons;
 
+import LuaNodeEditor.Logging.BaseLogger;
 import javafx.geometry.Insets;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
@@ -23,5 +24,7 @@ public class ButtonPanel extends HBox {
         setSpacing(5);
 
         setPadding(new Insets(5, 10, 5, 10));
+
+        BaseLogger.logSuccess("ButtonPanel created");
     }
 }

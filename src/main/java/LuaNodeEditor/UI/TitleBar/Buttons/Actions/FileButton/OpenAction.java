@@ -15,9 +15,11 @@ public class OpenAction {
             try {
                 Stage stage = new Stage();
 
-                FolderSelectionPopup popup = new FolderSelectionPopup(false, stage, directory -> {
-                    System.out.println("Selected directory: " + directory.getAbsolutePath());
-                    LuaNodeEditor.contentBrowser.updateContent(new File(directory.getAbsolutePath()));
+                BaseLogger.logSuccess("Opened the OpenAction popup");
+
+                FolderSelectionPopup popup = new FolderSelectionPopup(false, stage, pDirectory -> {
+                    BaseLogger.logInfo("Selected directory: " + pDirectory.getAbsolutePath());
+                    LuaNodeEditor.contentBrowser.updateContent(new File(pDirectory.getAbsolutePath()));
                 });
 
                 popup.show();
