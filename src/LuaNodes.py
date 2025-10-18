@@ -1181,7 +1181,7 @@ class LuaNodeIteratePairs(LuaNode):
             it2_code_colored = self.attribute_it2.generate_code(color_coded=True)
             table_name_colored = self.attribute_table.generate_code(color_coded=True)
 
-            execute_out_code = self.attribute_execute_out.generate_code(color_coded=True)
+            execute_out_code_colored = self.attribute_execute_out.generate_code(color_coded=True)
 
             return [
                 [ind()],
@@ -1200,7 +1200,7 @@ class LuaNodeIteratePairs(LuaNode):
                 [ind()],
                 ["end", color_keyword],
                 ["\n"]
-            ] + execute_code_colored
+            ] + execute_out_code_colored
 
 
 class LuaNodeIterateIPairs(LuaNodeIteratePairs):
