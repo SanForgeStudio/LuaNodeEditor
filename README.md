@@ -56,14 +56,9 @@ Our Lua Node Editor logo's and graphical assets fall under the **Attribution Non
 
 <img alt="BY-NC" src="https://github.com/SanForgeStudio/LuaNodeEditor/assets/97965051/07bc8029-ccc2-4b01-8c8d-5f756df2d6e2" width="50" />
 
-# Forum?
-Yes, we have our own forum suite, still early, but there everyone can share scripts, bugs, talk or simply connect with eachother, find it:
-[here](https://www.lua-node-editor.com/forum)
-
 # Author
 - Creator: Sander Kerkhoff
 - Author: SanForge Studio
 - Email: info@sanforgestudio.com
 
 *Copyright © All rights reserved SanForge Studio.*
-
